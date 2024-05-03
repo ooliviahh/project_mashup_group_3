@@ -35,3 +35,16 @@ fetch(request)
 .then(response => response.json())
 .then((djurData) =>  {
 console.log(djurData);    });
+
+
+window.addEventListener('scroll', function() {
+  var header = document.getElementById('sticky-parallax-header');
+  var scrollPosition = window.scrollY;
+
+  // Adjust header styles based on scroll position
+  if (scrollPosition < 90 * window.innerHeight / 100) {
+    header.style.opacity = 1 - (scrollPosition / (90 * window.innerHeight / 100));
+  } else {
+    header.style.opacity = 0;
+  }
+});

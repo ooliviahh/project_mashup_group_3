@@ -1,0 +1,70 @@
+*,
+* ::before,
+* ::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1.8rem;
+}
+
+.header {
+  display: flex;
+}
+
+.h1-text {
+  color: rgb(255, 234, 234);
+  display: flex;
+  justify-content: center;
+  padding: 5rem;
+}
+
+.h4-text {
+}
+
+.nav-bar {
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  background-color: rgb(230, 176, 209);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+#sticky-parallax-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80vh;
+  background-image: url("../projektarbete_grupp_3/img/jonatan-pie-vOVXTRXbApg-unsplash.jpg");
+  background-size: cover;
+  background-position: 50% 0;
+  font-size: calc(4vw + 1em);
+  animation: sticky-parallax-header-move-and-size linear forwards;
+}
+
+@keyframes sticky-parallax-header-move-and-size {
+  from {
+    background-position: 50% 0;
+    height: 80vh;
+    font-size: calc(4vw + 1em);
+  }
+  to {
+    background-position: 50% 100%;
+    background-color: #1f2672;
+    height: 80vh;
+    font-size: 2em;
+  }
+}
+
+.content {
+  padding-top: 100vh;
+  background-color: rgb(104, 186, 104);
+}
