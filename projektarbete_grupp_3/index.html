@@ -7,34 +7,59 @@
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="main.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
 </head>
 <body>
+
+<!-- First page / header-->
     <header> 
-       
-        <nav class="nav-bar">
-        <h4 class="h4-text">Grupp 3: Malin & Olivia</h4>
-        <a class="nav-links">Home</a>
-        <a class="nav-links">bla</a>
-        <a class="nav-links">bla</a>
-        <a class="nav-links">bla</a>
-        </nav>
+        <div class="container first-page"> 
+
+            <nav class="nav-bar">
+                <a class="nav-links">Home</a>
+                <a class="nav-links">Project</a>
+                <a class="nav-links">About us</a>
+                </nav>
+                
+                <div class="hejsan">
+                <img  class="bubble-svg"  src="svg/animal icon.svg" height="auto" width="90%">
+                <div class="bubble">
+                    <div class="text-box">
+                    <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
+                    <p>Grupp 3: Olivia & Malin</p>  
+                </div>
+                </div>
+                </div>
+        </div>
         <!-- <span><img src="img/brian-garrity-TeK76JR3JPA-unsplash.jpg"  width="100%" height="auto" alt="picture of trees"></span> -->
     </header>
 
-<div class="page first-page"> 
-    <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
-</div>
-<div>    <canvas id="djuroVaxtarter"></canvas>
-</div>
+<!----------------------------------------------------------------------->
 
-<div class="page second-page">
-    <h4 class="h4-text">15: Ekosystem och biologisk mångfald</h4>
-    <h6>Skydda, återställa och främja ett hållbart nyttjande av landbaserade ekosystem, 
+<!-- Second page ------------------------>
+
+<div class="container second-page">
+    <h4 class="h4-text">Globala mål 15: Ekosystem och biologisk mångfald</h4>
+    <p>Skydda, återställa och främja ett hållbart nyttjande av landbaserade ekosystem, 
         hållbart bruka skogar, bekämpa ökenspridning, hejda och vrida tillbaka
-        markförstöringen samt hejda förlusten av biologisk mångfald</h6>
+        markförstöringen samt hejda förlusten av biologisk mångfald</p>
     </div>
-  
-    <footer class="footer"> <p> Made with ♥️ Olivia & Malin </p> </footer> 
+
+<!---------------------------------------->
+
+<!-- Third page ---------------------------------------->
+
+<div class="container third-page">
+    <div class="text"></div>
+    <div class="chart">   
+        <canvas id="djuroVaxtarter"></canvas>
+    </div>
+</div>
+<!-------------------------------------------->
+
+    <footer class="footer"> <p> Made with ♥️ Olivia & Malin </p> 
+    </footer> 
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <script src="script.js"></script>
 </body>
