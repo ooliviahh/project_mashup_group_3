@@ -1,4 +1,3 @@
-
 // Lägga in data om fridlysta djur o växtarter från scb via API ------------>
 
 const urlDjuroVaxtart = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/DjuroVaxtart";
@@ -71,7 +70,7 @@ fetch(request)
 
 // Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
 
-    console.log(dataDjuroVaxtart.columns[1]);
+console.log(dataDjuroVaxtart.columns[1]);
 
 const textElement = document.querySelector('.text');
 const newElement = document.createElement('div');
@@ -99,22 +98,60 @@ textElement.insertAdjacentElement('beforeend', newElement);
 });
 
 //-----------------------------------------------------------------------------------------------
-
+//Ändra färg på h1 element på first-page
 // Select the h1 element
 const h1Element = document.querySelector('.h1-text');
 
-// Get the text content of the h1 element
 const text = h1Element.textContent;
 
-// Split the text content into words
 const words = text.split(' ');
 
-// Get the first word
 const firstWord = words[0];
 
-// Wrap the first word in a span element with a class
 h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
 
-// Style the span element to change the color
 const firstWordSpan = h1Element.querySelector('.first-word');
-firstWordSpan.style.color = 'white'; // Change color to whatever you desire
+firstWordSpan.style.color = 'white'; 
+
+
+// API från UN med goal indicator för Sverige
+const urlSWEUN =
+    "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
+
+    //förstå hur förfrågan ska formuleras 
+    const requestSWEUN = new Request(urlSWEUN, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // filtrera för sverige country id = 752
+        body: 'dataPointType=1&countryId=752&natureOfData=All'
+    })
+    
+    //skicka förfrågan 
+    fetch(requestSWEUN)
+    .then(response => response.json())
+    .then((unsweData) => { 
+
+        // //titta på svaren
+        // console.log(unsweData)
+
+        //behandlar svaret - lägg till indicator 15
+        const sweGoal = unsweData[14];
+        console.log(sweGoal);  
+        const indicatorGoalswe = unsweData[14].indicators.map((indicator)=> indicator.percentage); 
+        console.log(indicatorGoalswe)  
+
+        console.log(sweGoal.goalName);
+
+        const textElement2 = document.querySelector(".p-text")
+        const newHeading2 = document.createElement("h3");
+        const newParagraph = document.createElement("p")
+        const goal15Name = sweGoal.goalName;
+        newHeading2.textContent = "Från United Nations:";
+        newParagraph.textContent = goal15Name;
+        textElement2.insertAdjacentElement("beforebegin", newHeading2);
+        textElement2.insertAdjacentElement('beforebegin', newParagraph)
+
+    });
+

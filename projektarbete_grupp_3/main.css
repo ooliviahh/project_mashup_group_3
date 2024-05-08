@@ -1,7 +1,7 @@
 /* our custom css color variables */
 :root {
   --darkgreen: hsl(144, 32%, 14%);
-  --beigeish: hsl(144, 0%, 85%);
+  --beigeish: rgb(217, 217, 217);
 }
 
 *,
@@ -70,6 +70,7 @@ body {
   display: flex;
   font-size: 4rem;
   flex-wrap: wrap;
+  padding-bottom: 2rem;
 }
 
 .nav-bar {
@@ -83,7 +84,13 @@ body {
   margin-top: 2rem;
   margin-left: 1.5rem;
   font-size: 2.2rem;
+  text-decoration: none;
+  color: var(--beigeish);
   /* border: solid 5px yellow; */
+}
+
+.nav-links:hover {
+  color: var(--darkgreen);
 }
 
 .first-page {
@@ -94,7 +101,39 @@ body {
 }
 
 .second-page {
-  background-color: var(--beigeish);
+    position: relative; 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
+    background-size: cover;
+    overflow: hidden;
+
+}
+
+.second-page::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(25, 49, 35, 0.75);
+  
+}
+
+.second-page .second-text {
+  position: relative;
+  color: #ffffff;  
+  line-height: 1.2;
+  align-items: center;
+  width: 30%;
+} 
+
+.p-text {
+  padding-top: 2rem;
 }
 
 .container {
@@ -115,24 +154,51 @@ body {
   width: 70%;
 }
 
-/* #sticky-parallax-header {
+/*--------------- Knappar på second-page -------------- */
 
-} */
-
-/* @keyframes sticky-parallax-header-move-and-size {
-  from {
-    background-position: 50% 0%;
-    height: 100%;
-    font-size: calc(4vw + 1em);
-  }
-  to {
-    background-position: 50% 100%;
-    background-color: #1f2672;
-    height: 100%;
-    font-size: 2em;
-  }
+.bubble-btn {
+  z-index: 1; 
+  width: 40%;
+  height: 40%;
+  transition: transform 0.3s ease;
 }
 
-.content {
-  padding-top: 100vh;
-} */
+
+.bubble-btn:hover {
+  transform: scale(1.1);
+}
+
+.top-left-btn {
+  background-image:url(svg/paw_icon.svg), url(svg/bubble-4.svg);
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: 120px 200px;
+  /* top: -20%;
+  left: -25%;
+  rotate: 180deg; */
+ 
+
+}
+
+.top-right-btn {
+  position: absolute;
+  top: -10%;
+  right: -25%;
+
+}
+
+.bottom-right-btn {
+  position: absolute;
+  bottom: -20%;
+  right: -25%;
+}
+
+.bottom-left-btn {
+ position: absolute;
+  bottom: -10%;
+  left: -25%;
+  rotate: 180deg;
+}
+
+
+
