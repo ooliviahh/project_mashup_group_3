@@ -33,7 +33,12 @@
                 </div>
                
                 </div>
-                <button class="btn">Här kan man va</button>
+               
+                <section id="section02" class="btn btn-first_page">
+                    <a href="#" onclick="scrollToSecondPage(event)">
+                        <span></span>Scrolla för att läsa mer
+                    </a>
+                </section>  
         </div>
         
         <!-- <span><img src="img/brian-garrity-TeK76JR3JPA-unsplash.jpg"  width="100%" height="auto" alt="picture of trees"></span> -->
@@ -43,38 +48,37 @@
 
 <!-- Second page ------------------------>
 
-<div class="container second-page">
+<section class="container second-page">
     <div class="second-text"> 
     <h4 class="h4-text">Globala mål 15: Ekosystem och biologisk mångfald</h4>
     <p class="p-text">Denna webbplats fokucerar på att framhäva hur Sverige som land arbetar med just detta globala mål. 
             Speciellt delmål 15.5. bla bla bla. Lägg till mer text här.</p>
     </div>
     <!-- <img src="svg/paw_icon.svg" width="5%" height="auto"> -->
-    <div class="second-page__icon-paw"></div>
-    <div class="second-page__icon-earth"></div>
-    <div class="second-page__icon-water"></div>
-    <div class="second-page__icon-tree"></div>
+    
 <div class="bubble-box">
-    <a class="bubble-btn bottom-left-btn"></a>
-    <a class="bubble-btn bottom-right-btn"></a>
-    <a class="bubble-btn top-left-btn"></a>
-    <a class="bubble-btn top-right-btn"></a>
+    <a class="bubble-btn bottom-left-btn"><div class="second-page__icon-tree"></div></a>
+    <a class="bubble-btn bottom-right-btn"><div class="second-page__icon-turtle"></div></a>
+    <a class="bubble-btn top-left-btn"><div class="second-page__icon-paw"></div></a>
+    <a class="bubble-btn top-right-btn"><div class="second-page__icon-earth"></div></a>
     </div>
-</div>
+</section>
 
 <!---------------------------------------->
 
 <!-- Third page ---------------------------------------->
 
-<div class="container third-page">
-    <div class="text"></div>
+<section class="container third-page">
+    <div class="animals-page_text"></div> 
     <div class="chart">   
         <canvas id="djuroVaxtarter"></canvas>
     </div>
-</div>
+</section>
+
 <!-------------------------------------------->
 
-    <footer class="footer"> <p> Made with ♥️ Olivia & Malin </p> 
+    <footer class="footer"> 
+        <p> Made with ♥️ Olivia & Malin </p> 
     </footer> 
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <script src="script.js"></script>

@@ -72,7 +72,7 @@ fetch(request)
 
 console.log(dataDjuroVaxtart.columns[1]);
 
-const textElement = document.querySelector('.text');
+const textElement = document.querySelector('.animals-page_text');
 const newElement = document.createElement('div');
 
 // Hämta kommentaren och dela upp den i ord med hjälp av en reguljär expression
@@ -114,7 +114,7 @@ const firstWordSpan = h1Element.querySelector('.first-word');
 firstWordSpan.style.color = 'white'; 
 
 
-// API från UN med goal indicator för Sverige
+// API från UN med goal indicator för Sverige // 
 const urlSWEUN =
     "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
 
@@ -154,4 +154,22 @@ const urlSWEUN =
         textElement2.insertAdjacentElement('beforebegin', newParagraph)
 
     });
+//------------------------------------------------------------------------------ //
+
+    //Scroll för knapp på startsidan // 
+
+    function scrollToSecondPage(event) {
+      event.preventDefault(); // Förhindra standard ankaregenskaper
+  
+      const secondPage = document.querySelector('.second-page');
+  
+      if (secondPage) {
+          secondPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+          console.error('Second page not found.');
+      }
+  }
+  
+
+    
 
