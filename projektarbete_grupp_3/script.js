@@ -100,18 +100,18 @@ textElement.insertAdjacentElement('beforeend', newElement);
 //-----------------------------------------------------------------------------------------------
 //Ändra färg på h1 element på first-page
 // Select the h1 element
-const h1Element = document.querySelector('.h1-text');
+// const h1Element = document.querySelector('.h1-text');
 
-const text = h1Element.textContent;
+// const text = h1Element.textContent;
 
-const words = text.split(' ');
+// const words = text.split(' ');
 
-const firstWord = words[0];
+// const firstWord = words[0];
 
-h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
+// h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
 
-const firstWordSpan = h1Element.querySelector('.first-word');
-firstWordSpan.style.color = 'white'; 
+// const firstWordSpan = h1Element.querySelector('.first-word');
+// firstWordSpan.style.color = 'white'; 
 
 
 // API från UN med goal indicator för Sverige // 
@@ -169,7 +169,55 @@ const urlSWEUN =
           console.error('Second page not found.');
       }
   }
+
+    // Pop up bubble for paw button //
+    // const popButton = document.getElementById("popupButton")
+    // const closeButton = document.getElementById("closeButton")
+    // const popup = document.getElementById("popup")
+
+    // popButton.addEventListener("click", () =>{
+    //   popup.style.display = "flex";
+
+    // });
+    // closeButton.addEventListener("click", ()=> {
+    //   popup.style.display = "none";
+    // })
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var popupButton = document.getElementById("popupButton");
+      var popup = document.getElementById("popup");
+      var closeButton = document.getElementById("closeButton");
   
+      popupButton.addEventListener("click", function() {
+          popup.classList.toggle("active");
+      });
+  
+      closeButton.addEventListener("click", function() {
+          popup.classList.remove("active");
+      });
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var popupButton = document.getElementById("popupButton");
+    var popup = document.getElementById("popup");
+    var closeButton = document.getElementById("closeButton");
+    var contentToHide = document.querySelector('.content-to-hide');
+
+    popupButton.addEventListener("click", function() {
+        popup.classList.toggle("active");
+        contentToHide.classList.toggle("hidden");
+    });
+
+    closeButton.addEventListener("click", function() {
+        popup.classList.remove("active");
+        contentToHide.classList.remove("hidden");
+    });
+});
+
+
+
+
+
 
     
 

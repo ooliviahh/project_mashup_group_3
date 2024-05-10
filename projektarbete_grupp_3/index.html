@@ -15,25 +15,16 @@
 <!-- First page / header-->
     <header> 
         <div class="container first-page"> 
-
-            <nav class="nav-bar">
+             <nav class="nav-bar">
                 <a class="nav-links" href="index.html">Home</a>
                 <a class="nav-links" href="project.html">Project</a>
                 <a class="nav-links" href="aboutus.html">About us</a>
                 </nav>
-                
-                <div class="hejsan">
-                <img  class="bubble-svg"  src="svg/animal icon.svg" height="auto" width="90%">
-                <div class="bubble">
-                    <div class="text-box">
-                    <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
-                    <p>Grupp 3: Olivia & Malin</p>  
-                </div>
-              
-                </div>
-               
-                </div>
-               
+                <div class="text-box">
+                      <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
+                      <p>Grupp 3: Olivia & Malin</p>  
+                    </div>
+                    <!-- <img class="bubble-svg" src="svg/animal_icon.svg" alt="Animal Icon"> -->
                 <section id="section02" class="btn btn-first_page">
                     <a href="#" onclick="scrollToSecondPage(event)">
                         <span></span>Scrolla för att läsa mer
@@ -57,11 +48,41 @@
     <!-- <img src="svg/paw_icon.svg" width="5%" height="auto"> -->
     
 <div class="bubble-box">
-    <a class="bubble-btn bottom-left-btn"><div class="second-page__icon-tree"></div></a>
-    <a class="bubble-btn bottom-right-btn"><div class="second-page__icon-turtle"></div></a>
-    <a class="bubble-btn top-left-btn"><div class="second-page__icon-paw"></div></a>
-    <a class="bubble-btn top-right-btn"><div class="second-page__icon-earth"></div></a>
-    </div>
+    <a class="bubble-btn bottom-left-btn">
+        <div class="second-page__icon-tree">
+
+        </div>
+    </a>
+    <a class="bubble-btn bottom-right-btn">
+        <div class="second-page__icon-turtle">
+
+        </div>
+    </a>
+    
+     <!-- Pop-up bubble -->
+     <div id="popupButton">
+        <div id="popup" class="pop-up_bubble">
+            <div class="popup-content">
+                <img src="svg/paw_icon.svg" alt="paw icon" width="50px">
+                <h2>Utrotningshotade djur </h2>
+                <p>Hej hopp</p>
+            </div>
+            <button id="closeButton">Close</button>
+        </div>
+ 
+     <a class="bubble-btn top-left-btn content-to-hide hidden">
+        <!-- Paw icon -->
+        <div class="second-page__icon-paw">
+        </div>
+    </a>
+
+    <a class="bubble-btn top-right-btn">
+        <div class="second-page__icon-earth">
+
+        </div>
+    </a>
+</div>
+
 </section>
 
 <!---------------------------------------->

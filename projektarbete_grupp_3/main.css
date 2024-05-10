@@ -23,6 +23,15 @@ body {
   background-color: var(--darkgreen);
 }
 
+/*--------------- Classes  --------------- */
+
+.first-page {
+  background-image: url("../projektarbete_grupp_3/img/fox_image_1920x_zoom.webp");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
 .footer {
   text-align: center;
   color: var(--darkgreen);
@@ -30,42 +39,30 @@ body {
   background-color: var(--beigeish);
   height: 5rem;
   z-index: 2;
- 
-}
-
-/* Classes */
-.hejsan {
-  position: relative;
 }
 
 .text-box {
-  position: absolute;
-  top: 45%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  z-index: 1; /* Se till att texten ligger ovanpå SVG */
-}
-
-.bubble-svg {
-  position: relative; /* Se till att svg:en är relativ för att hålla texten ovanpå den */
-  display: block; /* Se till att svg:en har en korrekt displaytyp */
-  width: 75%; /* Bredden av svg:en */
-  height: auto; /* Automatisk höjd för att bibehålla proportioner */
-}
-
-.hejsan {
   display: flex;
+  background-image: url(svg/animal\ icon.svg); /* Sökvägen till din SVG-fil */
+  background-size: contain; /* Anpassa bakgrundsbilden för att täcka hela textrutan */
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  align-self: flex-end;
-  left: -10%;
-  top: 10%;
-  justify-content: end;
+  top: 20%;
+  left: 20%;
 }
 
 .h1-text {
-  font-size: 5rem;
-  width: 50rem;
   color: var(--darkgreen);
+}
+
+@media screen and (max-width: 768px) {
+  .h1-text {
+    font-size: 1.5rem; /* Justera textstorleken för mindre skärmar */
+  }
 }
 
 .h4-text {
@@ -78,8 +75,8 @@ body {
 .nav-bar {
   display: flex;
   color: var(--beigeish);
-  justify-content: flex-end;
-  margin-right: 10rem;
+  justify-content: end;
+  padding-right: 5rem;
   /* border: solid 5px pink; */
 }
 .nav-links {
@@ -95,24 +92,16 @@ body {
   color: var(--darkgreen);
 }
 
-.first-page {
-  background-image: url("../projektarbete_grupp_3/img/fox_image_1920x_zoom.webp");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
 .second-page {
-    position: relative; 
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
-    background-size: cover;
-    overflow: hidden;
-
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
+  background-size: cover;
+  overflow: hidden;
 }
 
 .second-page::before {
@@ -127,11 +116,11 @@ body {
 
 .second-page .second-text {
   position: relative;
-  color: #ffffff;  
+  color: #ffffff;
   line-height: 1.2;
   align-items: center;
   width: 30%;
-} 
+}
 
 .p-text {
   padding-top: 2rem;
@@ -182,17 +171,6 @@ body {
   z-index: 1;
 }
 
-.btn-first_page::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  content: '';
-  width: 100%;
-  height: 80%;
-  background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 50%);
-  background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 50%);
-}
-
 .btn a {
   position: absolute;
   bottom: 10px;
@@ -202,18 +180,17 @@ body {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   color: var(--beigeish);
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-decoration: none;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .btn a:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .btn-first_page a {
   padding-top: 70px;
- 
 }
 
 .btn-first_page a span {
@@ -229,7 +206,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  content: '';
+  content: "";
   width: 4rem;
   height: 4rem;
   margin: -12px 0 0 -8px;
@@ -239,51 +216,65 @@ body {
   transform: rotate(-45deg);
 }
 
+.btn-first_page::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 80%;
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0.8) 80%,
+    rgba(0, 0, 0, 0.8) 50%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0.8) 80%,
+    rgba(0, 0, 0, 0.8) 50%
+  );
+}
 
 /*--------------- Knappar på second-page -------------- */
 
 .bubble-btn {
   position: relative;
   display: flex;
-  align-items:center; 
-  z-index: 1; 
-height: 40%;
-width: 40%;
+  align-items: center;
+  z-index: 1;
+  height: 40%;
+  width: 40%;
   transition: transform 0.3s ease;
   background-image: url(svg/bubble-4.svg);
   background-repeat: no-repeat;
-
 }
-
 
 .bubble-btn:hover {
   transform: scale(1.1);
 }
 
 .top-left-btn {
-
   position: absolute;
   top: -20%;
   left: -25%;
   rotate: 180deg;
-
 }
 
 .second-page__icon-paw {
   position: relative;
-  right: -15%; 
+  right: -15%;
   width: 100px;
   bottom: 20%;
   max-width: 100%;
   height: 100px;
-  background-image: url('svg/paw_icon.svg');
+  background-image: url("svg/paw_icon.svg");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 2;
-  transform: rotate(180deg); 
-
+  transform: rotate(180deg);
 }
-
 
 .top-right-btn {
   position: absolute;
@@ -293,12 +284,12 @@ width: 40%;
 
 .second-page__icon-earth {
   position: relative;
-  left: 13%; 
+  left: 13%;
   bottom: 2%;
   width: 100px;
   max-width: 100%;
   height: 100px;
-  background-image: url('svg/bx_world.svg');
+  background-image: url("svg/bx_world.svg");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 2;
@@ -313,19 +304,19 @@ width: 40%;
 
 .second-page__icon-turtle {
   position: relative;
-  right: -13%; 
+  right: -13%;
   bottom: 20%;
   width: 100px;
   max-width: 100%;
   height: 100px;
-  background-image: url('svg/mdi_turtle.svg');
+  background-image: url("svg/mdi_turtle.svg");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 2;
 }
 
 .bottom-left-btn {
- position: absolute;
+  position: absolute;
   bottom: -10%;
   left: -25%;
   rotate: 180deg;
@@ -333,18 +324,55 @@ width: 40%;
 
 .second-page__icon-tree {
   position: relative;
-  left: 13%; 
+  left: 13%;
   bottom: 2%;
   width: 100px;
   max-width: 100%;
   height: 100px;
-  background-image: url('svg/mdi_tree.svg');
+  background-image: url("svg/mdi_tree.svg");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 2;
   transform: rotate(180deg);
 }
 
+/*--------------- Pop up modal for buttons on second page -------------- */
 
+.pop-up_bubble {
+  display: none;
+  border: 1px solid pink;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -100%) rotate(180deg);
+}
 
+.pop-up_bubble.active {
+  display: block;
+  background-image: url(svg/bubble-4.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100rem;
+  height: 58rem;
+}
 
+.pop-up_bubble .popup-content {
+  border: 1px solid black;
+  color: var(--darkgreen);
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
