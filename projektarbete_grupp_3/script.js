@@ -99,19 +99,19 @@ textElement.insertAdjacentElement('beforeend', newElement);
 
 //-----------------------------------------------------------------------------------------------
 //Ändra färg på h1 element på first-page
-// Select the h1 element
-// const h1Element = document.querySelector('.h1-text');
 
-// const text = h1Element.textContent;
+const h1Element = document.querySelector('.h1-text');
 
-// const words = text.split(' ');
+const text = h1Element.textContent;
 
-// const firstWord = words[0];
+const words = text.split(' ');
 
-// h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
+const firstWord = words[0];
 
-// const firstWordSpan = h1Element.querySelector('.first-word');
-// firstWordSpan.style.color = 'white'; 
+h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
+
+const firstWordSpan = h1Element.querySelector('.first-word');
+firstWordSpan.style.color = 'white'; 
 
 
 // API från UN med goal indicator för Sverige // 
@@ -170,54 +170,35 @@ const urlSWEUN =
       }
   }
 
-    // Pop up bubble for paw button //
-    // const popButton = document.getElementById("popupButton")
-    // const closeButton = document.getElementById("closeButton")
-    // const popup = document.getElementById("popup")
 
-    // popButton.addEventListener("click", () =>{
-    //   popup.style.display = "flex";
 
-    // });
-    // closeButton.addEventListener("click", ()=> {
-    //   popup.style.display = "none";
-    // })
+//-----------------------
 
-    document.addEventListener("DOMContentLoaded", function() {
-      var popupButton = document.getElementById("popupButton");
-      var popup = document.getElementById("popup");
-      var closeButton = document.getElementById("closeButton");
-  
-      popupButton.addEventListener("click", function() {
-          popup.classList.toggle("active");
-      });
-  
-      closeButton.addEventListener("click", function() {
-          popup.classList.remove("active");
-      });
+document.addEventListener("DOMContentLoaded", function() {
+  var infoBubble = document.querySelector(".info-bubble"); // Hämta bubblan
+  var secondText = document.querySelector(".second-text"); // Hämta second-text elementet
+  var topLeftBtn = document.querySelector(".top-left-btn"); // Hämta knappen
+
+  // Visa bubblan när sidan laddas för första gången
+  infoBubble.style.display = "block";
+  secondText.style.display = "none";
+
+  topLeftBtn.addEventListener("click", function() {
+      // Visa eller dölj bubblan beroende på dess nuvarande status
+      if (infoBubble.style.display === "block") {
+          infoBubble.style.display = "none";
+          secondText.style.display = "block"; // Visa second-text när bubblan är dold
+      } else {
+          infoBubble.style.display = "block";
+          secondText.style.display = "none"; // Dölj second-text när bubblan är synlig
+      }
   });
 
-  document.addEventListener("DOMContentLoaded", function() {
-    var popupButton = document.getElementById("popupButton");
-    var popup = document.getElementById("popup");
-    var closeButton = document.getElementById("closeButton");
-    var contentToHide = document.querySelector('.content-to-hide');
-
-    popupButton.addEventListener("click", function() {
-        popup.classList.toggle("active");
-        contentToHide.classList.toggle("hidden");
-    });
-
-    closeButton.addEventListener("click", function() {
-        popup.classList.remove("active");
-        contentToHide.classList.remove("hidden");
-    });
+  // Dölj bubblan när användaren klickar någon annanstans på sidan
+  document.addEventListener("click", function(event) {
+      if (event.target !== topLeftBtn && !infoBubble.contains(event.target)) {
+          infoBubble.style.display = "none";
+          secondText.style.display = "block"; // Visa second-text när bubblan är dold
+      }
+  });
 });
-
-
-
-
-
-
-    
-
