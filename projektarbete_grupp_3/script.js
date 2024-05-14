@@ -144,7 +144,7 @@ const urlSWEUN =
 
         console.log(sweGoal.goalName);
 
-        const textElement2 = document.querySelector(".p-text")
+        const textElement2 = document.querySelector(".second-page-text")
         const newHeading2 = document.createElement("h3");
         const newParagraph = document.createElement("p")
         const goal15Name = sweGoal.goalName;
@@ -171,34 +171,162 @@ const urlSWEUN =
   }
 
 
+//----------------------- Bubble modal on second page -----------------------//
 
-//-----------------------
 
 document.addEventListener("DOMContentLoaded", function() {
-  var infoBubble = document.querySelector(".info-bubble"); // Hämta bubblan
   var secondText = document.querySelector(".second-text"); // Hämta second-text elementet
-  var topLeftBtn = document.querySelector(".top-left-btn"); // Hämta knappen
 
-  // Visa bubblan när sidan laddas för första gången
-  infoBubble.style.display = "block";
-  secondText.style.display = "none";
+  // Alla bubbla-knappar och bubblor
+  var buttons = document.querySelectorAll(".bubble-btn");
+  var bubbles = {
+    "top-left-btn": document.querySelector(".top-left-bubble"),
+    "top-right-btn": document.querySelector(".top-right-bubble"),
+    "bottom-left-btn": document.querySelector(".bottom-left-bubble"),
+    "bottom-right-btn": document.querySelector(".bottom-right-bubble")
+  };
 
-  topLeftBtn.addEventListener("click", function() {
-      // Visa eller dölj bubblan beroende på dess nuvarande status
-      if (infoBubble.style.display === "block") {
-          infoBubble.style.display = "none";
-          secondText.style.display = "block"; // Visa second-text när bubblan är dold
+  // Status för att spåra om bubblan ska stanna kvar
+  var stickyBubbles = {
+    "top-left-btn": false,
+    "top-right-btn": false,
+    "bottom-left-btn": false,
+    "bottom-right-btn": false
+  };
+
+  // Funktion för att dölja second-text
+  function hideSecondText() {
+    secondText.style.display = "none";
+  }
+
+  // Funktion för att visa second-text
+  function showSecondText() {
+    secondText.style.display = "block";
+  }
+
+  // Lägg till hovringshändelser och klickhändelser för alla knappar
+  buttons.forEach(function(button) {
+    var buttonClass = button.classList[1];
+    var bubble = bubbles[buttonClass];
+
+    button.addEventListener("mouseenter", function() {
+      if (!stickyBubbles[buttonClass]) {
+        bubble.style.display = "block";
+        setTimeout(function() {
+          bubble.classList.add('show');
+        }, 10); // Kort fördröjning för att säkerställa att display:block hinner appliceras
+        hideSecondText();
+      }
+    });
+
+    button.addEventListener("mouseleave", function() {
+      if (!stickyBubbles[buttonClass]) {
+        bubble.classList.remove('show');
+        setTimeout(function() {
+          bubble.style.display = "none";
+          if (!Object.values(stickyBubbles).some(Boolean)) {
+            showSecondText();
+          }
+        }, 500); // Matcha tiden med transition-duration i CSS
+      }
+    });
+
+    button.addEventListener("click", function() {
+      stickyBubbles[buttonClass] = !stickyBubbles[buttonClass];
+      if (stickyBubbles[buttonClass]) {
+        bubble.classList.add('show');
+        bubble.style.display = "block";
+        hideSecondText();
       } else {
-          infoBubble.style.display = "block";
-          secondText.style.display = "none"; // Dölj second-text när bubblan är synlig
+        bubble.classList.remove('show');
+        setTimeout(function() {
+          bubble.style.display = "none";
+          if (!Object.values(stickyBubbles).some(Boolean)) {
+            showSecondText();
+          }
+        }, 500); // Matcha tiden med transition-duration i CSS
       }
+    });
   });
 
-  // Dölj bubblan när användaren klickar någon annanstans på sidan
+  // Dölj bubblorna när användaren klickar någon annanstans på sidan
   document.addEventListener("click", function(event) {
-      if (event.target !== topLeftBtn && !infoBubble.contains(event.target)) {
-          infoBubble.style.display = "none";
-          secondText.style.display = "block"; // Visa second-text när bubblan är dold
+    var clickedInsideBubble = false;
+    for (var key in bubbles) {
+      if (bubbles.hasOwnProperty(key) && bubbles[key].contains(event.target)) {
+        clickedInsideBubble = true;
+        break;
       }
+    }
+
+    if (!clickedInsideBubble && !event.target.classList.contains("bubble-btn")) {
+      for (var key in bubbles) {
+        if (bubbles.hasOwnProperty(key) && stickyBubbles[key]) {
+          bubbles[key].classList.remove('show');
+          stickyBubbles[key] = false;
+          setTimeout(function(bubble) {
+            bubble.style.display = "none";
+            if (!Object.values(stickyBubbles).some(Boolean)) {
+              showSecondText();
+            }
+          }, 500, bubbles[key]); // Matcha tiden med transition-duration i CSS
+        }
+      }
+    }
   });
+
+  // Visa second-text när sidan laddas för första gången
+  showSecondText();
 });
+
+
+
+//------------------ Click to open Artic Fox content bubble ------------------//
+
+
+function updateContent(title, content, imageUrl) {
+  // Hide the button container
+ const buttonContainer = document.getElementById('buttonContainer');
+  buttonContainer.style.display = 'none';
+
+  // Update the text of the h4 element
+  const h4Element = document.querySelector('.h4-text');
+  h4Element.textContent = title;
+
+  // Update the text of the p element
+  const pElement = document.querySelector('.p-text p');
+  pElement.textContent = content;
+
+  var existingImage = document.querySelector('.bubble-info-text img');
+  if (existingImage) {
+      existingImage.remove();
+  }
+
+  const imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+        imageElement.alt = title; 
+        document.querySelector('.bubble-info-text').appendChild(imageElement);
+        imageElement.classList.add('foxImage'); 
+
+
+  //Add a "Go Back" button
+  const goBackButton = document.createElement('button');
+  goBackButton.textContent = '⬅ Gå tillbaka';
+  goBackButton.classList.add('goBackButton'); 
+  goBackButton.onclick = function() {
+    // Reset the content and show the button container
+    h4Element.textContent = "Rödlistade djur i Sverige";
+    pElement.textContent = "Vart femte år presenterar Artdatabanken en lista över de mest hotade arterna i Sverige, varje art blir tilldelad en rödlistekategori som talar om hur hotad arten är från ej tillämplig till utdöd. Vi har tagit fram en lista på fyra olika däggdjur som är med på rödlistan 2020.";
+    buttonContainer.style.display = 'block';
+    
+    // Remove the "Go Back" button and image
+    goBackButton.remove();
+    imageElement.remove();
+};
+    // Append the "Go Back" button after the updated content
+    document.querySelector('.bubble-info-text').appendChild(goBackButton);
+  }
+
+
+
+

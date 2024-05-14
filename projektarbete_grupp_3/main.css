@@ -63,14 +63,23 @@ footer {
 
 .h1-text {
   display: flex;
-  font-size: 5rem;
+  font-size: 5.5rem;
   flex-wrap: wrap;
   width: 60%;
+}
+
+.h2-text {
+  display: flex;
+  font-size: 5rem;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  color: var(--beigeish);
 }
 
 .h4-text {
   font-size: 3rem;
 }
+
 
 @media screen and (max-width: 768px) {
   .h1-text {
@@ -83,13 +92,6 @@ footer {
 
 .text-box p {
   width: 60%;
-}
-
-.h2-text {
-  display: flex;
-  font-size: 4rem;
-  flex-wrap: wrap;
-  padding-bottom: 2rem;
 }
 
 .nav-bar {
@@ -105,7 +107,6 @@ footer {
   font-size: 2.2rem;
   text-decoration: none;
   color: var(--beigeish);
-  /* border: solid 5px yellow; */
 }
 
 .nav-links:hover {
@@ -116,12 +117,13 @@ footer {
   position: relative;
   height: 100vh;
   width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
   background-size: cover;
   overflow: hidden;
+  display: none;
+
 }
 
 .second-page::before {
@@ -140,18 +142,20 @@ footer {
   line-height: 1.2;
   align-items: center;
   width: 30%;
-  border: 1px solid yellow;
+
 }
 
 .p-text {
   padding-top: 2rem;
 }
 
+
+
 .container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: solid 5px yellow;
+
 }
 
 .third-page {
@@ -362,64 +366,103 @@ footer {
   position: absolute;
   top: 8%;
   left: 20%;
-  border: solid pink;
   width: 60%;
   height: 80%;
-  /* background-image: url(svg/bubble-4.svg);
-  background-size: contain;
-  background-size: 100%;
-  background-repeat: no-repeat; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3; */
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.info-bubble.show {
+  display: block;
+  opacity: 1;
 }
 
 .bubble-info-text {
   position: absolute;
-  top: -15%;
+  top: 20%;
   left: 20%;
   display: flex;
   flex-direction: column;
   width: 50%;
-  transform: translateY(50%);
-  border: 2px solid blue;
+}
+
+.bubble-info-content {
+position: relative;
 }
 
 .bubble-info-text p {
   padding: 1rem;
 }
 
-.paw__text-box-title {
+.paw__text-box-title,
+.earth__text-box-title,
+.tree__text-box-title,
+.turtle__text-box-title {
   display: flex;
   align-items: center;
 }
 
-.paw__text-box-title img {
+.paw__text-box-title img,
+.earth__text-box-title img,
+.tree__text-box-title img,
+.turtle__text-box-title img {
   margin: 1rem;
 }
 
-@media screen and (min-width: 1500px) {
+/* @media screen and (min-width: 1500px) {
   .info-bubble {
-    position: absolute;
     top: 15%;
     left: 20%;
-    border: solid pink;
     width: 60%;
     height: 70%;
   }
   .bubble-info-text {
-    position: absolute;
     top: -15%;
     left: 25%;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    transform: translateY(50%);
-    border: 2px solid blue;
   }
+} */
+
+
+.bubble-links {
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+}
+
+
+.bubble-links a{
+  color: var(--darkgreen);
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 0.4rem;
+  padding-left: 15%;
+
+}
+
+.bubble-links a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.goBackButton {
+  width: 30%;
+  height: 5rem;
+  font-size: 1.5rem;
+  color: var(--beigeish);
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--darkgreen);
+  /* border: 2px solid var(--beigeish); */
+  box-shadow: 3px 2px 5px grey;
+}
+
+.goBackButton:hover {
+  box-shadow: inset 5px 3px 5px black;
+} 
+
+
+.foxImage {
+width: 60%;
 }
