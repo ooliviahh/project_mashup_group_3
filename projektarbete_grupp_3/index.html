@@ -36,36 +36,33 @@
 <main>
 <!-- Second page ------------------------>
 
-<section class="container second-page">
+<section class="container second-page_backround">
+    <div class="second-page_content">
     <div class="second-text">
         <h2 class="h2-text">Globala mål 15: Ekosystem och biologisk mångfald</h2>
         <p class="p-text second-page-text">Denna webbplats fokucerar på att framhäva hur Sverige arbetar med just detta globala mål
             och hur djurarter i Sverige påverkats.</p>
             <p class="p-text">"När djur ökar i antal, eller livsmiljöer
                 minskar, finns det en större risk för konflikter mellan djur och människor" - WWF</p>
-
     </div>
+</div>
+
+    <div class="bubble-btn__container">
+        <button class="bubble-btn">
+            <img src="svg/paw_button.svg" alt="Bubble with a Paw icon" height="90%" width="90%">
+        </button>
+        <button class="bubble-btn"> <img src="svg/tree_button.svg" alt="Bubble with a Paw icon" height="90%" width="90%"></button>
+        <button class="bubble-btn"> <img src="svg/map_button1.svg" alt="Bubble with a Paw icon" height="90%" width="90%"></button>
+    </div>
+
     
-    <div class="bubble-box">
-        <a class="bubble-btn bottom-left-btn">
-            <div class="second-page__icon-tree"></div>
-        </a>
-        <a class="bubble-btn bottom-right-btn">
-            <div class="second-page__icon-turtle"></div>
-        </a>
-        <a class="bubble-btn top-left-btn">
-            <div class="second-page__icon-paw"></div>
-        </a>
-        <a class="bubble-btn top-right-btn">
-            <div class="second-page__icon-earth"></div>
-        </a>
-    </div>
 
-    <div class="info-bubble top-left-bubble">
-        <img src="svg/bubble_5.svg" alt="" width="100%" height="100%">
-        <div class="bubble-info-text">
-            <div class="paw__text-box-title">
-                <img src="svg/paw_icon.svg" alt="paw icon black" width="60rem" height="60rem">
+
+    <div class="bubble-btn__animal">
+        <!-- <img src="svg/bubble_5.svg" alt="" width="100%" height="100%"> -->
+        <div class="bubble-btn__animal-text">
+            <div class="animal-text__title">
+                <img src="svg/paw_icon.svg" class="paw_icon" alt="paw icon black" width="60rem" height="60rem">
                 <h4 class="h4-text">Rödlistade djur i Sverige</h4>
             </div>
             <div class="p-text">
@@ -74,52 +71,16 @@
                     Vi har tagit fram en lista på fyra olika däggdjur som är med på rödlistan 2020 i Sverige.</p>
                 <ol class="bubble-links" id="buttonContainer">
                     <a onclick="updateContent('Fjällräv: Starkt hotad', 'Fjällräven är idag klassad som starkt hotat i Sverige enligt Naturvårdsverket, trots att den fredades 1928 i Sverige har arten haft det svårt att hålla sig kvar. Under 2022 jobbade WWF tillsammans med Stockholms universitet och länsstyrelsen i Norrbotten med att rädda fjällrävarna i de nordligaste delen av Sverige. Där det fötts 164st rävkullar 2022 en ökning från 2021 med endast 118st.', 'img/artic_fix_2.jpg')"> <li>Fjällräv: Starkt hotad</li></a>
-                    <a onclick="updateContent('Brunbjörn: Nära hotad', 'Brunbjörn', 'img/bear_1.jpg')">  <li> Brunbjörn: Nära hotad</li></a>
-                    <a onclick="updateContent('Lodjur: Sårbar', 'Text om Lodjur.', 'img/lynx_1.jpg')"> <li> Lodjur: Sårbar</li></a>
-                    <a onclick="updateContent('Järv: Sårbar', 'Text om Järv', 'img/wolverine.jpg')"> <li>Järv: Sårbar</li></a>
+                    <a onclick="updateContent('Brunbjörn: Nära hotad', 'Brunbjörnen är idag klassad som nära hotad enligt rödlistningen 2020 som görs av Artdatabanken.  Trots att regeringen infört licensjakt på björn 2010 ska antalet björnar i Sverige ha blivit allt färre enligt Naturvårdsverket.  Antalet låg 2023 på 2448st jämfört med 2008 låg det på 3298st i Sverige. ', 'img/bear_1_resized.webp')">  <li> Brunbjörn: Nära hotad</li></a>
+                    <a onclick="updateContent('Lodjur: Sårbar', 'Lodjuret är klassat i hotkategorin sårbar på den svenska rödlistan 2020. Den senaste inventeringen skedde vintern 2020-2021 och då kom man fram till att det finns mellan 1052 och 1436 lodjur i Sverige. Det är en minskning med 27% sedan 2009. (Källa: rovdjur.se)', 'img/lynx_1_resized.webp')"> <li> Lodjur: Sårbar</li></a>
+                    <a onclick="updateContent('Järv: Sårbar', 'På den svenska rödlistan från 2020 har järven fått hotkategorin sårbar. Antalet järvar i Sverige uppskattas till 668 individer, och det är en minskning med nästan 20% sedan 2012. ', 'img/wolverine_1_resized.webp')"> <li>Järv: Sårbar</li></a>
                 </ol>
             </div>
         </div>
     </div>
-<div class="info-bubble top-right-bubble">
-        <img src="svg/bubble_5.svg" alt="" width="100%" height="100%">
-        <div class="bubble-info-text">
-            <div class="earth__text-box-title">
-                <img src="svg/bx_world.svg" alt="earth icon black" width="60rem" height="60rem">
-                <h4 class="h4-text">Jordgloben</h4>
-            </div>
-            <div class="p-text">
-                <p>Text här</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="info-bubble bottom-left-bubble">
-        <img src="svg/bubble_5.svg" alt="" width="100%" height="100%">
-        <div class="bubble-info-text">
-            <div class="tree__text-box-title">
-                <img src="svg/mdi_tree.svg" alt="tree icon black" width="60rem" height="60rem">
-                <h4 class="h4-text">Trädet</h4>
-            </div>
-            <div class="p-text">
-                <p>Text här</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="info-bubble bottom-right-bubble">
-        <img src="svg/bubble_5.svg" alt="" width="100%" height="100%">
-        <div class="bubble-info-text">
-            <div class="turtle__text-box-title">
-                <img src="svg/mdi_turtle.svg" alt="turtle icon black" width="60rem" height="60rem">
-                <h4 class="h4-text">Turtle</h4>
-            </div>
-            <div class="p-text">
-                <p>Text hära</p>
-            </div>
-        </div>
-    </div>
-</section>
+  </section>
 
 <!---------------------------------------->
 
@@ -132,20 +93,6 @@
     </div>
 </section>
 
-
-
-<!---------------- Artic Fox content bubble ----------------------->
-
-<!-- <section id="aBtnFox-content" class="hidden">
-    <div class="bubble-info-content">
-        <h4 class="h4-text">Fjällräv: Starkt hotad</h4>
-        <p class="p-text">Fjällräven är idag klassad som starkt hotat i Sverige enligt Naturvårdsverket, trots att den fredades 1928 i Sverige har arten haft det svårt att hålla sig kvar.
-            Under 2022 jobbade WWF tillsammans med Stockholms universitet och länsstyrelsen i Norrbotten med att rädda fjällrävarna i de nordligaste delen av Sverige.
-            Där det fötts 164st rävkullar 2022 en ökning från 2021 med endast 118st. <a> Se diagram. </a> </p>
-        <img src="img/artic_fix_2.jpg" alt="Artic fox in the snow" width="50%">
-        <button onclick="goBack()">Go Back</button>
-    </div>
-</section> -->
 </main>
 
 
