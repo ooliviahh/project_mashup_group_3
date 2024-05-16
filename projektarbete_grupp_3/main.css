@@ -1,6 +1,6 @@
 /* our custom css color variables */
 :root {
-  --darkgreen: hsl(144, 32%, 14%);
+  --darkgreen: rgb(24, 47, 33);
   --beigeish: rgb(217, 217, 217);
 }
 
@@ -43,10 +43,14 @@ footer {
 
 .text-box {
   display: flex;
-  background-image: url(svg/bubble-4.svg);
-  background-size: contain;
+  background-color: rgba(217, 217, 217, 0.7);
+  border-radius: 10rem;
+  width: 55rem;
+  height: 35rem;
+  /* background-image: url(svg/bubble-4.svg);  */
+  /* background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
   z-index: 4;
 }
 
@@ -54,10 +58,11 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50%;
-  width: 50%;
+  /* height: 45%;
+  width: 50%; */
   position: relative;
-  left: 25%;
+  left: 20%;
+  top: -10%;
 }
 
 .h1-text {
@@ -235,19 +240,89 @@ footer {
 
 /*--------------- Pop up modal for buttons on second page -------------- */
 
-.bubble-btn__animal {
-  display: none;
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
 }
 
-/* Third page section */
+.modal-content {
+  background-color: var(--beigeish);
+  margin: 5% auto;
+  padding: 2%;
+  border-radius: 20px;
+  width: 50%;
+  color: var(--darkgreen);
+  box-shadow: 1.5rem 3rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--darkgreen);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.ul-class_modal1 {
+  list-style-type: circle;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 2rem;
+}
+
+.ul-class_modal1 a {
+  text-decoration: none;
+  color: var(--darkgreen);
+  font-weight: 900;
+}
+
+.ul-class_modal1 li {
+  padding: 1%;
+}
+
+.ul-class_modal1 a:hover {
+  text-decoration: underline;
+  opacity: 80%;
+}
+
+.modal-content .p-text {
+  padding-right: 30%;
+  padding-top: 1%;
+}
+
+/*---Modal i modal----*/
+
+.modal .modal {
+  z-index: 9;
+}
+
+/*----------- Third page section --------------------------------- */
 .third-page {
   background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
   background-size: cover;
-  /* width: 100%; */
   height: 100vh;
   flex-direction: column;
   content: "";
-  position: absolute;
+  position: relative;
 }
 
 .third-page::before {
@@ -260,10 +335,61 @@ footer {
   background-color: rgba(25, 49, 35, 0.75);
 }
 
-.chart {
-  background-color: var(--beigeish);
-  width: 40%;
-  height: 40%;
+.bar-chart__endangered-species {
+  width: 30%;
+  height: 30%;
   margin: 1rem;
   z-index: 1;
+  background-color: var(--beigeish);
+}
+
+.bar-chart__endangered-species:hover {
+  transform: scale(1.2);
+  z-index: 3;
+}
+
+.animals-page_text {
+  color: white;
+  width: 30%;
+  z-index: 2;
+}
+
+.fourth-page {
+  background-image: url(img/sky_fourth_page_bg.jpg);
+  background-size: cover;
+  height: 120vh;
+  flex-direction: column;
+  content: "";
+}
+
+.pie-chart__goal-container {
+  width: calc(50% - 1rem);
+  margin-bottom: 1rem;
+  display: flex; /* Lägg till flex-rörelse */
+  justify-content: center; /* Centrera innehållet horisontellt */
+  align-items: center; /* Centrera innehållet vertikalt */
+}
+
+.pie-charts__swe-goal-15 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 30%;
+  height: auto;
+  justify-content: center; /* Centrera innehållet horisontellt */
+  margin: 4rem;
+}
+
+.pie-charts__swe-goal-15 canvas {
+  /* background-color: var(--beigeish); */
+}
+
+.fourth-page .h2-text {
+  z-index: 4;
+  color: white;
+  margin: 0.5rem;
+}
+
+.chart-wrapper {
+  width: 20rem;
+  margin: 1rem;
 }
