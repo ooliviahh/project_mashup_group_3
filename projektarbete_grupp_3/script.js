@@ -178,7 +178,7 @@ const urlSWEUN =
             
             const datasets = {
               datasets: [{
-                label: `Hur Sverige uppfyller delmål ${label}`,
+                label: `${label}`,
                 data: data,  
                 backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
                 hoverOffset: 4
@@ -187,8 +187,28 @@ const urlSWEUN =
             
             const config = {
               type: "pie",
-              data: datasets, 
-            };
+              data: {
+                  labels: ['Uppfyllt', 'Ej uppfyllt'],
+                  datasets: datasets.datasets
+              },
+              options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                let label = tooltipItem.label || '';
+                                let value = tooltipItem.raw || 0;
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += `${value}%`;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
             
             // Create a wrapper div for each canvas, label, and description
             const wrapperDiv = document.createElement('div');
@@ -243,13 +263,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal2 = document.getElementById('modal2');
   const modal3 = document.getElementById('modal3');
 
-  // Get additional modals for links inside modal1
+  // Get additional modals for links inside modals
   const modals = {
       'modal1_1': document.getElementById('modal1_1'),
       'modal1_2': document.getElementById('modal1_2'),
       'modal1_3': document.getElementById('modal1_3'),
       'modal1_4': document.getElementById('modal1_4'),
       'modal1_5': document.getElementById('modal1_5'),
+      'modal2_1': document.getElementById('modal2_1'),
   };
 
   // Get the close elements
@@ -339,9 +360,161 @@ fetch(requestUNgoalData)
 .then((ungoalData) => {
 
 const goalDataSWE = ungoalData;
-console.log(goalDataSWE);
+console.log("UN API global goals",goalDataSWE);
 
 // const Goal14swe = ungoalData1[14].indicators.map((indicator)=> indicator.percentage); 
 //         console.log(Goal14swe)  
 
 })
+
+
+// ---------------- API från SCB Natura 2000 områden -----///
+
+const urlSCBNatura2000 = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/Natura2000N"
+
+const querySCBNatura2000 =  
+  {
+    "query": [
+      {
+        "code": "Region",
+        "selection": {
+          "filter": "vs:RegionRiket99",
+          "values": [
+            "00"
+          ]
+        }
+      },
+      {
+        "code": "Skyddsform",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "200",
+            "210"
+          ]
+        }
+      },
+      {
+        "code": "ContentsCode",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "000003HX"
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  };
+
+  const requestNatura = new Request(urlSCBNatura2000, {
+    method: 'POST',
+    body: JSON.stringify(querySCBNatura2000)
+  });
+
+  fetch(requestNatura)
+  .then(response => response.json())
+  .then((dataNatura2000) => {
+
+    console.log("Natura 2000 SCB API",dataNatura2000)
+
+    const labelsNatura = dataNatura2000.data.map((data) => data.key[2]);
+    console.log("Årtal",labelsNatura);
+
+    const valuesNatura = dataNatura2000.data.map((data) => data.values[0]);
+    console.log("Totalareal i hektar",valuesNatura);
+
+    const labels = [...new Set (labelsNatura)];
+    console.log(labels)
+
+    const dataSPA = valuesNatura.splice(0, labels.length);
+    const dataSCI = valuesNatura;
+    
+    console.log("SPA: ", dataSPA, "SCI: ", dataSCI);
+
+    const datasetsNatura = [
+      {
+        label: "SPA områden i hektar",
+        data: dataSPA,
+        fill: false,
+        borderWidth: 3,
+        borderColor: "pink",
+        hoverBorderWidth: 4,
+        tension: 0.5
+      },
+      {
+        label: "SCI områden i hektar",
+        data: dataSCI,
+        fill: false,
+        borderWidth: 3,
+        borderColor: "green",
+        hoverBorderWidth: 4,
+        tension: 0.5
+      }
+    ];
+
+    const data = {
+      labels,
+      datasets: datasetsNatura
+    };
+
+    console.log("data:", data);
+
+    const config = { type: "line", data };
+    const canvas = document.getElementById('natura2000');
+    const natura2000Chart = new Chart(canvas, config);
+  })
+
+
+  const urlSCBNatura2000text = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/FormelltSkydd";
+
+  const querySCBNatura2000text = {
+    "query": [
+      {
+        "code": "Region",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "00"
+          ]
+        }
+      },
+      {
+        "code": "Skyddsform",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "N2000"
+          ]
+        }
+      },
+      {
+        "code": "ContentsCode",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "000001IF"
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  };
+
+
+  const requestNaturatext = new Request(urlSCBNatura2000text, {
+    method: 'POST',
+    body: JSON.stringify(querySCBNatura2000text)
+  });
+
+  fetch(requestNaturatext)
+  .then(response => response.json())
+  .then((dataNatura2000text) => {
+
+    console.log("Natura 2000 SCB API text",dataNatura2000text)
+
+    });

@@ -77,7 +77,15 @@
 <div id="modal2" class="modal">
     <div class="modal-content">
         <span class="close" data-modal="modal2">&times;</span>
-        <p>This is Modal 2</p>
+        <h4 class="h4-text">Natura 2000</h4>
+        <div class="p-text">
+            <p>Natura 2000 är ett nätverk av skyddade områden i hela EU. I Sverige innebär det bland annat täta bokskogar och forsande älvar.
+                De skyddande områden klassas som värdefulla naturområden med arter och/eller naturtyper som i ett europeiskt perspektiv anses som särskilt skyddsvärda.
+                
+            </p>
+            <ul class="ul-class_modal1">
+                <li><a href="#" class="link" data-modal="modal2_1">Se mer om Natura!</a></li>
+            </ul>
     </div>
 </div>
 
@@ -101,39 +109,88 @@
                     Under 2022 jobbade WWF tillsammans med Stockholms universitet och länsstyrelsen i Norrbotten med att rädda fjällrävarna i de nordligaste delen av Sverige. 
                     Där det fötts 164st rävkullar 2022 en ökning från 2021 med endast 118st.
                 </p>
+                <div class="modal-img_container"> <img src="img/arcticfox.png" alt="Bild på en vit fjällräv."> </div>
             </div>
         </div>
 
         <div id="modal1_2" class="modal">
             <div class="modal-content">
                 <span class="close" data-modal="modal1_2">&times;</span>
-                <p>This is Modal 1_2</p>
+                <h4 class="h4-text">Skogsvarg: Starkt hotad</h4>
+                <p class="p-text">
+                    Vargen är listad som Starkt Hotad på den svenska rödlistan 2020. 
+                    Enligt den senaste inventeringen, som genomfördes mellan 1 oktober 2020 och 31 mars 2021, fanns det 312-513 vargar i Sverige.
+                    Dens största hot är illegal och laglig jakt samt inavelsdepression. (Källa: rovdjur.se)
+                </p>
+                <div class="modal-img_container"><img src="img/wolf.png" alt="Bild på en varg."> </div>
             </div>
         </div>
 
         <div id="modal1_3" class="modal">
             <div class="modal-content">
                 <span class="close" data-modal="modal1_3">&times;</span>
-                <p>This is Modal 1_3</p>
+                <h4 class="h4-text">Brunbjörn: Nära hotad</h4>
+                <p class="p-text">
+                Brunbjörnen är idag klassad som nära hotad enligt rödlistningen 2020 som görs av Artdatabanken.  
+                Trots att regeringen infört licensjakt på björn 2010 ska antalet björnar i Sverige ha blivit allt färre enligt Naturvårdsverket. 
+                Antalet låg 2023 på 2448st jämfört med 2008 låg det på 3298st i Sverige. 
+                Brunbjörnens största hot är legal och illegal jakt. (Källa: naturvård)
+            
+                </p>
+                <div class="modal-img_container"> <img src="img/bear.png" alt="Bild på en björ."> </div>
             </div>
         </div>
 
         <div id="modal1_4" class="modal">
             <div class="modal-content">
                 <span class="close" data-modal="modal1_4">&times;</span>
-                <p>This is Modal 1_4</p>
+                <h4 class="h4-text">Lodjur: Sårbar</h4>
+                <p class="p-text">
+                Lodjuret är klassat i hotkategorin sårbar på den svenska rödlistan 2020. 
+                Den senaste inventeringen skedde vintern 2020-2021 och då kom man fram till att det finns mellan 1052 och 1436 lodjur i Sverige. 
+                Det är en minskning med 27% sedan 2009. 
+                Lodjurets största hot är jakt och liten genetiskt mångfald. (Källa: rovdjur.se)
+                </p>
+                <div class="modal-img_container"><img src="img/lynx.png" alt="Bild på ett lodjur på vintern."></div>
             </div>
         </div>
 
         <div id="modal1_5" class="modal">
             <div class="modal-content">
                 <span class="close" data-modal="modal1_5">&times;</span>
-                <p>This is Modal 1_5</p>
+                <h4 class="h4-text">Järv: Sårbar</h4>
+                <p class="p-text">
+                På den svenska rödlistan från 2020 har järven fått hotkategorin sårbar.
+                Antalet järvar i Sverige uppskattas till 668 individer, och det är en minskning med nästan 20% sedan 2012.
+                Dens största hot är illegal jakt och skyddsjakt. (Källa: rovdjur.se)
+                </p>
+                <div class="modal-img_container"><img src="img/wolverine.png" alt="Bild på en järv."> </div>
             </div>
         </div>
 
-<!------------------>
+  <!------------------ Modal 2 ---------------->
 
+<div id="modal2_1" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="modal2_1">&times;</span>
+        <h4 class="h4-text">Natura 2000 områden i Sverige</h4>
+        <div class="natura-line-chart">
+            <canvas id="natura2000"></canvas>
+        </div>
+        <div> 
+            <p>Natura 2000 estår av två olika typer av områden:
+            </p>
+            <p class="p-text">SPA står för Special Protection Areas vilket innebär särskilda skyddsområden för vissa fågelarter
+            och styrs av fågeldirektivet.
+        </p>
+        <p class="p-text">SCI står för Sites of Community Intrest vilket innebär områden av gemenskapsintresse för andra artgrupper av 
+            växter och djur samt naturtyper. Detta styrs av art- och habitatdirektivet.
+        </p></div>
+        <p class="p-text">Källa SCB & Naturvårdsverket</p>
+    </div>
+</div>!
+
+<!------------------>
     <!-- <div class="bubble-btn__animal">
         <div class="bubble-btn__animal-text">
             <div class="animal-text__title">
@@ -165,8 +222,7 @@
 <section class="container third-page">
     <div class="animals-page_text"></div> 
     <div class="bar-chart__endangered-species">             
-        <canvas id="djuroVaxtarter"></canvas>
-
+        <canvas id="djuroVaxtarter" width="100%" height="50%"></canvas>
     </div>
 </section>     
 

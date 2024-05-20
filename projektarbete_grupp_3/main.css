@@ -1,6 +1,6 @@
 /* our custom css color variables */
 :root {
-  --darkgreen: rgb(24, 47, 33);
+  --darkgreen: hsl(143, 32%, 14%);
   --beigeish: rgb(217, 217, 217);
 }
 
@@ -264,6 +264,22 @@ footer {
   box-shadow: 1.5rem 3rem 1rem rgba(0, 0, 0, 0.2);
 }
 
+.modal-img_container {
+  display: flex;
+  justify-content: center;
+  margin: 3%;
+  padding-right: 30%;
+  padding-top: 1%;
+  max-width: 90%;
+  height: auto;
+}
+
+.modal-img_container img {
+  display: block; /* Gör bilden blockelement för korrekt placering */
+  width: 100%; /* Fyller sin förälders bredd */
+  height: auto; /* Behåller bilden proportionell när den skalas */
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -315,6 +331,11 @@ body.modal-open {
   z-index: 9;
 }
 
+.natura-line-chart {
+  background-color: white;
+  width: 100%;
+}
+
 /*----------- Third page section --------------------------------- */
 .third-page {
   background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
@@ -336,7 +357,7 @@ body.modal-open {
 }
 
 .bar-chart__endangered-species {
-  width: 30%;
+  width: 40%;
   height: 30%;
   margin: 1rem;
   z-index: 1;
