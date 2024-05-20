@@ -23,10 +23,12 @@
                       <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
                       <p>Grupp 3: Olivia Hansson & Malin Grubb</p>  
                     </div>
+
                 
-                <div id="section02" class="btn btn-first_page">
+                <div class="btn btn-next-page">
                     <a href="#" onclick="scrollToSecondPage(event)">
-                        <span></span>Scrolla för att läsa mer
+                        <span class="next_page_btn-text">Fortsätt framåt</span>
+                        <span class="arrow"></span>
                     </a>
                 </div>  
         </div>
@@ -53,6 +55,13 @@
         <button id="bubble-btn_earth" class="bubble-btn"> <img src="svg/map_button1.svg" alt="Bubble with a earth icon" height="90%" width="90%"></button>
     </div>
 
+    <div class="btn btn-next-page btn-next-page_white">
+        <a href="#" onclick="scrollToThirdPage(event)">
+            <span class="next_page_btn-text">Utforska hotet</span>
+            <span class="arrow"></span>
+        </a>
+    </div> 
+    
 <!-------------- Modaler för bubbel-knapparna på second-page ------------------------->
 
 <div id="modal1" class="modal">
@@ -88,6 +97,7 @@
             </ul>
     </div>
 </div>
+</div>
 
 <div id="modal3" class="modal">
     <div class="modal-content">
@@ -95,6 +105,7 @@
         <p>This is Modal 3</p>
     </div>
 </div>
+
 
 <!---------------------------------------------------------------------------->
 
@@ -178,7 +189,7 @@
             <canvas id="natura2000"></canvas>
         </div>
         <div> 
-            <p>Natura 2000 estår av två olika typer av områden:
+            <p>Natura 2000 består av två olika typer av områden:
             </p>
             <p class="p-text">SPA står för Special Protection Areas vilket innebär särskilda skyddsområden för vissa fågelarter
             och styrs av fågeldirektivet.
@@ -188,30 +199,7 @@
         </p></div>
         <p class="p-text">Källa SCB & Naturvårdsverket</p>
     </div>
-</div>!
-
-<!------------------>
-    <!-- <div class="bubble-btn__animal">
-        <div class="bubble-btn__animal-text">
-            <div class="animal-text__title">
-                <img src="svg/paw_icon.svg" class="paw_icon" alt="paw icon black" width="60rem" height="60rem">
-                <h4 class="h4-text">Rödlistade djur i Sverige</h4>
-            </div>
-            <div class="p-text">
-                <p>Vart femte år presenterar Artdatabanken en lista över de mest hotade arterna i Sverige, varje art blir
-                    tilldelad en rödlistekategori som talar om hur hotad arten är från ej tillämplig till utdöd.
-                    Vi har tagit fram en lista på fyra olika däggdjur som är med på rödlistan 2020 i Sverige.</p>
-                <ol class="bubble-links" id="buttonContainer">
-                    <a onclick="updateContent('Fjällräv: Starkt hotad', '', 'img/artic_fix_2.jpg')"> <li>Fjällräv: Starkt hotad</li></a>
-                    <a onclick="updateContent('Skogsvarg: Starkt hotad', 'Text om varg', 'img/artic_fix_2.jpg')"> <li>Fjällräv: Starkt hotad</li></a>
-                    <a onclick="updateContent('Brunbjörn: Nära hotad', 'Brunbjörnen är idag klassad som nära hotad enligt rödlistningen 2020 som görs av Artdatabanken.  Trots att regeringen infört licensjakt på björn 2010 ska antalet björnar i Sverige ha blivit allt färre enligt Naturvårdsverket.  Antalet låg 2023 på 2448st jämfört med 2008 låg det på 3298st i Sverige. ', 'img/bear_1_resized.webp')">  <li> Brunbjörn: Nära hotad</li></a>
-                    <a onclick="updateContent('Lodjur: Sårbar', 'Lodjuret är klassat i hotkategorin sårbar på den svenska rödlistan 2020. Den senaste inventeringen skedde vintern 2020-2021 och då kom man fram till att det finns mellan 1052 och 1436 lodjur i Sverige. Det är en minskning med 27% sedan 2009. (Källa: rovdjur.se)', 'img/lynx_1_resized.webp')"> <li> Lodjur: Sårbar</li></a>
-                    <a onclick="updateContent('Järv: Sårbar', 'På den svenska rödlistan från 2020 har järven fått hotkategorin sårbar. Antalet järvar i Sverige uppskattas till 668 individer, och det är en minskning med nästan 20% sedan 2012. ', 'img/wolverine_1_resized.webp')"> <li>Järv: Sårbar</li></a>
-                </ol>
-            </div>
-        </div>
-    </div> -->
-
+</div>
 
   </section>
 
@@ -220,10 +208,33 @@
 <!-- Third page ---------------------------------------->
 
 <section class="container third-page">
-    <div class="animals-page_text"></div> 
-    <div class="bar-chart__endangered-species">             
-        <canvas id="djuroVaxtarter" width="100%" height="50%"></canvas>
+        <div class="third-page_content">
+            <h2 class="h2-text">Hotet mot djur och växtarter </h2>
+        <p class="p-text">Enligt SLU är mer än 2000 arter hotade i Sverige av totalt 21 000. Ur ett större perspektiv 
+                har vi totalt 44 000 av 157 190 arter hotade i världen enligt IUCN Red list.</p>
+        <h4 class="h4-text">De tre största hoten enligt SLU:</h4>
     </div>
+        <div class="bubble-btn__container">
+            <button id="bubble-btn_paw" class="bubble-btn"><img src="svg/hot_1_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
+            <button id="bubble-btn_tree" class="bubble-btn"> <img src="svg/hot_2_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
+            <button id="bubble-btn_earth" class="bubble-btn"> <img src="svg/hot_3_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
+        </div>
+    </div> 
+    <div class="third-page_content">
+    <p class="animals-page_text"></p> 
+    </div>
+    <div class="bar-chart__endangered-species">             
+        <canvas id="djuroVaxtarter"></canvas>
+</div>
+
+
+
+    <div class="btn btn-next-page btn-next-page_white">
+        <a href="#" onclick="scrollToFourthPage(event)">
+            <span class="next_page_btn-text">Läs mer</span>
+            <span class="arrow"></span>
+    </div> 
+   
 </section>     
 
 <!-- Fourth page ---------------------------------------->
@@ -245,7 +256,7 @@
 
 <!-------------------------------------------->
 
-    <footer> 
+    <footer class="footer"> 
         <p> Made with ♥️ Olivia & Malin </p> 
     </footer> 
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -24,21 +24,32 @@ body {
 }
 
 footer {
+  height: 60vh;
   display: flex;
   text-align: center;
-  color: var(--darkgreen);
+  color: var(--beigeish);
   margin-top: 1rem;
-  background-color: var(--beigeish);
+  background-color: var(--darkgreen);
   height: 5rem;
   flex-grow: 1;
 }
 
 /*--------------- First page classes  --------------- */
 
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .first-page {
   background-image: url("../projektarbete_grupp_3/img/fox_image_1920x_zoom.webp");
   background-size: cover;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .text-box {
@@ -47,10 +58,6 @@ footer {
   border-radius: 10rem;
   width: 55rem;
   height: 35rem;
-  /* background-image: url(svg/bubble-4.svg);  */
-  /* background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center; */
   z-index: 4;
 }
 
@@ -58,11 +65,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 45%;
-  width: 50%; */
-  position: relative;
-  left: 20%;
-  top: -10%;
+  margin-left: 50%;
 }
 
 .h1-text {
@@ -82,6 +85,7 @@ footer {
 
 .h4-text {
   font-size: 3rem;
+  color: var(--darkgreen);
 }
 
 @media screen and (max-width: 768px) {
@@ -120,59 +124,72 @@ footer {
 }
 
 /* Button on first page scroll */
-
-.btn a {
-  position: absolute;
-  bottom: 10px;
-  left: 45%;
-  z-index: 6;
-  display: inline-block;
-  -webkit-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-  color: var(--darkgreen);
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  transition: opacity 0.3s;
+/* Button container */
+.btn {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: auto;
+  padding-bottom: 5%;
 }
 
+/* Link styles */
+.btn a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--darkgreen);
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s;
+  z-index: 6;
+}
+
+/* Hover effect for link */
 .btn a:hover {
   opacity: 0.5;
 }
 
-.btn-first_page a {
-  padding-top: 70px;
+/* Text above the arrow */
+.btn-next-page a .next_page_btn-text {
+  display: block;
+  margin-bottom: 1rem; /* Spacing between text and arrow */
+  font-size: 1.2em; /* Adjust text size as needed */
 }
 
-.btn-first_page a span {
-  position: absolute;
-  top: 0%;
-  left: 50%;
-  width: 4rem;
-  height: 4rem;
-  margin-left: -33px;
-  border-radius: 100%;
+/* Arrow container */
+.btn-next-page a .arrow {
+  display: block;
+  width: 2rem; /* Adjust size */
+  height: 2rem;
+  position: relative;
 }
-.btn-first_page a span::after {
+
+/* Arrow styles */
+.btn-next-page a .arrow::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  content: "";
-  width: 4rem;
+  width: 4rem; /* Adjust arrow size */
   height: 4rem;
-  margin: -12px 0 0 -8px;
+  margin: -1rem 0 0 -1rem;
   border-left: 2px solid var(--darkgreen);
   border-bottom: 2px solid var(--darkgreen);
-  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
+  box-sizing: border-box;
   cursor: pointer;
 }
 
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+/* White color variant */
+.btn-next-page_white a {
+  color: white;
+}
+
+.btn-next-page_white a .arrow::after {
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
 }
 
 /* Second page classes */
@@ -196,7 +213,6 @@ footer {
   height: 230vh; /* Samma som top + höjd för att täcka hela second-page */
   background: url(img/trees_1.webp) no-repeat center center;
   background-size: cover;
-  /* background-size: cover; */
   z-index: 2;
 }
 
@@ -236,6 +252,18 @@ footer {
 
 .bubble-btn:hover {
   transform: scale(1.1);
+}
+
+.btn-next-page_white a {
+  color: white;
+  z-index: 4;
+}
+
+.btn-next-page_white a span::after {
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  top: -100%;
+  left: 50%;
 }
 
 /*--------------- Pop up modal for buttons on second page -------------- */
@@ -328,7 +356,7 @@ body.modal-open {
 /*---Modal i modal----*/
 
 .modal .modal {
-  z-index: 9;
+  z-index: 9999;
 }
 
 .natura-line-chart {
@@ -338,40 +366,54 @@ body.modal-open {
 
 /*----------- Third page section --------------------------------- */
 .third-page {
-  background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
+  background-image: url(img/geranimo-qzgN45hseN0-unsplash.jpg);
   background-size: cover;
-  height: 150vh;
-  flex-direction: column;
-  content: "";
+  display: flex;
+  height: auto;
   position: relative;
+  flex-direction: column;
 }
 
-.third-page::before {
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-color: rgba(25, 49, 35, 0.75);
+.third-page .h2-text {
+  z-index: 2;
+}
+
+.third-page .p-text,
+.third-page .h4-text {
+  z-index: 2;
+  color: var(--beigeish);
+}
+
+.third-page_content {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.third-page_content-info {
+  align-self: center;
+}
+
+.third-page_content-info .h4-text {
+  margin-top: 1.2rem;
 }
 
 .bar-chart__endangered-species {
-  width: 40%;
-  height: 30%;
-  margin: 1rem;
-  z-index: 1;
-  background-color: var(--beigeish);
+  width: 50%;
+  background-color: #ffffff;
+  margin-top: 2rem;
+  justify-content: center;
+  z-index: 2;
 }
 
-.bar-chart__endangered-species:hover {
+/* .bar-chart__endangered-species:hover {
   transform: scale(1.2);
   z-index: 3;
-}
+} */
 
 .animals-page_text {
   color: white;
-  width: 30%;
   z-index: 2;
 }
 
@@ -406,11 +448,18 @@ body.modal-open {
 
 .fourth-page .h2-text {
   z-index: 4;
-  color: white;
+  color: var(--darkgreen);
   margin: 0.5rem;
 }
 
 .chart-wrapper {
   width: 20rem;
   margin: 1rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
 }

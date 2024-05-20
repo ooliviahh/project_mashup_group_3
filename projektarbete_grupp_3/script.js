@@ -71,9 +71,7 @@ fetch(request)
 // Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
 
 console.log(dataDjuroVaxtart.columns[1]);
-
 const textElement = document.querySelector('.animals-page_text');
-const newElement = document.createElement('div');
 
 // Hämta kommentaren och dela upp den i ord med hjälp av en reguljär expression
 const comment = dataDjuroVaxtart.columns[1].comment;
@@ -81,22 +79,17 @@ const words = comment.split(/\s+/);
 
 // Skapa en rubrik med de första fyra orden
 const headerText = words.slice(0, 4).join(' ');
-const headerElement = document.createElement('h2');
+const headerElement = document.createElement('h4');
 headerElement.textContent = headerText;
-headerElement.classList.add('h2-text')
+headerElement.classList.add('h4-text');
 
 // Skapa en textnod för resten av kommentaren efter de fyra första orden
 const restOfComment = words.slice(4).join(' ');
 const restOfCommentNode = document.createTextNode(restOfComment);
 
-
-// Lägg till rubriken och den återstående texten till det nya elementet
-newElement.appendChild(headerElement);
-newElement.appendChild(restOfCommentNode);
-
-// Infoga det nya elementet sist i det befintliga elementet
-textElement.insertAdjacentElement('beforeend', newElement);
-
+// Lägg till rubriken och den återstående texten direkt i textElement
+textElement.appendChild(headerElement);
+textElement.appendChild(restOfCommentNode);
 });
 
 //-----------------------------------------------------------------------------------------------
@@ -115,127 +108,257 @@ h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slic
 const firstWordSpan = h1Element.querySelector('.first-word');
 firstWordSpan.style.color = 'white'; 
 
+//-----------------------------------------------------------------------------------------------
+// test 2 api till samma pie charts, API från UN Goal across countries
+async function getGoal15Swe() {
+  try {
+    const urlSWEUN1 = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: 'dataPointType=3&countryId=752&natureOfData=All'
+    }).then(response => response.json());
+
+    console.log("Indicators from the first API:", urlSWEUN1);
+
+    const sweGoal = urlSWEUN1[14];
+    const indicators = sweGoal.indicators.slice(0, 10);
+
+    console.log("Indicators:", indicators);
+
+    const textElement2 = document.querySelector(".second-page-text");
+    const newHeading2 = document.createElement("h3");
+    const newParagraph = document.createElement("p");
+    const goal15Name = sweGoal.goalName;
+    newHeading2.textContent = "Från United Nations:";
+    newParagraph.textContent = goal15Name;
+    textElement2.insertAdjacentElement("beforebegin", newHeading2);
+    textElement2.insertAdjacentElement('beforebegin', newParagraph);
+
+    const container = document.querySelector('.pie-charts__swe-goal-15');
+    if (!container) {
+      console.error("Container not found.");
+      return;
+    }
+
+    container.style.display = 'grid';
+    container.style.gridTemplateColumns = 'repeat(5, 1fr)';
+
+    const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true", {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+      }
+    }).then(response => response.json());
+
+    console.log("Goal 15 descriptions:", urlUNgoalData);
+
+    const descriptionMap = new Map();
+    if (urlUNgoalData && urlUNgoalData.targets) {
+      urlUNgoalData.targets.forEach(target => {
+        target.indicators.forEach(indicator => {
+          descriptionMap.set(indicator.code, indicator.description);
+        });
+      });
+    }
+
+    console.log("Description Map:", descriptionMap);
+
+    indicators.forEach((indicator, index) => {
+      const label = indicator.code;
+      const description = descriptionMap.get(label) || 'No description available';
+      const percentage = indicator.percentage;
+      const data = [percentage, 100 - percentage];
+
+      const datasets = {
+        datasets: [{
+          label: `${label}`,
+          data: data,
+          backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
+          hoverOffset: 4
+        }]
+      };
+
+      const config = {
+        type: "pie",
+        data: {
+          labels: ['Uppfyllt', 'Ej uppfyllt'],
+          datasets: datasets.datasets
+        },
+        options: {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  let label = tooltipItem.label || '';
+                  let value = tooltipItem.raw || 0;
+                  if (label) {
+                    label += ': ';
+                  }
+                  label += `${value}%`;
+                  return label;
+                }
+              }
+            }
+          }
+        }
+      };
+
+      const wrapperDiv = document.createElement('div');
+      wrapperDiv.classList.add('chart-wrapper');
+
+      const canvas = document.createElement('canvas');
+      canvas.id = `goal15chart${index + 1}`;
+      wrapperDiv.appendChild(canvas);
+
+      const labelDiv = document.createElement('div');
+      labelDiv.textContent = label;
+      wrapperDiv.appendChild(labelDiv);
+
+      const descriptionDiv = document.createElement('div');
+      descriptionDiv.textContent = description;
+      wrapperDiv.appendChild(descriptionDiv);
+
+      container.appendChild(wrapperDiv);
+
+      if (canvas) {
+        new Chart(canvas, config);
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+getGoal15Swe();
+
+
+
+
+
+
 
 // API från UN med goal indicator för Sverige // 
-const urlSWEUN =
-    "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
+// const urlSWEUN =
+//     "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
 
-    //förstå hur förfrågan ska formuleras 
-    const requestSWEUN = new Request(urlSWEUN, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        // filtrera för sverige country id = 752
-        body: 'dataPointType=3&countryId=752&natureOfData=All'
-    })
+//     //förstå hur förfrågan ska formuleras 
+//     const requestSWEUN = new Request(urlSWEUN, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/x-www-form-urlencoded",
+//         },
+//         // filtrera för sverige country id = 752
+//         body: 'dataPointType=3&countryId=752&natureOfData=All'
+//     })
     
-    //skicka förfrågan 
-    fetch(requestSWEUN)
-    .then(response => response.json())
-    .then((unsweData) => { 
+//     //skicka förfrågan 
+//     fetch(requestSWEUN)
+//     .then(response => response.json())
+//     .then((unsweData) => { 
 
-        // //titta på svaren
-        // console.log(unsweData)
+//         // //titta på svaren
+//         // console.log(unsweData)
 
-        //behandlar svaret - lägg till indicator 15
-        const sweGoal = unsweData[14];
-        console.log(sweGoal);  
-        const indicatorGoalswe = unsweData[14].indicators.map((indicator)=> indicator.percentage); 
-        // console.log(indicatorGoalswe)  
+//         //behandlar svaret - lägg till indicator 15
+//         const sweGoal = unsweData[14];
+//         console.log("här kan man va",sweGoal);  
+//         const indicatorGoalswe = unsweData[14].indicators.map((indicator)=> indicator.percentage); 
+//         // console.log(indicatorGoalswe)  
 
-        // console.log(sweGoal.goalName);
+//         // console.log(sweGoal.goalName);
 
-        const textElement2 = document.querySelector(".second-page-text")
-        const newHeading2 = document.createElement("h3");
-        const newParagraph = document.createElement("p")
-        const goal15Name = sweGoal.goalName;
-        newHeading2.textContent = "Från United Nations:";
-        newParagraph.textContent = goal15Name;
-        textElement2.insertAdjacentElement("beforebegin", newHeading2);
-        textElement2.insertAdjacentElement('beforebegin', newParagraph)
+//         const textElement2 = document.querySelector(".second-page-text")
+//         const newHeading2 = document.createElement("h3");
+//         const newParagraph = document.createElement("p")
+//         const goal15Name = sweGoal.goalName;
+//         newHeading2.textContent = "Från United Nations:";
+//         newParagraph.textContent = goal15Name;
+//         textElement2.insertAdjacentElement("beforebegin", newHeading2);
+//         textElement2.insertAdjacentElement('beforebegin', newParagraph)
 
-        // Rödlist index del mål 15.5.1 
-        const indicatorGoalswe1551 = unsweData[14].indicators[6];
+//         // Rödlist index del mål 15.5.1 
+//         const indicatorGoalswe1551 = unsweData[14].indicators[6];
 
-        //skapa pie charts till varje delmål
+//         //skapa pie charts till varje delmål
     
-        const indicators = unsweData[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
+//         const indicators = unsweData[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
 
-        const container = document.querySelector('.pie-charts__swe-goal-15');
+//         const container = document.querySelector('.pie-charts__swe-goal-15');
         
-        if (container) {
-          // Apply grid layout to the container
-          container.style.display = 'grid';
-          container.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columns of equal width
+//         if (container) {
+//           // Apply grid layout to the container
+//           container.style.display = 'grid';
+//           container.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columns of equal width
           
-          indicators.forEach((indicator, index) => {
-            const label = indicator.code;
-            const description = indicator.description;
-            const percentage = indicator.percentage;      
+//           indicators.forEach((indicator, index) => {
+//             const label = indicator.code;
+//             const description = indicator.description;
+//             const percentage = indicator.percentage;      
             
-            const data = [percentage, 100 - percentage];
+//             const data = [percentage, 100 - percentage];
             
-            const datasets = {
-              datasets: [{
-                label: `${label}`,
-                data: data,  
-                backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
-                hoverOffset: 4
-              }]
-            };
+//             const datasets = {
+//               datasets: [{
+//                 label: `${label}`,
+//                 data: data,  
+//                 backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
+//                 hoverOffset: 4
+//               }]
+//             };
             
-            const config = {
-              type: "pie",
-              data: {
-                  labels: ['Uppfyllt', 'Ej uppfyllt'],
-                  datasets: datasets.datasets
-              },
-              options: {
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                let label = tooltipItem.label || '';
-                                let value = tooltipItem.raw || 0;
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += `${value}%`;
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
-        };
+//             const config = {
+//               type: "pie",
+//               data: {
+//                   labels: ['Uppfyllt', 'Ej uppfyllt'],
+//                   datasets: datasets.datasets
+//               },
+//               options: {
+//                 plugins: {
+//                     tooltip: {
+//                         callbacks: {
+//                             label: function(tooltipItem) {
+//                                 let label = tooltipItem.label || '';
+//                                 let value = tooltipItem.raw || 0;
+//                                 if (label) {
+//                                     label += ': ';
+//                                 }
+//                                 label += `${value}%`;
+//                                 return label;
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         };
             
-            // Create a wrapper div for each canvas, label, and description
-            const wrapperDiv = document.createElement('div');
-            wrapperDiv.classList.add('chart-wrapper');
+//             // Create a wrapper div for each canvas, label, and description
+//             const wrapperDiv = document.createElement('div');
+//             wrapperDiv.classList.add('chart-wrapper');
             
-            const canvas = document.createElement('canvas');
-            canvas.id = `goal15chart${index + 1}`;
-            wrapperDiv.appendChild(canvas);
+//             const canvas = document.createElement('canvas');
+//             canvas.id = `goal15chart${index + 1}`;
+//             wrapperDiv.appendChild(canvas);
             
-            const labelDiv = document.createElement('div');
-            labelDiv.textContent = label;
-            wrapperDiv.appendChild(labelDiv);
+//             const labelDiv = document.createElement('div');
+//             labelDiv.textContent = label;
+//             wrapperDiv.appendChild(labelDiv);
             
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.textContent = description;
-            wrapperDiv.appendChild(descriptionDiv);
+//             const descriptionDiv = document.createElement('div');
+//             descriptionDiv.textContent = description;
+//             wrapperDiv.appendChild(descriptionDiv);
             
-            container.appendChild(wrapperDiv);
+//             container.appendChild(wrapperDiv);
             
-            if (canvas) {
-              const unsweDataChart = new Chart(canvas, config);
-            }
-          });
-        }
+//             if (canvas) {
+//               const unsweDataChart = new Chart(canvas, config);
+//             }
+//           });
+//         }
         
 
- });
+//  });
 
     
 //------------------------------------------------------------------------------ //
@@ -249,6 +372,20 @@ const urlSWEUN =
           behavior: 'smooth' // Gör rullningen jämn
       });
   }
+
+
+  function scrollToThirdPage(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    const thirdPageSection = document.querySelector('.third-page'); // Get the third section element by class
+    thirdPageSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the third section smoothly
+}
+
+
+function scrollToFourthPage(event) {
+  event.preventDefault(); 
+    const thirdPageSection = document.querySelector('.fourth-page'); 
+    thirdPageSection.scrollIntoView({ behavior: 'smooth' });
+}
 
 
 //-----------Modaler för second-page-----------------------------------------------//
@@ -341,7 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 // ---------------- API från UN Goal across countries -----///
 const urlUNgoalData = "https://unstats.un.org/SDGAPI/v1/sdg/GeoArea/752/List";
 const requestUNgoalData = new Request(urlUNgoalData, 
@@ -360,10 +496,10 @@ fetch(requestUNgoalData)
 .then((ungoalData) => {
 
 const goalDataSWE = ungoalData;
-console.log("UN API global goals",goalDataSWE);
+console.log("Den andra UN API global goals",goalDataSWE);
 
-// const Goal14swe = ungoalData1[14].indicators.map((indicator)=> indicator.percentage); 
-//         console.log(Goal14swe)  
+const Goal14swe = ungoalData1[14].indicators.map((indicator)=> indicator.percentage); 
+        console.log(Goal14swe)  
 
 })
 
@@ -427,12 +563,12 @@ const querySCBNatura2000 =
     console.log("Totalareal i hektar",valuesNatura);
 
     const labels = [...new Set (labelsNatura)];
-    console.log(labels)
+    // console.log(labels)
 
     const dataSPA = valuesNatura.splice(0, labels.length);
     const dataSCI = valuesNatura;
     
-    console.log("SPA: ", dataSPA, "SCI: ", dataSCI);
+    // console.log("SPA: ", dataSPA, "SCI: ", dataSCI);
 
     const datasetsNatura = [
       {
