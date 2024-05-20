@@ -319,7 +319,7 @@ body.modal-open {
 .third-page {
   background-image: url(img/brian-garrity-TeK76JR3JPA-unsplash.jpg);
   background-size: cover;
-  height: 100vh;
+  height: 150vh;
   flex-direction: column;
   content: "";
   position: relative;
@@ -357,7 +357,7 @@ body.modal-open {
 .fourth-page {
   background-image: url(img/sky_fourth_page_bg.jpg);
   background-size: cover;
-  height: 120vh;
+  height: 150vh;
   flex-direction: column;
   content: "";
 }
