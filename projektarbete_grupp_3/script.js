@@ -156,9 +156,9 @@ async function getGoal15Swe() {
 
     const descriptionMap = new Map();
     if (urlUNgoalData && urlUNgoalData.targets) {
-      urlUNgoalData.targets.forEach(target => {
-        target.indicators.forEach(indicator => {
-          descriptionMap.set(indicator.code, indicator.description);
+      urlUNgoalData.targets.forEach(targets => {
+        targets.description.forEach(indicator => {
+          descriptionMap.set(indicator.code, targets.description);
         });
       });
     }
