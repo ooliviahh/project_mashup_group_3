@@ -59,17 +59,17 @@ fetch(request)
       labels,
       datasets
     };
+    
 
     console.log("data:", data);
 
     const config = {type: "bar", data}
     const canvas = document.getElementById('djuroVaxtarter');
-    const djuroVaxtarterChart = new Chart(canvas, config);
+    const djuroVaxtarterChart = new Chart(canvas, config); 
 
 
-
+//-------------------------------------------------------------------------//
 // Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
-
 console.log(dataDjuroVaxtart.columns[1]);
 const textElement = document.querySelector('.animals-page_text');
 
@@ -91,7 +91,6 @@ const restOfCommentNode = document.createTextNode(restOfComment);
 textElement.appendChild(headerElement);
 textElement.appendChild(restOfCommentNode);
 });
-
 
 
 //-----------------------------------------------------------------------------------------------
@@ -204,9 +203,10 @@ async function getGoal15Swe() {
             });
           });
         }
+
       
         const modal = document.getElementById("pie-chart-modal");
-        const span = document.getElementsByClassName("close")[0];
+
       
         function openModal(title, description) {
           document.getElementById("modalTitle").textContent = title;
@@ -402,7 +402,7 @@ getGoal15Swe();
 
   function scrollToThirdPage(event) {
     event.preventDefault(); // Prevent the default behavior of the link
-    const thirdPageSection = document.querySelector('.third-page'); // Get the third section element by class
+    const thirdPageSection = document.querySelector('.third-page__background'); // Get the third section element by class
     thirdPageSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the third section smoothly
 }
 
@@ -600,19 +600,19 @@ const querySCBNatura2000 =
       {
         label: "SPA områden i hektar",
         data: dataSPA,
-        fill: false,
-        borderWidth: 3,
-        borderColor: "pink",
-        hoverBorderWidth: 4,
+        fill: "false",
+        // borderWidth: 3,
+        backgroundColor: "rgb(24, 47, 33)",
+        hoverBorderWidth: 2,
         tension: 0.5
       },
       {
         label: "SCI områden i hektar",
         data: dataSCI,
         fill: false,
-        borderWidth: 3,
-        borderColor: "green",
-        hoverBorderWidth: 4,
+        // borderWidth: 3,
+        backgroundColor: "rgb(217, 217, 217) ",
+        hoverBorderWidth: 2,
         tension: 0.5
       }
     ];
@@ -624,7 +624,22 @@ const querySCBNatura2000 =
 
     console.log("data:", data);
 
-    const config = { type: "line", data };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+          responsive: true,
+          scales: {
+              x: {
+                  stacked: true,
+              },
+              y: {
+                  stacked: true,
+              },
+          },
+      },
+  };
+
     const canvas = document.getElementById('natura2000');
     const natura2000Chart = new Chart(canvas, config);
   })
