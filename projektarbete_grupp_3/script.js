@@ -50,7 +50,7 @@ fetch(request)
       {
         label: "Antal arter, utrotningshotade djur och växter i Sverige år 2022",
         data: values,
-        backgroundColor: 'green',
+        backgroundColor: "rgb(24, 47, 33)",
 
       }
     ];
