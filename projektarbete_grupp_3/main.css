@@ -52,28 +52,22 @@ footer {
   flex-direction: column;
 }
 
-.text-box {
+.first-page__title {
   display: flex;
-  background-color: rgba(217, 217, 217, 0.7);
-  border-radius: 10rem;
-  width: 55rem;
-  height: 35rem;
-  z-index: 4;
-}
-
-.first-page_text-box_position {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 50%;
-  margin-top: 10%;
+  position: absolute;
+  top: 20rem;
+  left: 80rem;
+  width: 100%;
+  color: var(--beigeish);
+  font-family: "Koulen", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 .h1-text {
-  display: flex;
-  font-size: 5.5rem;
-  flex-wrap: wrap;
-  width: 60%;
+  position: absolute;
+  border: 2px solid pink;
+  font-size: 7.5rem;
 }
 
 .h2-text {
@@ -82,6 +76,7 @@ footer {
   flex-wrap: wrap;
   padding-bottom: 2rem;
   color: var(--beigeish);
+  margin-top: 20%;
 }
 
 .h4-text {
@@ -102,28 +97,6 @@ footer {
   width: 60%;
 }
 
-.nav-bar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: flex;
-  color: var(--beigeish);
-  justify-content: end;
-  padding-right: 5rem;
-  z-index: 5;
-}
-.nav-links {
-  margin-top: 2rem;
-  margin-left: 1.5rem;
-  font-size: 2.2rem;
-  text-decoration: none;
-  color: var(--beigeish);
-}
-
-.nav-links:hover {
-  color: var(--darkgreen);
-}
-
 /* Button on first page scroll */
 /* Button container */
 .btn {
@@ -131,7 +104,7 @@ footer {
   justify-content: center;
   position: relative;
   margin-top: auto;
-  padding-bottom: 5%;
+  padding-bottom: 1%;
 }
 
 /* Link styles */
@@ -156,15 +129,15 @@ footer {
 /* Text above the arrow */
 .btn-next-page a .next_page_btn-text {
   display: block;
-  margin-bottom: 1rem; /* Spacing between text and arrow */
-  font-size: 1.2em; /* Adjust text size as needed */
+  margin-bottom: 0.5rem; /* Spacing between text and arrow */
+  font-size: 1em; /* Adjust text size as needed */
 }
 
 /* Arrow container */
 .btn-next-page a .arrow {
   display: block;
-  width: 2rem; /* Adjust size */
-  height: 2rem;
+  width: 1rem; /* Adjust size */
+  height: 1em;
   position: relative;
 }
 
@@ -174,8 +147,8 @@ footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4rem; /* Adjust arrow size */
-  height: 4rem;
+  width: 1.2em; /* Adjust arrow size */
+  height: 1.2em;
   margin: -1rem 0 0 -1rem;
   border-left: 2px solid var(--darkgreen);
   border-bottom: 2px solid var(--darkgreen);
@@ -197,7 +170,7 @@ footer {
 /* Second page classes */
 
 .second-page_backround {
-  height: 100vh;
+  height: auto;
   position: relative;
   z-index: 1;
   display: flex;
@@ -212,7 +185,7 @@ footer {
   top: -130vh;
   left: 0;
   width: 100%;
-  height: 230vh; /* Samma som top + höjd för att täcka hela second-page */
+  height: 245vh; /* Samma som top + höjd för att täcka hela second-page */
   background: url(img/trees_1.webp) no-repeat center center;
   background-size: cover;
   z-index: 2;
@@ -224,7 +197,8 @@ footer {
   line-height: 1.2;
   align-items: center;
   z-index: 2;
-  width: 30%;
+  width: 80%; /* Anpassa till en bredare vy för mindre skärmar */
+  max-width: 30%; /* Maxbredd för större skärmar */
 }
 
 .p-text {
@@ -235,6 +209,34 @@ footer {
   padding-top: 1.8rem;
 }
 
+/* Media Queries för responsiv design */
+@media (max-width: 1200px) {
+  .second-page_content {
+    max-width: 50%; /* Anpassa bredden för större surfplattor */
+  }
+}
+
+@media (max-width: 768px) {
+  .second-page_content {
+    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+  }
+}
+
+@media (max-width: 480px) {
+  .second-page_content {
+    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+  }
+  .second-page_backround::before {
+    top: -100vh;
+    height: auto; /* Anpassa höjden för att täcka hela sidan på mindre skärmar */
+  }
+  .p-text {
+    padding-top: 1rem; /* Justera padding för mindre skärmar */
+  }
+  .second-text .p-text {
+    padding-top: 1.5rem; /* Justera padding för mindre skärmar */
+  }
+}
 /*--------------- Knappar på second-page -------------- */
 
 .bubble-btn__container {
@@ -292,6 +294,7 @@ footer {
   width: 50%;
   color: var(--darkgreen);
   box-shadow: 1.5rem 3rem 1rem rgba(0, 0, 0, 0.2);
+  z-index: 999;
 }
 
 .modal-img_container {
@@ -367,11 +370,12 @@ body.modal-open {
 }
 
 /*----------- Third page section --------------------------------- */
+/* Grundläggande stilar */
 .third-page {
   background-image: url(img/geranimo-qzgN45hseN0-unsplash.jpg);
   background-size: cover;
   display: flex;
-  height: auto;
+  height: 160vh;
   position: relative;
   flex-direction: column;
 }
@@ -387,10 +391,13 @@ body.modal-open {
 }
 
 .third-page_content {
-  width: 30%;
+  width: 50%;
+  height: 150vh;
+  /* width: 80%; 
+  max-width: 30%; 
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 2; */
 }
 
 .third-page_content-info {
@@ -402,21 +409,54 @@ body.modal-open {
 }
 
 .bar-chart__endangered-species {
-  width: 50%;
+  width: 80%; /* Anpassa till en bredare vy för mindre skärmar */
+  max-width: 50%; /* Maxbredd för större skärmar */
   background-color: #ffffff;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   justify-content: center;
   z-index: 2;
 }
 
-/* .bar-chart__endangered-species:hover {
-  transform: scale(1.2);
-  z-index: 3;
-} */
-
 .animals-page_text {
   color: white;
   z-index: 2;
+}
+
+/* Media Queries för responsiv design */
+@media (max-width: 1200px) {
+  .third-page_content {
+    max-width: 50%; /* Anpassa bredden för större surfplattor */
+  }
+
+  .bar-chart__endangered-species {
+    max-width: 60%; /* Anpassa bredden för större surfplattor */
+  }
+}
+
+@media (max-width: 768px) {
+  .third-page_content {
+    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+  }
+
+  .bar-chart__endangered-species {
+    width: 70%; /* Anpassa bredden för mindre surfplattor */
+  }
+}
+
+@media (max-width: 480px) {
+  .third-page_content {
+    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+  }
+
+  .bar-chart__endangered-species {
+    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+  }
+
+  .third-page .p-text,
+  .third-page .h4-text {
+    font-size: 0.9rem; /* Justera fontstorleken för mindre skärmar */
+  }
 }
 
 .fourth-page {

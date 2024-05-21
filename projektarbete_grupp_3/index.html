@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashup projektarbete grupp 3</title>
+    <title>Globala mål #15 - </title>
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="main.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- First page / header-->
     <section> 
         <div class="container first-page">  
-             <nav class="nav-bar">
-                <a class="nav-links" href="index.html">Home</a>
-                <a class="nav-links" href="project.html">Project</a>
-                <a class="nav-links" href="aboutus.html">About us</a>
-                </nav>
-                <div class="text-box first-page_text-box_position">
-                      <h1 class="h1-text">Projektarbete: Hållbar utveckling</h1>
-                      <p>Grupp 3: Olivia Hansson & Malin Grubb</p>  
+                <div class="first-page__title">
+                      <h1 class="h1-text">MOT ETT HÅLLBART SAMHÄLLE:</h1> 
+                      <h2> Bevara hotade arter och livsmiljöer</h2>
                     </div>
-
-                
                 <div class="btn btn-next-page">
                     <a href="#" onclick="scrollToSecondPage(event)">
                         <span class="next_page_btn-text">Fortsätt framåt</span>
@@ -57,7 +52,7 @@
 
     <div class="btn btn-next-page btn-next-page_white">
         <a href="#" onclick="scrollToThirdPage(event)">
-            <span class="next_page_btn-text">Utforska hotet</span>
+            <span class="next_page_btn-text">Utforska hoten</span>
             <span class="arrow"></span>
         </a>
     </div> 
@@ -231,8 +226,8 @@
 
     <div class="btn btn-next-page btn-next-page_white">
         <a href="#" onclick="scrollToFourthPage(event)">
-            <span class="next_page_btn-text">--Läs mer</span>
-            <span class="arrow"></span>
+            <span class="next_page_btn-text">Läs mer</span>
+            <span class="arrow"></span> </a>
     </div> 
    
 </section>     
@@ -247,6 +242,16 @@
         </div>
     </div>
     <p>(källa: unstats.un.org)</p>
+
+    <div id="pie-chart-modal" class="modal">
+        <div class="pie-chart-modal__content modal-content">
+          <span class="close">&times;</span>
+          <h2 id="modalTitle">Red List Index</h2>
+          <p id="modalDescription">
+            Lägg till beskrivning från API UN nr 2
+          </p>
+        </div>
+      </div>
  
 </section>
 

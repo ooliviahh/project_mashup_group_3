@@ -92,154 +92,180 @@ textElement.appendChild(headerElement);
 textElement.appendChild(restOfCommentNode);
 });
 
-//-----------------------------------------------------------------------------------------------
-//Ändra färg på h1 element på first-page
 
-const h1Element = document.querySelector('.h1-text');
-
-const text = h1Element.textContent;
-
-const words = text.split(' ');
-
-const firstWord = words[0];
-
-h1Element.innerHTML = `<span class="first-word">${firstWord}</span>` + text.slice(firstWord.length);
-
-const firstWordSpan = h1Element.querySelector('.first-word');
-firstWordSpan.style.color = 'white'; 
 
 //-----------------------------------------------------------------------------------------------
-// test 2 api till samma pie charts, API från UN Goal across countries
+// Två API:er till samma pie charts på sida 4, API från UN Goal across countries
 async function getGoal15Swe() {
-  try {
-    const urlSWEUN1 = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries", {
+  const urlSWEUN1 = await fetch ("https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries",
+    {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: 'dataPointType=3&countryId=752&natureOfData=All'
-    }).then(response => response.json());
-
-    console.log("Indicators from the first API:", urlSWEUN1);
-
-    const sweGoal = urlSWEUN1[14];
-    const indicators = sweGoal.indicators.slice(0, 10);
-
-    console.log("Indicators:", indicators);
-
-    const textElement2 = document.querySelector(".second-page-text");
-    const newHeading2 = document.createElement("h3");
-    const newParagraph = document.createElement("p");
-    const goal15Name = sweGoal.goalName;
-    newHeading2.textContent = "Från United Nations:";
-    newParagraph.textContent = goal15Name;
-    textElement2.insertAdjacentElement("beforebegin", newHeading2);
-    textElement2.insertAdjacentElement('beforebegin', newParagraph);
-
-    const container = document.querySelector('.pie-charts__swe-goal-15');
-    if (!container) {
-      console.error("Container not found.");
-      return;
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // filtrera för sverige country id = 752
+        body: 'dataPointType=3&countryId=752&natureOfData=All'
     }
+  ).then(response => response.json());
 
-    container.style.display = 'grid';
-    container.style.gridTemplateColumns = 'repeat(5, 1fr)';
+      console.log("hopp",urlSWEUN1);
 
-    const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true", {
+      // skriva ut text till page 2 
+      const sweGoal = urlSWEUN1[14];
+        const indicatorGoalswe = urlSWEUN1[14].indicators.map((indicator)=> indicator.percentage); 
+        const textElement2 = document.querySelector(".second-page-text")
+        const newHeading2 = document.createElement("h3");
+        const newParagraph = document.createElement("p")
+        const goal15Name = sweGoal.goalName;
+        newHeading2.textContent = "Från United Nations:";
+        newParagraph.textContent = goal15Name;
+        textElement2.insertAdjacentElement("beforebegin", newHeading2);
+        textElement2.insertAdjacentElement('beforebegin', newParagraph)
+
+        // Rödlist index del mål 15.5.1 
+        const indicatorGoalswe1551 = urlSWEUN1[14].indicators[6];
+
+        //skapa pie charts till varje delmål
+    
+        const indicators = urlSWEUN1[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
+
+        const container = document.querySelector('.pie-charts__swe-goal-15');
+        
+        if (container) {
+          // Apply grid layout to the container
+          container.style.display = 'grid';
+          container.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columns of equal width
+          
+          indicators.forEach((indicator, index) => {
+            const label = indicator.code;
+            const description = indicator.description;
+            const percentage = indicator.percentage;      
+            
+            const data = [percentage, 100 - percentage];
+            
+            const datasets = {
+              datasets: [{
+                label: `${label}`,
+                data: data,  
+                backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
+                hoverOffset: 4
+              }]
+            };
+            
+            const config = {
+              type: "pie",
+              data: {
+                  labels: ['Uppfyllt', 'Ej uppfyllt'],
+                  datasets: datasets.datasets
+              },
+              options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                let label = tooltipItem.label || '';
+                                let value = tooltipItem.raw || 0;
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += `${value}%`;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+            
+            // Create a wrapper div for each canvas, label, and description
+            const wrapperDiv = document.createElement('div');
+            wrapperDiv.classList.add('chart-wrapper');
+            
+            const canvas = document.createElement('canvas');
+            canvas.id = `goal15chart${index + 1}`;
+            wrapperDiv.appendChild(canvas);
+            
+            const labelDiv = document.createElement('div');
+            labelDiv.textContent = label;
+            wrapperDiv.appendChild(labelDiv);
+            
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.textContent = description;
+            wrapperDiv.appendChild(descriptionDiv);
+            
+            container.appendChild(wrapperDiv);
+            
+            if (canvas) {
+              const unsweDataChart = new Chart(canvas, config);
+            }
+            // lägg till modaller för varje chart
+            canvas.addEventListener('click', () => {
+              openModal(label, description);
+            });
+          });
+        }
+      
+        const modal = document.getElementById("pie-chart-modal");
+        const span = document.getElementsByClassName("close")[0];
+      
+        function openModal(title, description) {
+          document.getElementById("modalTitle").textContent = title;
+          document.getElementById("modalDescription").textContent = description;
+          modal.style.display = "block";
+        }
+      
+        span.onclick = function () {
+          modal.style.display = "none";
+        }
+      
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        
+  const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true"
+    ,  {
       method: "GET",
       headers: {
         "Accept": "application/json",
-      }
-    }).then(response => response.json());
-
-    console.log("Goal 15 descriptions:", urlUNgoalData);
-
-    const descriptionMap = new Map();
-    if (urlUNgoalData && urlUNgoalData.targets) {
-      urlUNgoalData.targets.forEach(targets => {
-        targets.description.forEach(indicator => {
-          descriptionMap.set(indicator.code, targets.description);
-        });
-      });
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      // body: "dataPointType=2&areaCodes=752&natureOfData=all"
     }
+  )  .then(response => response.json());
+ 
+  // const goalDataSWE = ungoalData;
+  // console.log("UN API global goals 1",goalDataSWE);
+  console.log("Goal 15 descriptions", urlUNgoalData);
 
-    console.log("Description Map:", descriptionMap);
-
-    indicators.forEach((indicator, index) => {
-      const label = indicator.code;
-      const description = descriptionMap.get(label) || 'No description available';
-      const percentage = indicator.percentage;
-      const data = [percentage, 100 - percentage];
-
-      const datasets = {
-        datasets: [{
-          label: `${label}`,
-          data: data,
-          backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
-          hoverOffset: 4
-        }]
-      };
-
-      const config = {
-        type: "pie",
-        data: {
-          labels: ['Uppfyllt', 'Ej uppfyllt'],
-          datasets: datasets.datasets
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem) {
-                  let label = tooltipItem.label || '';
-                  let value = tooltipItem.raw || 0;
-                  if (label) {
-                    label += ': ';
-                  }
-                  label += `${value}%`;
-                  return label;
-                }
-              }
-            }
-          }
-        }
-      };
-
-      const wrapperDiv = document.createElement('div');
-      wrapperDiv.classList.add('chart-wrapper');
-
-      const canvas = document.createElement('canvas');
-      canvas.id = `goal15chart${index + 1}`;
-      wrapperDiv.appendChild(canvas);
-
-      const labelDiv = document.createElement('div');
-      labelDiv.textContent = label;
-      wrapperDiv.appendChild(labelDiv);
-
-      const descriptionDiv = document.createElement('div');
-      descriptionDiv.textContent = description;
-      wrapperDiv.appendChild(descriptionDiv);
-
-      container.appendChild(wrapperDiv);
-
-      if (canvas) {
-        new Chart(canvas, config);
-      }
-    });
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
+  
+};
 
 getGoal15Swe();
 
+// const targets = ungoalData[0].targets;
+// const titles = targets.map(target => target.title);
+
+// console.log("Titles:", titles)
+
+
+//   const codeToDescriptionMap = {};
+// indicators.forEach(indicator => {
+//   const target = targets.find(target => target.code === indicator.targetCode); 
+//   if (target) {
+//     codeToDescriptionMap[indicator.code] = target.title;
+//   }
+// });
 
 
 
 
 
 
-// API från UN med goal indicator för Sverige // 
+
+//------------------------------------------------------------//
+// API från UN med goal indicator för Sverige för pie charts // 
 // const urlSWEUN =
 //     "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
 
@@ -263,7 +289,7 @@ getGoal15Swe();
 
 //         //behandlar svaret - lägg till indicator 15
 //         const sweGoal = unsweData[14];
-//         console.log("här kan man va",sweGoal);  
+//         // console.log("UN API",sweGoal);  
 //         const indicatorGoalswe = unsweData[14].indicators.map((indicator)=> indicator.percentage); 
 //         // console.log(indicatorGoalswe)  
 
@@ -479,29 +505,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ---------------- API från UN Goal across countries -----///
-const urlUNgoalData = "https://unstats.un.org/SDGAPI/v1/sdg/GeoArea/752/List";
-const requestUNgoalData = new Request(urlUNgoalData, 
-  {
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-      // "Content-Type": "application/x-www-form-urlencoded",
-    },
-    // body: "dataPointType=2&areaCodes=752&natureOfData=all"
-  }
-)
+// const urlUNgoalData = "https://unstats.un.org/SDGAPI/v1/sdg/GeoArea/752/List";
+// const requestUNgoalData = new Request(urlUNgoalData, 
+//   {
+//     method: "GET",
+//     headers: {
+//       "Accept": "application/json",
+//       // "Content-Type": "application/x-www-form-urlencoded",
+//     },
+//     // body: "dataPointType=2&areaCodes=752&natureOfData=all"
+//   }
+// )
 
-fetch(requestUNgoalData) 
-.then(response => response.json())
-.then((ungoalData) => {
+// fetch(requestUNgoalData) 
+// .then(response => response.json())
+// .then((ungoalData) => {
 
-const goalDataSWE = ungoalData;
-console.log("Den andra UN API global goals",goalDataSWE);
+// const goalDataSWE = ungoalData;
+// console.log("Den andra UN API global goals",goalDataSWE);
 
-const Goal14swe = ungoalData1[14].indicators.map((indicator)=> indicator.percentage); 
-        console.log(Goal14swe)  
+// const Goal14swe = ungoalData[14].indicators.map((indicator)=> indicator.percentage); 
+//         console.log(Goal14swe)  
 
-})
+// })
 
 
 // ---------------- API från SCB Natura 2000 områden -----///
