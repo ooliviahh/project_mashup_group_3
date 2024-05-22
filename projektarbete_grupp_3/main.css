@@ -67,7 +67,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 2rem;
-  margin-top: 20%;
+  margin-top: 15%;
 }
 
 .h1-text {
@@ -81,8 +81,25 @@ footer {
 }
 
 .h4-text {
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: var(--darkgreen);
+}
+
+.h5-text {
+  font-size: 2rem;
+  color: var(--beigeish);
+}
+
+.figure-text {
+  width: 50%;
+  margin-bottom: 1rem;
+}
+.figure-text-small {
+  font-size: 1.3rem;
+}
+
+.figure-text-bold {
+  font-weight: 900;
 }
 
 @media screen and (max-width: 768px) {
@@ -193,7 +210,7 @@ footer {
   align-items: center;
   z-index: 2;
   width: 80%; /* Anpassa till en bredare vy för mindre skärmar */
-  max-width: 30%; /* Maxbredd för större skärmar */
+  max-width: 40%; /* Maxbredd för större skärmar */
 }
 
 .p-text {
@@ -205,19 +222,18 @@ footer {
 }
 
 /* Media Queries för responsiv design */
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .second-page_content {
     max-width: 50%; /* Anpassa bredden för större surfplattor */
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .second-page_content {
     max-width: 70%; /* Anpassa bredden för mindre surfplattor */
   }
 }
-
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .second-page_content {
     max-width: 90%; /* Anpassa bredden för mobiltelefoner */
   }
@@ -365,6 +381,7 @@ body.modal-open {
   margin-bottom: 2rem;
   padding: 2rem;
   width: 100%;
+  border-radius: 2rem;
 }
 .accordion-header {
   cursor: pointer;
@@ -407,7 +424,7 @@ body.modal-open {
   align-items: center;
   z-index: 2;
   width: 80%;
-  max-width: 30%;
+  max-width: 40%;
 }
 
 .third-page_content-info {
@@ -419,13 +436,14 @@ body.modal-open {
 }
 
 .bar-chart__endangered-species {
-  width: 80%;
-  max-width: 50%;
+  width: 100%;
   background-color: #ffffff;
   margin-top: 2rem;
   margin-bottom: 2rem;
   justify-content: center;
   z-index: 2;
+  padding: 2rem;
+  border-radius: 2rem;
 }
 
 .animals-page_text {
@@ -433,17 +451,13 @@ body.modal-open {
 }
 
 /* Media Queries för responsiv design */
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .third-page__content {
     max-width: 50%; /* Anpassa bredden för större surfplattor */
   }
-
-  .bar-chart__endangered-species {
-    max-width: 60%; /* Anpassa bredden för större surfplattor */
-  }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .third-page__content {
     max-width: 70%; /* Anpassa bredden för mindre surfplattor */
   }
@@ -453,59 +467,101 @@ body.modal-open {
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .third-page__content {
-    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
-  }
-
-  .bar-chart__endangered-species {
     max-width: 90%; /* Anpassa bredden för mobiltelefoner */
   }
 
   .third-page__background .p-text,
   .third-page__background .h4-text {
-    font-size: 0.9rem; /* Justera fontstorleken för mindre skärmar */
+    font-size: 0.9rem;
   }
 }
-
 .fourth-page {
   background-image: url(img/sky_fourth_page_bg.jpg);
   background-size: cover;
-  height: 150vh;
-  flex-direction: column;
-  content: "";
-}
-
-.pie-chart__goal-container {
-  width: calc(50% - 1rem);
-  margin-bottom: 1rem;
-  display: flex; /* Lägg till flex-rörelse */
-  justify-content: center; /* Centrera innehållet horisontellt */
-  align-items: center; /* Centrera innehållet vertikalt */
-}
-
-.pie-charts__swe-goal-15 {
-  display: flex;
-  flex-wrap: wrap;
-  width: 30%;
   height: auto;
-  justify-content: center; /* Centrera innehållet horisontellt */
-  margin: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.pie-charts__swe-goal-15 canvas {
-  /* background-color: var(--beigeish); */
+.fourth-page_content {
+  z-index: 2;
+  width: 80%;
+  line-height: 1.2;
+  max-width: 80%;
 }
 
 .fourth-page .h2-text {
   z-index: 4;
   color: var(--darkgreen);
   margin: 0.5rem;
+  /* font-size: 1.5rem; */
+}
+
+.pie-charts__swe-goal-15 {
+  padding-top: 5%;
+  width: 80%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, 1fr); /* 5 kolumner för stora skärmar */
 }
 
 .chart-wrapper {
-  width: 20rem;
-  margin: 1rem;
+  max-width: 85%;
+}
+
+@media screen and (max-width: 1200px) {
+  .fourth-page_content {
+    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 70%; /* Anpassa bredden för mindre surfplattor */
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .pie-charts__swe-goal-15 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fourth-page_content {
+    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+  }
+
+  .fourth-page .h2-text {
+    font-size: 0.9rem; /* Justera fontstorleken för mindre skärmar */
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .fourth-page_content {
+    max-width: 95%;
+  }
+
+  .fourth-page .h2-text {
+    font-size: 0.9rem;
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .pie-charts__swe-goal-15 {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .footer {
@@ -513,4 +569,30 @@ body.modal-open {
   align-items: center;
   justify-content: center;
   height: 15vh;
+}
+
+/* Test för modal nr 3 hide part of the text */
+.hidden-text {
+  display: none;
+}
+.show-text {
+  display: inline;
+}
+
+.read-more-button,
+.show-less-button {
+  color: var(--beigeish);
+  background-color: var(--darkgreen);
+  border: none;
+  border-radius: 0.5rem;
+  width: 15%;
+  height: 3rem;
+}
+
+.read-more-button {
+  margin-top: 1rem;
+}
+
+.show-less-button {
+  margin: 1rem;
 }

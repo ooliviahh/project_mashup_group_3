@@ -39,15 +39,15 @@
         <h2 class="h2-text">Globala mål 15: Ekosystem och biologisk mångfald</h2>
         <p class="p-text second-page-text">Denna webbplats fokucerar på att framhäva hur Sverige arbetar med just detta globala mål
             och hur djurarter i Sverige påverkats.</p>
-            <p class="p-text">"När djur ökar i antal, eller livsmiljöer
-                minskar, finns det en större risk för konflikter mellan djur och människor" - WWF</p>
+            <h5 class="h5-text">"När djur ökar i antal, eller livsmiljöer
+                minskar, finns det en större risk för konflikter mellan djur och människor" - WWF</h5>
     </div>
 </div>
 
     <div class="bubble-btn__container">
-        <button id="bubble-btn_paw" class="bubble-btn"><img src="svg/paw_button.svg" alt="Bubble with a Paw icon" height="90%" width="90%"></button>
-        <button id="bubble-btn_tree" class="bubble-btn"> <img src="svg/tree_button.svg" alt="Bubble with a tree icon" height="90%" width="90%"></button>
-        <button id="bubble-btn_earth" class="bubble-btn"> <img src="svg/map_button1.svg" alt="Bubble with a earth icon" height="90%" width="90%"></button>
+        <button id="bubble-btn_paw" class="bubble-btn"><img src="svg/paw_button_1.svg" alt="Bubble with a Paw icon" height="90%" width="90%"></button>
+        <button id="bubble-btn_tree" class="bubble-btn"> <img src="svg/natura_button_2.svg" alt="Bubble with a tree icon" height="90%" width="90%"></button>
+        <button id="bubble-btn_flower" class="bubble-btn"> <img src="svg/arter_button_3.svg" alt="Bubble with a flower icon" height="90%" width="90%"></button>
     </div>
 
     <div class="btn btn-next-page btn-next-page_white">
@@ -66,7 +66,7 @@
         <div class="p-text">
             <p>Vart femte år presenterar Artdatabanken en lista över de mest hotade arterna i Sverige, varje art blir
             tilldelad en rödlistekategori som talar om hur hotad arten är från ej tillämplig till utdöd.
-            Vi har tagit fram en lista på fem olika däggdjur som är med på rödlistan 2020 i Sverige. Klicka för att läsa mer:</p>
+            Vi har tagit fram en lista på fem olika däggdjur som är med på rödlistan 2020 i Sverige.</p>
             <ul class="ul-class_modal1">
                 <li><a href="#" class="link" data-modal="modal1_1">Fjällräv: Starkt hotad</a></li>
                 <li><a href="#" class="link" data-modal="modal1_2">Skogsvarg: Starkt hotad</a></li>
@@ -82,27 +82,25 @@
     <div class="modal-content">
         <span class="close" data-modal="modal2">&times;</span>
         <h4 class="h4-text">Natura 2000</h4>
-        <div class="p-text">
-            <p>Natura 2000 är ett nätverk av skyddade områden i hela EU. I Sverige innebär det bland annat täta bokskogar och forsande älvar.
+            <p class="p-text">Natura 2000 är ett nätverk av skyddade områden i hela EU. I Sverige innebär det bland annat täta bokskogar och forsande älvar.
                 De skyddande områden klassas som värdefulla naturområden med arter och/eller naturtyper som i ett europeiskt perspektiv anses som särskilt skyddsvärda.
             </p>
             <div class="natura-line-chart">
                 <canvas id="natura2000"></canvas>
             </div>
-            <div> 
-                <p>Natura 2000 består av två olika typer av områden:
+            <div class="figure-text">
+                <p class="figure-text-small"><span class="figure-text-bold">Figur 1:</span> lägg till källa här.</p>
+            </div>
+         
+            <p class="p-text">Natura 2000 består av två olika typer av områden:
                 </p>
                 <p class="p-text">SPA står för Special Protection Areas vilket innebär särskilda skyddsområden för vissa fågelarter
                 och styrs av fågeldirektivet.
             </p>
             <p class="p-text">SCI står för Sites of Community Intrest vilket innebär områden av gemenskapsintresse för andra artgrupper av 
                 växter och djur samt naturtyper. Detta styrs av art- och habitatdirektivet.
-            </p></div>
-            <p class="p-text">Källa SCB & Naturvårdsverket</p>
-        </div>
-            <!-- <ul class="ul-class_modal1">
-                <li><a href="#" class="link" data-modal="modal2_1">Se mer om Natura!</a></li>
-            </ul> -->
+            </p>
+            <p class="p-text">Källa: SCB & Naturvårdsverket</p>
     </div>
 </div>
 </div>
@@ -110,11 +108,19 @@
 <div id="modal3" class="modal">
     <div class="modal-content">
         <span class="close" data-modal="modal3">&times;</span>
-    <div>
-    <p class="p-text animals-page_text"></p> 
+    <div class="endangered-species-modal_header">
+        <p class="p-text">
+            Naturvårdverket anser idag att ca 585 av 50 000 växt och djurarter i Sverige är fridlysta. Därav finns det 5672 arter på röd listningen. 
+            Varje art och dess livsmiljö som finns utgör den biologiska mångfalden som är livsviktig för alla oss som lever på jorden. 
+        </p>
+        <p class="p-text endangered-species-modal_text">
+         </p> 
     </div>
     <div class="bar-chart__endangered-species">             
         <canvas id="djuroVaxtarter"></canvas>
+    </div>
+    <div class="figure-text">
+        <p class="figure-text-small"><span class="figure-text-bold">Figur 2:</span> lägg till källa här.</p>
     </div>
     </div>
 </div>
@@ -202,16 +208,35 @@
 <section class="container third-page__background">
         <div class="third-page__content">
             <h2 class="h2-text">Hotet mot djur och växtarter </h2>
-        <p class="p-text">Enligt SLU är mer än 2000 arter hotade i Sverige av totalt 21 000. Ur ett större perspektiv 
-                har vi totalt 44 000 av 157 190 arter hotade i världen enligt IUCN Red list.</p>
+        <p class="p-text">Enligt Svenska Lantbruksuniversitetet (2023) är mer än 2000 arter hotade i Sverige av totalt 21 000. Ur ett större perspektiv 
+                har vi totalt 44 000 arter hotade i världen där endast 150 000 arter är värderade enligt IUCN Red list. Men totalt finns det uppskattningsvis 8 miljoner arter på jorden, 
+                där Naturvårdverket skriver i sin globala utvärderings rapport att 1 miljon riskerar att dö ut helt. Där den övergripande orsaken är mänskliga aktiviteter som orsakar förlust 
+                och försämring av arternas livsmiljöer. Sedan 1990 har 129 miljoner hektar skog försvunnit och fortsätter i en takt av 0.45% per år enligt Naturvårdsverket. 
+            </p>
+        <h5 class="h5-text">"Utrotningstakten är mellan tio och hundra gånger snabbare än den varit de senaste tio miljoner åren." - SLU.se</h5>
+        <p class="p-text"></p>
         <h4 class="h4-text">De tre största hoten enligt SLU:</h4>
-    </div>
+        </div>
         <div class="bubble-btn__container">
-            <button id="bubble-btn_paw" class="bubble-btn"><img src="svg/hot_1_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
-            <button id="bubble-btn_tree" class="bubble-btn"> <img src="svg/hot_2_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
-            <button id="bubble-btn_earth" class="bubble-btn"> <img src="svg/hot_3_bubble.svg" alt="Bubble " height="90%" width="90%"></button>
+            <button id="bubble-btn_hot_1" class="bubble-btn"><img src="svg/hot_1_bubble.svg" alt="Bubble button " height="90%" width="90%"></button>
+            <button id="bubble-btn_hot_2" class="bubble-btn"> <img src="svg/hot_2_bubble.svg" alt="Bubble button " height="90%" width="90%"></button>
+            <button id="bubble-btn_hot_3" class="bubble-btn"> <img src="svg/hot_3_bubble.svg" alt="Bubble button" height="90%" width="90%"></button>
         </div>
     </div> 
+
+    <!-----Modaler i Modal på third page--------->
+       
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="modal4">&times;</span>
+            <h4 class="h4-text">Biotopförstörelse</h4>
+            <p class="p-text">
+                text text text. 
+            </p>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -225,24 +250,17 @@
 
 <!-- Fourth page ---------------------------------------->
 <section class="container fourth-page">
+    <div class="fourth-page_content">
     <h2 class="h2-text">Hur Sverige uppfyller globala mål 15 delmål:</h2>
-    <div class="pie-chart__goal-container">
-      
         <div class="pie-charts__swe-goal-15">
       <!-------- 10 st canvas skapas med javasript -->
         </div>
-    </div>
-    <p>(källa: unstats.un.org)</p>
 
-    <div id="pie-chart-modal" class="modal">
-        <div class="pie-chart-modal__content modal-content">
-          <span class="close">&times;</span>
-          <h2 id="modalTitle">Red List Index</h2>
-          <p id="modalDescription">
-            Lägg till beskrivning från API UN nr 2
-          </p>
-        </div>
-      </div>
+    <div class="figure-text">
+        <p class="figure-text-small"><span class="figure-text-bold">Figur 3:</span> lägg till källa här.</p>
+    </div>
+</div>
+
  
 </section>
 

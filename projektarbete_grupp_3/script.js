@@ -51,6 +51,7 @@ fetch(request)
         label: "Antal arter, utrotningshotade djur och växter i Sverige år 2022",
         data: values,
         backgroundColor: "rgb(24, 47, 33)",
+        borderRadius: 10,
 
       }
     ];
@@ -63,7 +64,22 @@ fetch(request)
 
     console.log("data:", data);
 
-    const config = {type: "bar", data}
+    const config = {type: "bar", data,
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Antal fridlysta djur och växtarter i Sverige år 2022',
+            font: {
+              size: 18
+            }
+          }
+        }
+      }
+    };
     const canvas = document.getElementById('djuroVaxtarter');
     const djuroVaxtarterChart = new Chart(canvas, config); 
 
@@ -71,25 +87,66 @@ fetch(request)
 //-------------------------------------------------------------------------//
 // Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
 console.log(dataDjuroVaxtart.columns[1]);
-const textElement = document.querySelector('.animals-page_text');
 
-// Hämta kommentaren och dela upp den i ord med hjälp av en reguljär expression
-const comment = dataDjuroVaxtart.columns[1].comment;
-const words = comment.split(/\s+/);
+const animalTextElement = document.querySelector('.endangered-species-modal_text');
+        const animalHeaderElement = document.querySelector(".endangered-species-modal_header");
 
-// Skapa en rubrik med de första fyra orden
-const headerText = words.slice(0, 4).join(' ');
-const headerElement = document.createElement('h4');
-headerElement.textContent = headerText;
-headerElement.classList.add('h4-text');
+        // Check if the elements exist in the DOM
+        if (animalTextElement && animalHeaderElement) {
+            // Hämta kommentaren och dela upp den i meningar med hjälp av en reguljär expression
+            const comment = dataDjuroVaxtart.columns[1].comment;
+            const words = comment.split(/\s+/);
+            const sentences = comment.match(/[^\.!\?]+[\.!\?]+/g) || [comment]; // Split by sentence
 
-// Skapa en textnod för resten av kommentaren efter de fyra första orden
-const restOfComment = words.slice(4).join(' ');
-const restOfCommentNode = document.createTextNode(restOfComment);
+            // Skapa en rubrik med den första meningen
+            const headerText = words.slice(0, 4).join(' ');
+            const headerElement = document.createElement('h4');
+            headerElement.textContent = headerText;
+            headerElement.classList.add('h4-text');
 
-// Lägg till rubriken och den återstående texten direkt i textElement
-textElement.appendChild(headerElement);
-textElement.appendChild(restOfCommentNode);
+            // Skapa en textnod för den andra och tredje meningen
+            const initialText = sentences.slice(1, 3).join(' ');
+            const initialTextNode = document.createTextNode(initialText + " ");
+
+            // Skapa en span för den dolda texten
+            const hiddenText = sentences.slice(3).join(' ');
+            const hiddenSpan = document.createElement('span');
+            hiddenSpan.textContent = hiddenText;
+            hiddenSpan.classList.add('hidden-text');
+
+            // Skapa "Read more" och "Show less" knappar
+            const readMoreButton = document.createElement('button');
+            readMoreButton.textContent = 'Läs mer';
+            readMoreButton.classList.add('read-more-button');
+
+            const showLessButton = document.createElement('button');
+            showLessButton.textContent = 'Läs mindre';
+            showLessButton.style.display = 'none';
+            showLessButton.classList.add('show-less-button');
+
+            // Lägg till event listeners till knapparna
+            readMoreButton.addEventListener('click', () => {
+                hiddenSpan.classList.add('show-text');
+                readMoreButton.style.display = 'none';
+                showLessButton.style.display = 'inline';
+            });
+
+            showLessButton.addEventListener('click', () => {
+                hiddenSpan.classList.remove('show-text');
+                readMoreButton.style.display = 'inline';
+                showLessButton.style.display = 'none';
+            });
+
+            // Lägg till rubriken i början av headerElement och den återstående texten i textElement
+            animalHeaderElement.insertBefore(headerElement, animalHeaderElement.firstChild);
+            animalTextElement.appendChild(initialTextNode);
+            animalTextElement.appendChild(hiddenSpan);
+            animalTextElement.appendChild(readMoreButton);
+            animalTextElement.appendChild(showLessButton);
+        } else {
+            console.error("One or more elements were not found in the DOM");
+        }
+
 });
 
 
@@ -116,7 +173,7 @@ async function getGoal15Swe() {
         const newHeading2 = document.createElement("h3");
         const newParagraph = document.createElement("p")
         const goal15Name = sweGoal.goalName;
-        newHeading2.textContent = "Från United Nations:";
+        newHeading2.textContent = "United Nation beskriver mål 15:";
         newParagraph.textContent = goal15Name;
         textElement2.insertAdjacentElement("beforebegin", newHeading2);
         textElement2.insertAdjacentElement('beforebegin', newParagraph)
@@ -131,9 +188,6 @@ async function getGoal15Swe() {
         const container = document.querySelector('.pie-charts__swe-goal-15');
         
         if (container) {
-          // Apply grid layout to the container
-          container.style.display = 'grid';
-          container.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columns of equal width
           
           indicators.forEach((indicator, index) => {
             const label = indicator.code;
@@ -176,7 +230,8 @@ async function getGoal15Swe() {
             }
         };
             
-            // Create a wrapper div for each canvas, label, and description
+            // Skapa en wrapper-div till varje canvas, label och description
+
             const wrapperDiv = document.createElement('div');
             wrapperDiv.classList.add('chart-wrapper');
             
@@ -197,32 +252,10 @@ async function getGoal15Swe() {
             if (canvas) {
               const unsweDataChart = new Chart(canvas, config);
             }
-            // lägg till modaller för varje chart
-            canvas.addEventListener('click', () => {
-              openModal(label, description);
-            });
+
           });
         }
 
-      
-        const modal = document.getElementById("pie-chart-modal");
-
-      
-        function openModal(title, description) {
-          document.getElementById("modalTitle").textContent = title;
-          document.getElementById("modalDescription").textContent = description;
-          modal.style.display = "block";
-        }
-      
-        span.onclick = function () {
-          modal.style.display = "none";
-        }
-      
-        window.onclick = function (event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
         
   const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true"
     ,  {
@@ -244,147 +277,6 @@ async function getGoal15Swe() {
 
 getGoal15Swe();
 
-// const targets = ungoalData[0].targets;
-// const titles = targets.map(target => target.title);
-
-// console.log("Titles:", titles)
-
-
-//   const codeToDescriptionMap = {};
-// indicators.forEach(indicator => {
-//   const target = targets.find(target => target.code === indicator.targetCode); 
-//   if (target) {
-//     codeToDescriptionMap[indicator.code] = target.title;
-//   }
-// });
-
-
-
-
-
-
-
-//------------------------------------------------------------//
-// API från UN med goal indicator för Sverige för pie charts // 
-// const urlSWEUN =
-//     "https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries";
-
-//     //förstå hur förfrågan ska formuleras 
-//     const requestSWEUN = new Request(urlSWEUN, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/x-www-form-urlencoded",
-//         },
-//         // filtrera för sverige country id = 752
-//         body: 'dataPointType=3&countryId=752&natureOfData=All'
-//     })
-    
-//     //skicka förfrågan 
-//     fetch(requestSWEUN)
-//     .then(response => response.json())
-//     .then((unsweData) => { 
-
-//         // //titta på svaren
-//         // console.log(unsweData)
-
-//         //behandlar svaret - lägg till indicator 15
-//         const sweGoal = unsweData[14];
-//         // console.log("UN API",sweGoal);  
-//         const indicatorGoalswe = unsweData[14].indicators.map((indicator)=> indicator.percentage); 
-//         // console.log(indicatorGoalswe)  
-
-//         // console.log(sweGoal.goalName);
-
-//         const textElement2 = document.querySelector(".second-page-text")
-//         const newHeading2 = document.createElement("h3");
-//         const newParagraph = document.createElement("p")
-//         const goal15Name = sweGoal.goalName;
-//         newHeading2.textContent = "Från United Nations:";
-//         newParagraph.textContent = goal15Name;
-//         textElement2.insertAdjacentElement("beforebegin", newHeading2);
-//         textElement2.insertAdjacentElement('beforebegin', newParagraph)
-
-//         // Rödlist index del mål 15.5.1 
-//         const indicatorGoalswe1551 = unsweData[14].indicators[6];
-
-//         //skapa pie charts till varje delmål
-    
-//         const indicators = unsweData[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
-
-//         const container = document.querySelector('.pie-charts__swe-goal-15');
-        
-//         if (container) {
-//           // Apply grid layout to the container
-//           container.style.display = 'grid';
-//           container.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columns of equal width
-          
-//           indicators.forEach((indicator, index) => {
-//             const label = indicator.code;
-//             const description = indicator.description;
-//             const percentage = indicator.percentage;      
-            
-//             const data = [percentage, 100 - percentage];
-            
-//             const datasets = {
-//               datasets: [{
-//                 label: `${label}`,
-//                 data: data,  
-//                 backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
-//                 hoverOffset: 4
-//               }]
-//             };
-            
-//             const config = {
-//               type: "pie",
-//               data: {
-//                   labels: ['Uppfyllt', 'Ej uppfyllt'],
-//                   datasets: datasets.datasets
-//               },
-//               options: {
-//                 plugins: {
-//                     tooltip: {
-//                         callbacks: {
-//                             label: function(tooltipItem) {
-//                                 let label = tooltipItem.label || '';
-//                                 let value = tooltipItem.raw || 0;
-//                                 if (label) {
-//                                     label += ': ';
-//                                 }
-//                                 label += `${value}%`;
-//                                 return label;
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         };
-            
-//             // Create a wrapper div for each canvas, label, and description
-//             const wrapperDiv = document.createElement('div');
-//             wrapperDiv.classList.add('chart-wrapper');
-            
-//             const canvas = document.createElement('canvas');
-//             canvas.id = `goal15chart${index + 1}`;
-//             wrapperDiv.appendChild(canvas);
-            
-//             const labelDiv = document.createElement('div');
-//             labelDiv.textContent = label;
-//             wrapperDiv.appendChild(labelDiv);
-            
-//             const descriptionDiv = document.createElement('div');
-//             descriptionDiv.textContent = description;
-//             wrapperDiv.appendChild(descriptionDiv);
-            
-//             container.appendChild(wrapperDiv);
-            
-//             if (canvas) {
-//               const unsweDataChart = new Chart(canvas, config);
-//             }
-//           });
-//         }
-        
-
-//  });
 
     
 //------------------------------------------------------------------------------ //
@@ -414,17 +306,24 @@ function scrollToFourthPage(event) {
 }
 
 
-//-----------Modaler för second-page-----------------------------------------------//
+//-----------Modaler för second och third -page-----------------------------------------------//
 document.addEventListener('DOMContentLoaded', () => {
-  // Get all the buttons
+  // Get all the buttons on second page
   const btn1 = document.getElementById('bubble-btn_paw');
   const btn2 = document.getElementById('bubble-btn_tree');
-  const btn3 = document.getElementById('bubble-btn_earth');
+  const btn3 = document.getElementById('bubble-btn_flower');
+  //third page 
+  const btn4 = document.getElementById('bubble-btn_hot_1');
+  const btn5 = document.getElementById('bubble-btn_hot_2');
+  const btn6 = document.getElementById('bubble-btn_hot_3');
 
   // Get all the modals
   const modal1 = document.getElementById('modal1');
   const modal2 = document.getElementById('modal2');
   const modal3 = document.getElementById('modal3');
+  const modal4 = document.getElementById('modal4');
+  const modal5 = document.getElementById('modal5');
+  const modal6 = document.getElementById('modal6');
 
   // Get additional modals for links inside modals
   const modals = {
@@ -474,6 +373,15 @@ document.addEventListener('DOMContentLoaded', () => {
   btn3.onclick = function() {
       openModal(modal3);
   };
+  btn4.onclick = function() {
+      openModal(modal4);
+  };
+  btn5.onclick = function() {
+      openModal(modal5);
+  };
+  btn6.onclick = function() {
+    openModal(modal6);
+};
 
   // When the user clicks on a link inside modal1, open the respective modal
   linkButtons.forEach(link => {
@@ -594,7 +502,9 @@ const querySCBNatura2000 =
     const dataSPA = valuesNatura.splice(0, labels.length);
     const dataSCI = valuesNatura;
     
-    // console.log("SPA: ", dataSPA, "SCI: ", dataSCI);
+  
+
+// Natura 2000 chart 
 
     const datasetsNatura = [
       {
@@ -610,8 +520,8 @@ const querySCBNatura2000 =
         label: "SCI områden i hektar",
         data: dataSCI,
         fill: false,
-        // borderWidth: 3,
         backgroundColor: "rgb(217, 217, 217) ",
+        borderRadius: 3,
         hoverBorderWidth: 2,
         tension: 0.5
       }
@@ -622,13 +532,27 @@ const querySCBNatura2000 =
       datasets: datasetsNatura
     };
 
-    console.log("data:", data);
 
     const config = {
       type: 'bar',
       data: data,
       options: {
           responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                usePointStyle: true,
+                pointStyleWidth: 20,
+              }
+            },
+            title: {
+              display: true,
+              text: 'Antal Natura 2000 områden i Sverige över tid',
+              font: {
+                size: 18
+              }
+            }
+          },
           scales: {
               x: {
                   stacked: true,
