@@ -58,7 +58,7 @@ footer {
   font-family: "Koulen", sans-serif;
   font-weight: 900;
   font-style: normal;
-  margin-left: 50%;
+  margin-left: 40%;
   margin-top: 10%;
   flex-wrap: wrap;
 }
@@ -71,7 +71,7 @@ footer {
 }
 
 .h1-text {
-  font-size: 7.5rem;
+  font-size: 7.3rem;
   color: var(--beigeish);
 }
 
@@ -88,6 +88,7 @@ footer {
 .h5-text {
   font-size: 2rem;
   color: var(--beigeish);
+  margin-top: 1.8rem;
 }
 
 .figure-text {
@@ -411,8 +412,8 @@ body.modal-open {
   margin-top: 10rem;
 }
 
-.third-page__background .p-text,
-.third-page__background .h4-text {
+.third-page__content .p-text,
+.third-page__content .h4-text {
   z-index: 2;
   color: var(--beigeish);
   margin-top: 2rem;
@@ -478,19 +479,23 @@ body.modal-open {
   }
 }
 .fourth-page {
-  background-image: url(img/sky_fourth_page_bg.jpg);
+  background-image: url(img/axel-josefsson-_ILBhImc210-unsplash.jpg);
   background-size: cover;
   height: auto;
   width: 100%;
   display: flex;
-  flex-direction: column;
 }
 
 .fourth-page_content {
+  margin-top: 5%;
   z-index: 2;
   width: 80%;
   line-height: 1.2;
   max-width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .fourth-page .h2-text {
@@ -514,11 +519,11 @@ body.modal-open {
 
 @media screen and (max-width: 1200px) {
   .fourth-page_content {
-    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+    max-width: 100%;
   }
 
   .pie-charts__swe-goal-15 {
-    width: 70%; /* Anpassa bredden för mindre surfplattor */
+    width: 90%;
   }
 }
 
@@ -530,38 +535,34 @@ body.modal-open {
 
 @media screen and (max-width: 768px) {
   .fourth-page_content {
-    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
-  }
-
-  .fourth-page .h2-text {
-    font-size: 0.9rem; /* Justera fontstorleken för mindre skärmar */
+    max-width: 90%;
   }
 
   .pie-charts__swe-goal-15 {
-    width: 70%;
+    width: 80%;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 650px) {
   .fourth-page_content {
-    max-width: 95%;
-  }
-
-  .fourth-page .h2-text {
-    font-size: 0.9rem;
+    max-width: 100%;
   }
 
   .pie-charts__swe-goal-15 {
-    width: 90%;
+    width: 100%;
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 500px) {
   .pie-charts__swe-goal-15 {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.pieChart_labelDiv {
+  font-weight: 900;
 }
 
 .footer {
@@ -594,5 +595,12 @@ body.modal-open {
 }
 
 .show-less-button {
-  margin: 1rem;
+  margin-left: 1rem;
+}
+
+/* Description targets from UN API */
+
+.target-description__container {
+  background-color: var(--beigeish);
+  width: 40%;
 }

@@ -181,80 +181,87 @@ async function getGoal15Swe() {
         // Rödlist index del mål 15.5.1 
         const indicatorGoalswe1551 = urlSWEUN1[14].indicators[6];
 
-        //skapa pie charts till varje delmål
-    
-        const indicators = urlSWEUN1[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
+//Skapa pie-chart för varje delmål
 
-        const container = document.querySelector('.pie-charts__swe-goal-15');
-        
-        if (container) {
-          
-          indicators.forEach((indicator, index) => {
-            const label = indicator.code;
-            const description = indicator.description;
-            const percentage = indicator.percentage;      
-            
-            const data = [percentage, 100 - percentage];
-            
-            const datasets = {
-              datasets: [{
-                label: `${label}`,
-                data: data,  
-                backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
-                hoverOffset: 4
-              }]
-            };
-            
-            const config = {
-              type: "pie",
-              data: {
-                  labels: ['Uppfyllt', 'Ej uppfyllt'],
-                  datasets: datasets.datasets
-              },
-              options: {
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                let label = tooltipItem.label || '';
-                                let value = tooltipItem.raw || 0;
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += `${value}%`;
-                                return label;
-                            }
+const indicators = urlSWEUN1[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
+
+const container = document.querySelector('.pie-charts__swe-goal-15');
+
+if (container) {
+  
+  indicators.forEach((indicator, index) => {
+    const label = indicator.code;
+    const description = indicator.description;
+    const percentage = indicator.percentage;      
+    
+    const data = [percentage, 100 - percentage];
+    
+    const datasets = {
+      datasets: [{
+        label: `${label}`,
+        data: data,  
+        backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
+        hoverOffset: 4
+      }]
+    };
+    
+    const config = {
+      type: "pie",
+      data: {
+          labels: ['Uppfyllt', 'Ej uppfyllt'],
+          datasets: datasets.datasets
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        let label = tooltipItem.label || '';
+                        let value = tooltipItem.raw || 0;
+                        if (label) {
+                            label += ': ';
                         }
+                        label += `${value}%`;
+                        return label;
                     }
                 }
             }
-        };
-            
-            // Skapa en wrapper-div till varje canvas, label och description
-
-            const wrapperDiv = document.createElement('div');
-            wrapperDiv.classList.add('chart-wrapper');
-            
-            const canvas = document.createElement('canvas');
-            canvas.id = `goal15chart${index + 1}`;
-            wrapperDiv.appendChild(canvas);
-            
-            const labelDiv = document.createElement('div');
-            labelDiv.textContent = label;
-            wrapperDiv.appendChild(labelDiv);
-            
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.textContent = description;
-            wrapperDiv.appendChild(descriptionDiv);
-            
-            container.appendChild(wrapperDiv);
-            
-            if (canvas) {
-              const unsweDataChart = new Chart(canvas, config);
-            }
-
-          });
         }
+    }
+};
+    
+    // Skapa en wrapper-div till varje canvas, label och description
+
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('chart-wrapper');
+    
+    const canvas = document.createElement('canvas');
+    canvas.id = `goal15chart${index + 1}`;
+    wrapperDiv.appendChild(canvas);
+    
+    const labelDiv = document.createElement('div');
+    labelDiv.classList.add('pieChart_labelDiv')
+    labelDiv.textContent = label;
+    wrapperDiv.appendChild(labelDiv);
+    
+    const descriptionDiv = document.createElement('p');
+    descriptionDiv.classList.add('p-text')
+    descriptionDiv.textContent = description;
+    wrapperDiv.appendChild(descriptionDiv);
+    
+    container.appendChild(wrapperDiv);
+    
+    if (canvas) {
+      const unsweDataChart = new Chart(canvas, config);
+    }
+
+  });
+} 
+
+
 
         
   const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true"
@@ -262,15 +269,30 @@ async function getGoal15Swe() {
       method: "GET",
       headers: {
         "Accept": "application/json",
-        // "Content-Type": "application/x-www-form-urlencoded",
+
       },
-      // body: "dataPointType=2&areaCodes=752&natureOfData=all"
+
     }
   )  .then(response => response.json());
  
   // const goalDataSWE = ungoalData;
   // console.log("UN API global goals 1",goalDataSWE);
-  console.log("Goal 15 descriptions", urlUNgoalData);
+// Log the fetched data to verify it
+console.log("Goal 15 descriptions", urlUNgoalData);
+
+// Select all elements with the class 'target-description__text'
+const descriptionElements = document.querySelectorAll('.target-description__text');
+
+// Iterate over each target and corresponding HTML element
+urlUNgoalData.forEach(goal => {
+  // Iterate over each target within the goal
+  goal.targets.forEach((target, index) => {
+    // Ensure the element exists before attempting to set its text
+    if (descriptionElements[index]) {
+      descriptionElements[index].textContent = target.description;
+    }
+  });
+});
 
   
 };
