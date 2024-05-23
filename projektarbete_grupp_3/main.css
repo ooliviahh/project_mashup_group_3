@@ -480,8 +480,10 @@ body.modal-open {
   }
 }
 .fourth-page {
-  background-image: url(img/jonatan-pie-Kl_mnvGqPnU-unsplash.jpg);
+  background-image: url(img/artic_fox_horizontal_rotate.jpg);
+  background-image: url(img/artic_fox_horizontal_rotate_zoom.jpg);
   background-size: cover;
+  background-position-x: right 100%;
   height: auto;
   width: 100%;
   display: flex;
@@ -491,7 +493,6 @@ body.modal-open {
 .fourth-page_content {
   margin-top: 5%;
   z-index: 2;
-  width: 80%;
   line-height: 1.2;
   max-width: 80%;
   display: flex;
@@ -500,33 +501,51 @@ body.modal-open {
   flex-direction: column;
 }
 
-.fourth-page .h2-text {
-  z-index: 4;
-  /* color: var(--darkgreen); */
-  margin: 0.5rem;
-  /* font-size: 1.5rem; */
+.fourth-page_content .target-description__container {
+  width: 59%;
 }
 
+.fourth-page .h2-text {
+  z-index: 4;
+  margin: 0.5rem;
+}
+
+/* Pie charts på sida 4  */
 .pie-charts__swe-goal-15 {
   padding-top: 2%;
   width: 70%;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns for large screens */
-  background-color: rgba(255, 255, 255, 0.9);
+  grid-template-columns: repeat(5, 1fr);
+  background-color: rgba(255, 255, 255);
   border-radius: 3rem;
   padding-left: 2.5rem;
   padding-bottom: 2rem;
 }
 
 .pie-charts__swe-goal-15 .h5-text {
-  grid-column: 1 / -1; /* Make the h4 span across all columns */
+  grid-column: 1 / -1;
   color: var(--darkgreen);
   padding-bottom: 2%;
 }
 
+.pie-charts__swe-goal-15 .figure-text-small {
+  grid-column: 1 / -1;
+}
+
 .chart-wrapper {
   max-width: 85%;
+}
+
+.chart-wrapper .p-text {
+  font-size: 1.2rem;
+}
+
+.fourth-page .figure-text {
+  color: var(--beigeish);
+  margin-top: 1.2rem;
+  position: relative;
+  left: -9%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -575,6 +594,7 @@ body.modal-open {
 
 .pieChart_labelDiv {
   font-weight: 900;
+  font-size: 1.2rem;
 }
 
 .footer {
@@ -666,4 +686,29 @@ body.modal-open {
 
 .target-description__text {
   color: var(--beigeish);
+  margin-top: 0.5rem;
+}
+
+/* Legends till pie charts på sida 4 */
+.circle-green {
+  background-color: var(--darkgreen);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2rem;
+  margin-right: 1rem;
+}
+
+.circle-green-outlines {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2rem;
+  border: 2px solid var(--darkgreen);
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 3rem;
+}
+
+.legend {
+  display: flex;
+  flex-direction: row;
 }

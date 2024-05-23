@@ -43,12 +43,15 @@ fetch(request)
   const values = dataDjuroVaxtart.data.map((value) => value.values[0]);
   console.log("värden", values);
 
+  // const customLabel = ['Etikett1','Etikett2', 'Etikett 3', 'Etikett 4', 'Etikett 5', 'Etikett6'];
+  // const labels = customLabel;
+
   const labels = dataDjuroVaxtart.data.map(value => value.key[1]);
   console.log("etiketter:", labels);
 
     const datasets = [
       {
-        label: "Antal arter, utrotningshotade djur och växter i Sverige år 2022",
+        label: "Antal",
         data: values,
         backgroundColor: "rgb(24, 47, 33)",
         borderRadius: 10,
@@ -185,7 +188,8 @@ async function getGoal15Swe() {
 
 const indicators = urlSWEUN1[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
 
-const container = document.querySelector('.pie-charts__swe-goal-15');
+const container = document.querySelector('.pie-charts__swe-goal-15 ');
+// const figureText = document.querySelector('.figure-text');
 
 if (container) {
   
@@ -253,7 +257,7 @@ if (container) {
     descriptionDiv.textContent = description+".";
     wrapperDiv.appendChild(descriptionDiv);
     
-    container.appendChild(wrapperDiv);
+    container.insertAdjacentElement('beforeend', wrapperDiv);
     
     if (canvas) {
       const unsweDataChart = new Chart(canvas, config);
@@ -262,8 +266,7 @@ if (container) {
   });
 } 
 
-
-
+ 
         
   const urlUNgoalData = await fetch("https://unstats.un.org/SDGAPI/v1/sdg/Goal/15/Target/List?includechildren=true"
     ,  {
@@ -435,30 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// ---------------- API från UN Goal across countries -----///
-// const urlUNgoalData = "https://unstats.un.org/SDGAPI/v1/sdg/GeoArea/752/List";
-// const requestUNgoalData = new Request(urlUNgoalData, 
-//   {
-//     method: "GET",
-//     headers: {
-//       "Accept": "application/json",
-//       // "Content-Type": "application/x-www-form-urlencoded",
-//     },
-//     // body: "dataPointType=2&areaCodes=752&natureOfData=all"
-//   }
-// )
 
-// fetch(requestUNgoalData) 
-// .then(response => response.json())
-// .then((ungoalData) => {
-
-// const goalDataSWE = ungoalData;
-// console.log("Den andra UN API global goals",goalDataSWE);
-
-// const Goal14swe = ungoalData[14].indicators.map((indicator)=> indicator.percentage); 
-//         console.log(Goal14swe)  
-
-// })
 
 
 // ---------------- API från SCB Natura 2000 områden -----///
