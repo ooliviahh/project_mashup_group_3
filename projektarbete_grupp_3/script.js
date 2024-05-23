@@ -168,15 +168,15 @@ async function getGoal15Swe() {
 
       // skriva ut text till page 2 
       const sweGoal = urlSWEUN1[14];
-        const indicatorGoalswe = urlSWEUN1[14].indicators.map((indicator)=> indicator.percentage); 
-        const textElement2 = document.querySelector(".second-page-text")
-        const newHeading2 = document.createElement("h3");
-        const newParagraph = document.createElement("p")
-        const goal15Name = sweGoal.goalName;
-        newHeading2.textContent = "United Nation beskriver mål 15:";
-        newParagraph.textContent = goal15Name;
-        textElement2.insertAdjacentElement("beforebegin", newHeading2);
-        textElement2.insertAdjacentElement('beforebegin', newParagraph)
+      const indicatorGoalswe = urlSWEUN1[14].indicators.map((indicator) => indicator.percentage); 
+      const textElement2 = document.querySelector(".second-page-text");
+      const newHeading2 = document.createElement("p");
+      const newParagraph = document.createElement("p");
+      const goal15Name = sweGoal.goalName;
+      newHeading2.textContent = "United Nation beskriver mål 15:";
+      newParagraph.textContent = '"'+goal15Name+"."+'"';
+      textElement2.insertAdjacentElement("beforebegin", newHeading2);
+      textElement2.insertAdjacentElement("beforebegin", newParagraph);
 
         // Rödlist index del mål 15.5.1 
         const indicatorGoalswe1551 = urlSWEUN1[14].indicators[6];
@@ -201,6 +201,7 @@ if (container) {
         label: `${label}`,
         data: data,  
         backgroundColor: ['rgb(24, 47, 33)', 'transparent'],
+        borderColor: ['rgb(24, 47, 33)'],
         hoverOffset: 4
       }]
     };
@@ -249,7 +250,7 @@ if (container) {
     
     const descriptionDiv = document.createElement('p');
     descriptionDiv.classList.add('p-text')
-    descriptionDiv.textContent = description;
+    descriptionDiv.textContent = description+".";
     wrapperDiv.appendChild(descriptionDiv);
     
     container.appendChild(wrapperDiv);
@@ -289,7 +290,7 @@ urlUNgoalData.forEach(goal => {
   goal.targets.forEach((target, index) => {
     // Ensure the element exists before attempting to set its text
     if (descriptionElements[index]) {
-      descriptionElements[index].textContent = target.description;
+      descriptionElements[index].textContent = target.description+".";
     }
   });
 });
