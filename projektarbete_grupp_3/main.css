@@ -644,7 +644,6 @@ a {
 .footer {
   display: flex;
   align-items: center;
-
   color: var(--beigeish);
   margin: 1rem;
   background-color: var(--darkgreen);
@@ -658,6 +657,7 @@ a {
   margin: 2rem;
   padding-right: 2rem;
 }
+
 /* Test för modal nr 3 hide part of the text */
 .hidden-text {
   display: none;
