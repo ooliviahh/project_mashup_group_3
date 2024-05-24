@@ -23,17 +23,6 @@ body {
   background-color: var(--darkgreen);
 }
 
-footer {
-  height: 60vh;
-  display: flex;
-  text-align: center;
-  color: var(--beigeish);
-  margin-top: 1rem;
-  background-color: var(--darkgreen);
-  height: 5rem;
-  flex-grow: 1;
-}
-
 /*--------------- First page classes  --------------- */
 
 .container {
@@ -91,6 +80,10 @@ footer {
   font-size: 2rem;
   color: var(--beigeish);
   margin-top: 1.8rem;
+}
+
+.h6-text {
+  font-size: 1.5rem;
 }
 
 .figure-text {
@@ -207,44 +200,48 @@ footer {
 }
 
 .second-page_content {
-  padding-top: 120vh; /* Samma värde som margin-top för att behålla innehållets position */
+  padding-top: 120vh; /* Samma värde som margin-top ovan för att behålla innehållets position */
   color: #ffffff;
-  /* line-height: 1.2; */
   align-items: center;
   z-index: 2;
-  width: 80%; /* Anpassa till en bredare vy för mindre skärmar */
-  max-width: 40%; /* Maxbredd för större skärmar */
+  width: 80%;
+  max-width: 50%;
 }
 
 .second-text .p-text {
   margin-top: 1.2rem;
 }
 
-/* Media Queries för responsiv design */
 @media screen and (max-width: 1200px) {
   .second-page_content {
-    max-width: 50%; /* Anpassa bredden för större surfplattor */
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .second-page_content {
+    max-width: 65%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .second-page_content {
-    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+    max-width: 80%;
   }
 }
 @media screen and (max-width: 480px) {
   .second-page_content {
-    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+    max-width: 100%;
   }
   .second-page_backround::before {
     top: -100vh;
     height: auto;
   }
   .p-text {
-    padding-top: 1rem; /* Justera padding för mindre skärmar */
+    padding-top: 1rem;
   }
   .second-text .p-text {
-    padding-top: 1.5rem; /* Justera padding för mindre skärmar */
+    padding-top: 1.5rem;
   }
 }
 /*--------------- Knappar på second-page -------------- */
@@ -261,7 +258,7 @@ footer {
   padding: 0;
   cursor: pointer;
   padding: 3rem;
-  transition: transform 0.3s ease; /* Add transition for smooth movement */
+  transition: transform 0.3s ease;
 }
 
 .bubble-btn:hover {
@@ -280,7 +277,7 @@ footer {
   left: 50%;
 }
 
-/*--------------- Pop up modal for buttons on second page -------------- */
+/*--------------- Pop up modal för knappar på second page -------------- */
 
 .modal {
   display: none; /* Hidden by default */
@@ -396,6 +393,7 @@ body.modal-open {
 .accordion-content.show {
   display: block;
 }
+
 /*----------- Third page section --------------------------------- */
 .third-page__background {
   background-image: url(img/geranimo-qzgN45hseN0-unsplash.jpg);
@@ -419,7 +417,6 @@ body.modal-open {
 
 .third-page__content {
   line-height: 1.2;
-  align-items: center;
   z-index: 2;
   width: 80%;
   max-width: 40%;
@@ -444,18 +441,37 @@ body.modal-open {
   border-radius: 2rem;
 }
 
-.endangered-species-modal_text {
-  padding-bottom: 1rem;
-}
-
-.animals-page_text {
-  z-index: 2;
-}
-
 /* Media Queries för responsiv design */
+@media screen and (max-width: 1470px) {
+  .third-page__content .h4-text,
+  .third-page__content .h5-text {
+    font-size: 95%;
+  }
+  .third-page__content {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 60%;
+  }
+
+  .third-page__content2 {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 70%;
+  }
+
+  .third-page__content .h2-text {
+    grid-column: 1 / -1;
+  }
+
+  .third-page__background .bubble-btn__container {
+    max-width: 50%;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .third-page__content {
-    max-width: 50%; /* Anpassa bredden för större surfplattor */
+    max-width: 60%; /* Anpassa bredden för större surfplattor */
   }
 }
 
@@ -479,8 +495,9 @@ body.modal-open {
     font-size: 0.9rem;
   }
 }
+
+/* Fourth page section  */
 .fourth-page {
-  background-image: url(img/artic_fox_horizontal_rotate.jpg);
   background-image: url(img/artic_fox_horizontal_rotate_zoom.jpg);
   background-size: cover;
   background-position-x: right 100%;
@@ -541,11 +558,38 @@ body.modal-open {
   font-size: 1.2rem;
 }
 
+.target-description__container .figure-text {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
 .fourth-page .figure-text {
   color: var(--beigeish);
   margin-top: 1.2rem;
   position: relative;
   left: -9%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.modal-content .figure-text-small a {
+  color: var(--darkgreen);
+}
+
+.fourth-page_content .figure-text-small a {
+  color: var(--beigeish);
+}
+
+.figure-text-small a:hover {
+  color: var(--darkgreen);
+}
+
+@media screen and (max-width: 1470px) {
+  .fourth-page {
+    background-image: url(img/artic_fox_horizontal_rotate_1470px.jpg);
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -600,16 +644,26 @@ body.modal-open {
 .footer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 15vh;
+
+  color: var(--beigeish);
+  margin: 1rem;
+  background-color: var(--darkgreen);
+  flex-direction: row;
+  justify-content: end;
 }
 
+.footer_content {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  padding-right: 2rem;
+}
 /* Test för modal nr 3 hide part of the text */
 .hidden-text {
   display: none;
 }
 .show-text {
-  display: inline;
+  display: block;
 }
 
 .read-more-button,
@@ -627,7 +681,7 @@ body.modal-open {
 }
 
 .show-less-button {
-  margin-left: 1rem;
+  margin-top: 1rem;
 }
 
 /* Description targets from UN API */
@@ -711,4 +765,12 @@ body.modal-open {
 .legend {
   display: flex;
   flex-direction: row;
+}
+
+.footer_content a {
+  color: var(--beigeish);
+}
+
+.footer_content a:hover {
+  color: white;
 }

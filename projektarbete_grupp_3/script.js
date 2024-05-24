@@ -90,67 +90,105 @@ fetch(request)
 //-------------------------------------------------------------------------//
 // Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
 console.log(dataDjuroVaxtart.columns[1]);
-
 const animalTextElement = document.querySelector('.endangered-species-modal_text');
-        const animalHeaderElement = document.querySelector(".endangered-species-modal_header");
+const animalHeaderElement = document.querySelector(".endangered-species-modal_header");
 
-        // Check if the elements exist in the DOM
-        if (animalTextElement && animalHeaderElement) {
-            // Hämta kommentaren och dela upp den i meningar med hjälp av en reguljär expression
-            const comment = dataDjuroVaxtart.columns[1].comment;
-            const words = comment.split(/\s+/);
-            const sentences = comment.match(/[^\.!\?]+[\.!\?]+/g) || [comment]; // Split by sentence
+// Check if the elements exist in the DOM
+if (animalTextElement && animalHeaderElement) {
+    // Hämta kommentaren
+    let comment = dataDjuroVaxtart.columns[1].comment;
 
-            // Skapa en rubrik med den första meningen
-            const headerText = words.slice(0, 4).join(' ');
-            const headerElement = document.createElement('h4');
-            headerElement.textContent = headerText;
-            headerElement.classList.add('h4-text');
+    // Dela upp texten i ord och ta bort de första fyra orden
+    const words = comment.split(/\s+/);
+    const headerText = words.slice(0, 4).join(' ');
+    comment = words.slice(4).join(' ');
 
-            // Skapa en textnod för den andra och tredje meningen
-            const initialText = sentences.slice(1, 3).join(' ');
-            const initialTextNode = document.createTextNode(initialText + " ");
+    // Dela upp den resterande texten i meningar
+    const sentences = comment.match(/[^\.!\?]+[\.!\?]+/g) || [comment]; // Split by sentence
 
-            // Skapa en span för den dolda texten
-            const hiddenText = sentences.slice(3).join(' ');
-            const hiddenSpan = document.createElement('span');
-            hiddenSpan.textContent = hiddenText;
-            hiddenSpan.classList.add('hidden-text');
+    // Skapa en rubrik med de första fyra orden
+    const headerElement = document.createElement('h4');
+    headerElement.textContent = headerText;
+    headerElement.classList.add('h4-text');
 
-            // Skapa "Read more" och "Show less" knappar
-            const readMoreButton = document.createElement('button');
-            readMoreButton.textContent = 'Läs mer';
-            readMoreButton.classList.add('read-more-button');
+    // Funktion för att dela upp texten i stycken
+    function splitIntoParagraphs(text, firstParagraphSentences, subsequentParagraphSentences) {
+        const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text]; // Dela upp texten i meningar
+        const paragraphs = [];
 
-            const showLessButton = document.createElement('button');
-            showLessButton.textContent = 'Läs mindre';
-            showLessButton.style.display = 'none';
-            showLessButton.classList.add('show-less-button');
+        let i = 0;
+        // Första stycket med angivet antal meningar
+        const firstParagraph = sentences.slice(i, i + firstParagraphSentences).join(' ').trim();
+        paragraphs.push(firstParagraph);
+        i += firstParagraphSentences;
 
-            // Lägg till event listeners till knapparna
-            readMoreButton.addEventListener('click', () => {
-                hiddenSpan.classList.add('show-text');
-                readMoreButton.style.display = 'none';
-                showLessButton.style.display = 'inline';
-            });
-
-            showLessButton.addEventListener('click', () => {
-                hiddenSpan.classList.remove('show-text');
-                readMoreButton.style.display = 'inline';
-                showLessButton.style.display = 'none';
-            });
-
-            // Lägg till rubriken i början av headerElement och den återstående texten i textElement
-            animalHeaderElement.insertBefore(headerElement, animalHeaderElement.firstChild);
-            animalTextElement.appendChild(initialTextNode);
-            animalTextElement.appendChild(hiddenSpan);
-            animalTextElement.appendChild(readMoreButton);
-            animalTextElement.appendChild(showLessButton);
-        } else {
-            console.error("One or more elements were not found in the DOM");
+        // Resten av styckena med angivet antal meningar
+        while (i < sentences.length) {
+            const paragraph = sentences.slice(i, i + subsequentParagraphSentences).join(' ').trim();
+            paragraphs.push(paragraph);
+            i += subsequentParagraphSentences;
         }
 
+        return paragraphs;
+    }
+
+    // Dela upp texten i stycken: första stycket med 3 meningar, resten med 2 meningar
+    const paragraphs = splitIntoParagraphs(comment, 4, 2);
+
+    // Skapa textnoder för varje stycke
+    paragraphs.forEach((paragraph, index) => {
+        const paragraphElement = document.createElement('p');
+        paragraphElement.textContent = paragraph;
+        paragraphElement.classList.add('p-text')
+
+        // Lägg till stycken till textElement
+        if (index === 0) {
+            // Första stycket visas direkt
+            animalTextElement.appendChild(paragraphElement);
+        } else {
+            // Övriga stycken läggs till i en span som initialt är dold
+            paragraphElement.classList.add('hidden-text');
+            animalTextElement.appendChild(paragraphElement);
+        }
+    });
+
+    // Skapa "Read more" och "Show less" knappar
+    const readMoreButton = document.createElement('button');
+    readMoreButton.textContent = 'Läs mer';
+    readMoreButton.classList.add('read-more-button');
+
+    const showLessButton = document.createElement('button');
+    showLessButton.textContent = 'Läs mindre';
+    showLessButton.style.display = 'none';
+    showLessButton.classList.add('show-less-button');
+
+    // Lägg till event listeners till knapparna
+    readMoreButton.addEventListener('click', () => {
+        document.querySelectorAll('.hidden-text').forEach(element => {
+            element.classList.add('show-text');
+        });
+        readMoreButton.style.display = 'none';
+        showLessButton.style.display = 'inline';
+    });
+
+    showLessButton.addEventListener('click', () => {
+        document.querySelectorAll('.hidden-text').forEach(element => {
+            element.classList.remove('show-text');
+        });
+        readMoreButton.style.display = 'inline';
+        showLessButton.style.display = 'none';
+    });
+
+    // Lägg till rubriken i början av headerElement och knapparna i textElement
+    animalHeaderElement.insertBefore(headerElement, animalHeaderElement.firstChild);
+    animalTextElement.appendChild(readMoreButton);
+    animalTextElement.appendChild(showLessButton);
+} else {
+    console.error("One or more elements were not found in the DOM");
+}
+
 });
+
 
 
 //-----------------------------------------------------------------------------------------------
