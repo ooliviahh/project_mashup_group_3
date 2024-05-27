@@ -1,4 +1,4 @@
-/* our custom css color variables */
+/* Vår färgpalett */
 :root {
   --darkgreen: rgb(24, 47, 33);
   --beigeish: rgb(217, 217, 217);
@@ -23,41 +23,7 @@ body {
   background-color: var(--darkgreen);
 }
 
-/*--------------- First page classes  --------------- */
-
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.first-page {
-  background-image: url("../projektarbete_grupp_3/img/fox_image_1920x_zoom.webp");
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.first-page__title {
-  display: flex;
-  position: relative;
-  width: 50%;
-  font-family: "Freeman", sans-serif;
-  font-weight: 400;
-  margin-left: 40%;
-  margin-top: 10%;
-  flex-wrap: wrap;
-}
-
-.second-page_background .h2-text {
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 2rem;
-  margin-top: 15%;
-}
-
+/* Alla rubriker och brödtext på webbplatsen */
 .h1-text {
   font-size: 7.3rem;
   color: var(--beigeish);
@@ -94,7 +60,53 @@ body {
   font-weight: 900;
 }
 
-@media screen and (max-width: 768px) {
+/*--------------- First page classer  --------------- */
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-page {
+  background-image: url("../projektarbete_grupp_3/img/fox_image_1920x_zoom.webp");
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-page__title {
+  display: flex;
+  position: relative;
+  width: 50%;
+  font-family: "Freeman", sans-serif;
+  font-weight: 400;
+  margin-left: 40%;
+  margin-top: 10%;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 1200px) {
+  .first-page__title {
+    width: 80%;
+    margin-left: 5%;
+  }
+  .h1-text {
+    font-size: 4.5rem;
+  }
+  .h2-text {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .first-page__title {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20%;
+  }
+
   .h1-text {
     font-size: 3.5rem;
   }
@@ -110,8 +122,7 @@ body {
   width: 60%;
 }
 
-/* Button on first page scroll */
-/* Button container */
+/* Scrollknappar på sida 1,2 och 3 */
 .btn {
   display: flex;
   justify-content: center;
@@ -121,7 +132,6 @@ body {
   z-index: 4;
 }
 
-/* Link styles */
 .btn a {
   position: relative;
   display: flex;
@@ -135,19 +145,16 @@ body {
   z-index: 6;
 }
 
-/* Hover effect for link */
 .btn a:hover {
   opacity: 0.5;
 }
 
-/* Text above the arrow */
 .btn-next-page a .next_page_btn-text {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 1.7rem;
 }
 
-/* Arrow container */
 .btn-next-page a .arrow {
   display: block;
   width: 1rem;
@@ -155,7 +162,6 @@ body {
   position: relative;
 }
 
-/* Arrow styles */
 .btn-next-page a .arrow::after {
   content: "";
   position: absolute;
@@ -171,7 +177,6 @@ body {
   cursor: pointer;
 }
 
-/* White color variant */
 .btn-next-page_white a {
   color: white;
 }
@@ -181,7 +186,7 @@ body {
   border-bottom: 2px solid white;
 }
 
-/* Second page classes */
+/* Second page classer */
 
 .second-page_background {
   display: flex;
@@ -191,16 +196,23 @@ body {
   background: url(img/trees_1.webp) no-repeat center center;
   width: 100%;
   background-size: cover;
-  margin-top: -120vh; /* Justera denna värde efter behov för att flytta upp bakgrunden */
+  margin-top: -120vh;
   height: 220vh;
 }
 
 .second-page_content {
-  padding-top: 120vh; /* Samma värde som margin-top ovan för att behålla innehållets position */
+  padding-top: 120vh;
   color: #ffffff;
   align-items: center;
   z-index: 2;
   max-width: 40%;
+}
+
+.second-page_background .h2-text {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  margin-top: 15%;
 }
 
 .second-text .p-text {
@@ -209,13 +221,13 @@ body {
 
 @media screen and (max-width: 1450px) {
   .second-page_content {
-    max-width: 45%;
+    max-width: 50%;
   }
 }
 
 @media screen and (max-width: 1160px) {
   .second-page_content {
-    max-width: 65%;
+    max-width: 70%;
   }
 }
 
@@ -229,12 +241,9 @@ body {
     max-width: 80%;
   }
   .second-page_background::before {
-    top: -100vh;
     height: auto;
   }
-  /* .p-text {
-    padding-top: 1rem;
-  } */
+
   .second-text .p-text {
     padding-top: 1.5rem;
   }
@@ -284,7 +293,7 @@ body {
 /*--------------- Pop up modal för knappar på second page -------------- */
 
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   z-index: 999;
   left: 0;
@@ -308,25 +317,38 @@ body {
   z-index: 999;
 }
 
-@media screen and (max-width: 900px) {
-  .modal-content {
-    width: 70%;
-  }
+.modal-content .p-text {
+  padding-right: 30%;
+  padding-top: 1%;
+  margin-bottom: 1rem;
+}
+.bar-chart__endangered-species {
+  width: 100%;
+  background-color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  z-index: 2;
+  padding: 2rem;
+  border-radius: 2rem;
 }
 
-@media screen and (max-width: 580px) {
-  .modal-content {
-    width: 95%;
-  }
+/* Läsa mer/mindre knapp till modal nr 3 på second page */
+.hidden-text {
+  display: none;
+}
+.show-text {
+  display: block;
+}
 
-  .modal-content .p-text {
-    border: 1px solid pink;
-    padding-right: 0%;
-  }
-
-  .figure-text {
-    width: 80%;
-  }
+.read-more-button,
+.show-less-button {
+  color: var(--beigeish);
+  background-color: var(--darkgreen);
+  border: none;
+  border-radius: 0.5rem;
+  width: 15%;
+  height: 3rem;
 }
 
 .modal-img_container {
@@ -340,9 +362,9 @@ body {
 }
 
 .modal-img_container img {
-  display: block; /* Gör bilden blockelement för korrekt placering */
-  width: 100%; /* Fyller sin förälders bredd */
-  height: auto; /* Behåller bilden proportionell när den skalas */
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .close {
@@ -385,12 +407,6 @@ body.modal-open {
   opacity: 80%;
 }
 
-.modal-content .p-text {
-  padding-right: 30%;
-  padding-top: 1%;
-  margin-bottom: 1rem;
-}
-
 /*---Modal i modal----*/
 
 .modal .modal {
@@ -405,19 +421,25 @@ body.modal-open {
   width: 100%;
   border-radius: 2rem;
 }
-.accordion-header {
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: 10px;
+
+@media screen and (max-width: 900px) {
+  .modal-content {
+    width: 80%;
+  }
 }
 
-.accordion-content {
-  display: none;
-  margin-bottom: 10px;
-}
+@media screen and (max-width: 580px) {
+  .modal-content {
+    width: 95%;
+  }
 
-.accordion-content.show {
-  display: block;
+  .modal-content .p-text {
+    padding-right: 0%;
+  }
+
+  .figure-text {
+    width: 80%;
+  }
 }
 
 /*----------- Third page section --------------------------------- */
@@ -434,17 +456,18 @@ body.modal-open {
   margin-top: 10rem;
 }
 
-.third-page__content .p-text,
-.third-page__content .h4-text {
-  z-index: 2;
+.third-page__content .p-text {
   color: var(--beigeish);
   margin-top: 2rem;
 }
 
+.third-page__content .h4-text {
+  margin-top: 10rem;
+  color: var(--beigeish);
+}
+
 .third-page__content {
   line-height: 1.2;
-  z-index: 2;
-  /* width: 80%; */
   max-width: 40%;
 }
 
@@ -456,23 +479,16 @@ body.modal-open {
   margin-top: 1.2rem;
 }
 
-.bar-chart__endangered-species {
-  width: 100%;
-  background-color: #ffffff;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-  z-index: 2;
-  padding: 2rem;
-  border-radius: 2rem;
-}
-
-/* Media Queries för responsiv design */
 @media screen and (max-width: 1470px) {
-  .third-page__content .h4-text,
-  .third-page__content .h5-text {
-    font-size: 95%;
+  .third-page__content .p-text,
+  .third-page__content .h2-text {
+    margin-top: 2rem;
   }
+
+  .third-page__content .h4-text {
+    margin-top: 5rem;
+  }
+
   .third-page__content {
     display: grid;
     gap: 2rem;
@@ -480,27 +496,28 @@ body.modal-open {
     max-width: 60%;
   }
 
-  .third-page__content2 {
+  .third-page__content-2 {
     grid-column: 1 / -1;
     justify-self: center;
-    max-width: 70%;
+    max-width: 80%;
   }
 
   .third-page__content .h2-text {
     grid-column: 1 / -1;
   }
-
-  .third-page__background .bubble-btn__container {
-    max-width: 60%;
-  }
 }
 
 @media screen and (max-width: 1200px) {
+  .third-page__content .h4-text,
+  .third-page__content .h5-text {
+    font-size: 98%;
+  }
+
   .third-page__content {
     max-width: 60%;
   }
 
-  .third-page__content2 {
+  .third-page__content-2 {
     max-width: 100%;
   }
 }
@@ -565,7 +582,7 @@ body.modal-open {
 
 /* Pie charts på sida 4  */
 .pie-charts__swe-goal-15 {
-  padding-top: 2%;
+  padding-top: 1%;
   width: 70%;
   display: grid;
   gap: 1rem;
@@ -579,11 +596,19 @@ body.modal-open {
 .pie-charts__swe-goal-15 .h5-text {
   grid-column: 1 / -1;
   color: var(--darkgreen);
-  padding-bottom: 2%;
+  padding-bottom: 1%;
+  display: flex;
+  justify-content: center;
 }
 
 .pie-charts__swe-goal-15 .figure-text-small {
   grid-column: 1 / -1;
+}
+
+.pie-chart_legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .chart-wrapper {
@@ -623,120 +648,6 @@ a {
 
 .figure-text-small a:hover {
   color: var(--darkgreen);
-}
-
-@media screen and (max-width: 1470px) {
-  .fourth-page {
-    background-image: url(img/artic_fox_horizontal_rotate_1470px.jpg);
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .fourth-page_content {
-    max-width: 100%;
-  }
-
-  .pie-charts__swe-goal-15 {
-    width: 90%;
-  }
-  .fourth-page_content .target-description__container {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 968px) {
-  .pie-charts__swe-goal-15 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .fourth-page_content {
-    max-width: 90%;
-  }
-
-  .pie-charts__swe-goal-15 {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .fourth-page_content {
-    max-width: 100%;
-  }
-
-  .pie-charts__swe-goal-15 {
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .fourth-page_content .target-description__container {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-  }
-
-  .target-description__title {
-    font-size: 90%;
-  }
-  .target-description__text {
-    font-size: 90%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .pie-charts__swe-goal-15 {
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.pieChart_labelDiv {
-  font-weight: 900;
-  font-size: 1.2rem;
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  color: var(--beigeish);
-  margin: 1rem;
-  background-color: var(--darkgreen);
-  justify-content: center;
-}
-
-.footer_content {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem;
-  padding-right: 2rem;
-}
-
-.footer_content a {
-  color: var(--beigeish);
-  font-size: 1.2rem;
-  text-decoration: underline;
-}
-
-.footer_content a:hover {
-  color: white;
-}
-
-/* Test för modal nr 3 hide part of the text */
-.hidden-text {
-  display: none;
-}
-.show-text {
-  display: block;
-}
-
-.read-more-button,
-.show-less-button {
-  color: var(--beigeish);
-  background-color: var(--darkgreen);
-  border: none;
-  border-radius: 0.5rem;
-  width: 15%;
-  height: 3rem;
 }
 
 /* Description targets from UN API */
@@ -817,7 +728,103 @@ a {
   margin-bottom: 3rem;
 }
 
-.pie-chart_legend {
+@media screen and (max-width: 1470px) {
+  .fourth-page {
+    background-image: url(img/artic_fox_horizontal_rotate_1470px.jpg);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .fourth-page_content {
+    max-width: 100%;
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 90%;
+  }
+  .fourth-page_content .target-description__container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .pie-charts__swe-goal-15 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fourth-page_content {
+    max-width: 90%;
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .fourth-page_content {
+    max-width: 100%;
+  }
+
+  .pie-charts__swe-goal-15 {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fourth-page_content .target-description__container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+
+  .target-description__title {
+    font-size: 90%;
+  }
+  .target-description__text {
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pie-charts__swe-goal-15 {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pieChart_labelDiv {
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.footer {
   display: flex;
-  flex-direction: row;
+  color: var(--beigeish);
+  margin: 1rem;
+  background-color: var(--darkgreen);
+  justify-content: center;
+}
+
+.footer_content {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  padding-right: 2rem;
+}
+
+.footer_content:first-child {
+  width: 35%;
+  justify-content: center;
+}
+
+.footer_content a {
+  color: var(--beigeish);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-decoration: underline;
+}
+
+.footer_content a:hover {
+  color: white;
 }

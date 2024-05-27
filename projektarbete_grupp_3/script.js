@@ -18,7 +18,7 @@ const queryDjuroVaxtart = {
       "selection": {
         "filter": "item",
         "values": [
-          "2022"
+          "2023"
         ]
       }
     }
@@ -43,10 +43,29 @@ fetch(request)
   const values = dataDjuroVaxtart.data.map((value) => value.values[0]);
   console.log("värden", values);
 
-  // const customLabel = ['Etikett1','Etikett2', 'Etikett 3', 'Etikett 4', 'Etikett 5', 'Etikett6'];
-  // const labels = customLabel;
+  const customLabelsMap = {
+    "Daggdjur": "Däggdjur",
+    "Faglar": "Fåglar",
+    "Fiskar": "",
+    "Kraldjur": "Kräldjur",
+    "Groddjur": "",
+    "RyggLdjur": "Ryggradslösa djur",
+    "Orkid": "Orkidéer",
+    "OvrigaKarlv": "Övriga Kärlväxter",
+    "Mossor": "",
+    "Lavar": "",
+    "Svampar": ""
+  };
 
-  const labels = dataDjuroVaxtart.data.map(value => value.key[1]);
+  const expectedStructure = dataDjuroVaxtart.data.every(value => value.key && value.key.length > 1);
+
+  const labels = expectedStructure
+      ? dataDjuroVaxtart.data.map(value => {
+          const originalLabel = value.key[1];
+          return customLabelsMap[originalLabel] || originalLabel; // Använd anpassad label om den finns, annars original
+        })
+      : dataDjuroVaxtart.data.map(value => value.key[1]);
+
   console.log("etiketter:", labels);
 
     const datasets = [
@@ -75,10 +94,11 @@ fetch(request)
           },
           title: {
             display: true,
-            text: 'Antal fridlysta djur och växtarter i Sverige år 2022',
+            text: 'Antal fridlysta djur och växtarter i Sverige år 2023',
             font: {
               size: 18
-            }
+            },
+            color: "rgb(24, 47, 33)"
           }
         }
       }
@@ -550,7 +570,6 @@ const querySCBNatura2000 =
         label: "SPA områden i hektar",
         data: dataSPA,
         fill: "false",
-        // borderWidth: 3,
         backgroundColor: "rgb(24, 47, 33)",
         hoverBorderWidth: 2,
         tension: 0.5
@@ -589,7 +608,8 @@ const querySCBNatura2000 =
               text: 'Antal Natura 2000 områden i Sverige över tid',
               font: {
                 size: 18
-              }
+              },
+              color: "rgb(24, 47, 33)"
             }
           },
           scales: {
