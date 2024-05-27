@@ -51,7 +51,7 @@ body {
   flex-wrap: wrap;
 }
 
-.second-page_backround .h2-text {
+.second-page_background .h2-text {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 2rem;
@@ -80,10 +80,6 @@ body {
   font-size: 2rem;
   color: var(--beigeish);
   margin-top: 1.8rem;
-}
-
-.h6-text {
-  font-size: 1.5rem;
 }
 
 .figure-text {
@@ -147,15 +143,15 @@ body {
 /* Text above the arrow */
 .btn-next-page a .next_page_btn-text {
   display: block;
-  margin-bottom: 0.5rem; /* Spacing between text and arrow */
-  font-size: 1em; /* Adjust text size as needed */
+  margin-bottom: 0.5rem;
+  font-size: 1.7rem;
 }
 
 /* Arrow container */
 .btn-next-page a .arrow {
   display: block;
-  width: 1rem; /* Adjust size */
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   position: relative;
 }
 
@@ -165,8 +161,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1.2em; /* Adjust arrow size */
-  height: 1.2em;
+  width: 2.2rem;
+  height: 2.2rem;
   margin: -1rem 0 0 -1rem;
   border-left: 2px solid var(--darkgreen);
   border-bottom: 2px solid var(--darkgreen);
@@ -187,7 +183,7 @@ body {
 
 /* Second page classes */
 
-.second-page_backround {
+.second-page_background {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,17 +200,16 @@ body {
   color: #ffffff;
   align-items: center;
   z-index: 2;
-  width: 80%;
-  max-width: 50%;
+  max-width: 40%;
 }
 
 .second-text .p-text {
   margin-top: 1.2rem;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1450px) {
   .second-page_content {
-    max-width: 50%;
+    max-width: 45%;
   }
 }
 
@@ -231,17 +226,26 @@ body {
 }
 @media screen and (max-width: 480px) {
   .second-page_content {
-    max-width: 100%;
+    max-width: 80%;
   }
-  .second-page_backround::before {
+  .second-page_background::before {
     top: -100vh;
     height: auto;
   }
-  .p-text {
+  /* .p-text {
     padding-top: 1rem;
-  }
+  } */
   .second-text .p-text {
     padding-top: 1.5rem;
+  }
+
+  .btn-next-page a .next_page_btn-text {
+    font-size: 1.2rem;
+  }
+
+  .btn-next-page a .arrow::after {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 /*--------------- Knappar på second-page -------------- */
@@ -304,6 +308,27 @@ body {
   z-index: 999;
 }
 
+@media screen and (max-width: 900px) {
+  .modal-content {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .modal-content {
+    width: 95%;
+  }
+
+  .modal-content .p-text {
+    border: 1px solid pink;
+    padding-right: 0%;
+  }
+
+  .figure-text {
+    width: 80%;
+  }
+}
+
 .modal-img_container {
   display: flex;
   justify-content: center;
@@ -363,6 +388,7 @@ body.modal-open {
 .modal-content .p-text {
   padding-right: 30%;
   padding-top: 1%;
+  margin-bottom: 1rem;
 }
 
 /*---Modal i modal----*/
@@ -418,7 +444,7 @@ body.modal-open {
 .third-page__content {
   line-height: 1.2;
   z-index: 2;
-  width: 80%;
+  /* width: 80%; */
   max-width: 40%;
 }
 
@@ -465,34 +491,44 @@ body.modal-open {
   }
 
   .third-page__background .bubble-btn__container {
-    max-width: 50%;
+    max-width: 60%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .third-page__content {
-    max-width: 60%; /* Anpassa bredden för större surfplattor */
+    max-width: 60%;
+  }
+
+  .third-page__content2 {
+    max-width: 100%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .third-page__content {
-    max-width: 70%; /* Anpassa bredden för mindre surfplattor */
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
   }
 
-  .bar-chart__endangered-species {
-    width: 70%; /* Anpassa bredden för mindre surfplattor */
+  .third-page__content2 {
+    max-width: 100%;
   }
 }
 
 @media screen and (max-width: 480px) {
   .third-page__content {
-    max-width: 90%; /* Anpassa bredden för mobiltelefoner */
+    max-width: 70%;
   }
 
-  .third-page__background .p-text,
-  .third-page__background .h4-text {
-    font-size: 0.9rem;
+  .third-page__content .p-text {
+    margin-top: 1rem;
+  }
+
+  .third-page__background .bubble-btn__container {
+    max-width: 100%;
   }
 }
 
@@ -566,6 +602,9 @@ body.modal-open {
 .fourth-page .figure-text {
   color: var(--beigeish);
   margin-top: 1.2rem;
+}
+
+.figure-text-position {
   position: relative;
   left: -9%;
 }
@@ -600,6 +639,9 @@ a {
   .pie-charts__swe-goal-15 {
     width: 90%;
   }
+  .fourth-page_content .target-description__container {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 968px) {
@@ -627,9 +669,21 @@ a {
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
   }
+  .fourth-page_content .target-description__container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+
+  .target-description__title {
+    font-size: 90%;
+  }
+  .target-description__text {
+    font-size: 90%;
+  }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .pie-charts__swe-goal-15 {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
@@ -647,8 +701,7 @@ a {
   color: var(--beigeish);
   margin: 1rem;
   background-color: var(--darkgreen);
-  flex-direction: row;
-  justify-content: end;
+  justify-content: center;
 }
 
 .footer_content {
@@ -656,6 +709,16 @@ a {
   flex-direction: column;
   margin: 2rem;
   padding-right: 2rem;
+}
+
+.footer_content a {
+  color: var(--beigeish);
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
+.footer_content a:hover {
+  color: white;
 }
 
 /* Test för modal nr 3 hide part of the text */
@@ -674,14 +737,6 @@ a {
   border-radius: 0.5rem;
   width: 15%;
   height: 3rem;
-}
-
-.read-more-button {
-  margin-top: 1rem;
-}
-
-.show-less-button {
-  margin-top: 1rem;
 }
 
 /* Description targets from UN API */
@@ -762,15 +817,7 @@ a {
   margin-bottom: 3rem;
 }
 
-.legend {
+.pie-chart_legend {
   display: flex;
   flex-direction: row;
-}
-
-.footer_content a {
-  color: var(--beigeish);
-}
-
-.footer_content a:hover {
-  color: white;
 }

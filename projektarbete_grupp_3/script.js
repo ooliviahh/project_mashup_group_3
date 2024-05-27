@@ -88,7 +88,8 @@ fetch(request)
 
 
 //-------------------------------------------------------------------------//
-// Lägga in information om fridlysta djur, text + lägga 4 första som rubrik ------------>
+
+// Lägga in information om fridlysta djur, text + lägga 4 första ord som rubrik ------------>
 console.log(dataDjuroVaxtart.columns[1]);
 const animalTextElement = document.querySelector('.endangered-species-modal_text');
 const animalHeaderElement = document.querySelector(".endangered-species-modal_header");
@@ -317,9 +318,6 @@ if (container) {
     }
   )  .then(response => response.json());
  
-  // const goalDataSWE = ungoalData;
-  // console.log("UN API global goals 1",goalDataSWE);
-// Log the fetched data to verify it
 console.log("Goal 15 descriptions", urlUNgoalData);
 
 // Select all elements with the class 'target-description__text'
@@ -331,7 +329,7 @@ urlUNgoalData.forEach(goal => {
   goal.targets.forEach((target, index) => {
     // Ensure the element exists before attempting to set its text
     if (descriptionElements[index]) {
-      descriptionElements[index].textContent = target.description+".";
+      descriptionElements[index].textContent = '"'+target.description+"."+'"';
     }
   });
 });
@@ -372,7 +370,7 @@ function scrollToFourthPage(event) {
 
 //-----------Modaler för second och third -page-----------------------------------------------//
 document.addEventListener('DOMContentLoaded', () => {
-  // Get all the buttons on second page
+  // Bubble buttons second page
   const btn1 = document.getElementById('bubble-btn_paw');
   const btn2 = document.getElementById('bubble-btn_tree');
   const btn3 = document.getElementById('bubble-btn_flower');
@@ -381,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn5 = document.getElementById('bubble-btn_hot_2');
   const btn6 = document.getElementById('bubble-btn_hot_3');
 
-  // Get all the modals
+  // Modaler page 2 och 3
   const modal1 = document.getElementById('modal1');
   const modal2 = document.getElementById('modal2');
   const modal3 = document.getElementById('modal3');
@@ -389,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal5 = document.getElementById('modal5');
   const modal6 = document.getElementById('modal6');
 
-  // Get additional modals for links inside modals
+  // Modaler i modal 1
   const modals = {
       'modal1_1': document.getElementById('modal1_1'),
       'modal1_2': document.getElementById('modal1_2'),
@@ -399,11 +397,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'modal2_1': document.getElementById('modal2_1'),
   };
 
-  // Get the close elements
+  // Stäng-knappen
   const closeButtons = document.querySelectorAll('.close');
   const linkButtons = document.querySelectorAll('.link');
 
-  // Function to open a modal
+  // Funktion för att öppna en modal
   function openModal(modal) {
       console.log(`Opening modal: ${modal.id}`);
       modal.style.display = "block";
@@ -411,11 +409,11 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('modal-open class added to body');
   }
 
-  // Function to close a modal
+  // Funktion för att stänga modal 
   function closeModal(modal) {
     console.log(`Closing modal: ${modal.id}`);
     modal.style.display = "none";
-    // Check if any modal is still open
+    // Kolla om någon modal är öppen, för att ta bort modal-open klassen
     const anyModalOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === "block");
     if (!anyModalOpen) {
         document.body.classList.remove('modal-open');
@@ -425,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-  // When the user clicks on the button, open the modal
+  // När använvdaren klickar på en knapp, öppna modalen
   btn1.onclick = function() {
       openModal(modal1);
   };
@@ -447,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openModal(modal6);
 };
 
-  // When the user clicks on a link inside modal1, open the respective modal
+  // Öppna modaler i modal 1 när man klickar på länken
   linkButtons.forEach(link => {
       link.onclick = function(event) {
           event.preventDefault();
@@ -458,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
   });
 
-  // When the user clicks on <span> (x), close the modal
+  // När användaren klickar på (x)close-knappen, stäng modalen
   closeButtons.forEach(button => {
       button.onclick = function() {
           const modalId = this.getAttribute('data-modal');
@@ -466,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
   });
 
-  // When the user clicks anywhere outside of the modal, close it
+  // När man klickar utanför modalen så skall den stängas.
   window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
           closeModal(event.target);
@@ -660,3 +658,16 @@ const querySCBNatura2000 =
     console.log("Natura 2000 SCB API text",dataNatura2000text)
 
     });
+
+    // Footer länkar till olika sections på sidan
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('data-target'));
+          if (target) {
+              target.scrollIntoView({
+                  behavior: 'smooth'
+              });
+          }
+      });
+  });
