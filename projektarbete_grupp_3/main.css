@@ -19,7 +19,6 @@ html {
 body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  font-size: 1.8rem;
   background-color: var(--darkgreen);
 }
 
@@ -46,6 +45,10 @@ body {
   font-size: 2rem;
   color: var(--beigeish);
   margin-top: 1.8rem;
+}
+
+.p-text {
+  font-size: 1.8rem;
 }
 
 .figure-text {
@@ -647,10 +650,10 @@ a {
 }
 
 .figure-text-small a:hover {
-  color: var(--darkgreen);
+  color: white;
 }
 
-/* Description targets from UN API */
+/* Description targets från UN API */
 
 .target-description__container {
   display: grid;
@@ -709,7 +712,7 @@ a {
   margin-top: 0.5rem;
 }
 
-/* Legends till pie charts på sida 4 */
+/* Skapa egna legends till pie charts på sida 4 */
 .circle-green {
   background-color: var(--darkgreen);
   width: 1rem;
@@ -818,9 +821,14 @@ a {
   justify-content: center;
 }
 
+.footer_content:nth-child(2) .p-text,
+.footer_content:nth-child(3) .p-text {
+  margin-bottom: 0.5rem;
+}
+
 .footer_content a {
   color: var(--beigeish);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
   text-decoration: underline;
 }

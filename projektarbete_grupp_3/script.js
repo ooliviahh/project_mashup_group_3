@@ -1,4 +1,4 @@
-// Lägga in data om fridlysta djur o växtarter från scb via API ------------>
+// Data om fridlysta djur och växtarter från SCB via API ------------>
 
 const urlDjuroVaxtart = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/DjuroVaxtart";
 
@@ -66,7 +66,7 @@ fetch(request)
         })
       : dataDjuroVaxtart.data.map(value => value.key[1]);
 
-  console.log("etiketter:", labels);
+  // console.log("etiketter:", labels);
 
     const datasets = [
       {
@@ -84,7 +84,7 @@ fetch(request)
     };
     
 
-    console.log("data:", data);
+    // console.log("data:", data);
 
     const config = {type: "bar", data,
       options: {
@@ -213,7 +213,7 @@ if (animalTextElement && animalHeaderElement) {
 
 
 //-----------------------------------------------------------------------------------------------
-// Två API:er till samma pie charts på sida 4, API från UN Goal across countries
+// Hämta data från två API:er från UN: Get indicators all countries och Goal list 
 async function getGoal15Swe() {
   const urlSWEUN1 = await fetch ("https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries",
     {
@@ -221,34 +221,32 @@ async function getGoal15Swe() {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        // filtrera för sverige country id = 752
+        // filtrera ut data för Sverige, country id = 752
         body: 'dataPointType=3&countryId=752&natureOfData=All'
     }
   ).then(response => response.json());
 
-      console.log("hopp",urlSWEUN1);
 
-      // skriva ut text till page 2 
+      // skriva ut goal 15 description på second page 
       const sweGoal = urlSWEUN1[14];
       const indicatorGoalswe = urlSWEUN1[14].indicators.map((indicator) => indicator.percentage); 
       const textElement2 = document.querySelector(".second-page-text");
       const newHeading2 = document.createElement("p");
+      newHeading2.className = "p-text"
       const newParagraph = document.createElement("p");
+      newParagraph.className = "p-text"
       const goal15Name = sweGoal.goalName;
       newHeading2.textContent = "United Nation beskriver mål 15:";
       newParagraph.textContent = '"'+goal15Name+"."+'"';
       textElement2.insertAdjacentElement("beforebegin", newHeading2);
       textElement2.insertAdjacentElement("beforebegin", newParagraph);
 
-        // Rödlist index del mål 15.5.1 
+// Rödlist index del mål 15.5.1 
         const indicatorGoalswe1551 = urlSWEUN1[14].indicators[6];
 
-//Skapa pie-chart för varje delmål
-
-const indicators = urlSWEUN1[14].indicators.slice(0, 10); // Assuming unsweData[14].indicators is an array of indicators
-
+// Skapa pie-chart för varje delmål och lägga in på fourth page
+const indicators = urlSWEUN1[14].indicators.slice(0, 10);
 const container = document.querySelector('.pie-charts__swe-goal-15 ');
-// const figureText = document.querySelector('.figure-text');
 
 if (container) {
   
@@ -298,7 +296,6 @@ if (container) {
 };
     
     // Skapa en wrapper-div till varje canvas, label och description
-
     const wrapperDiv = document.createElement('div');
     wrapperDiv.classList.add('chart-wrapper');
     
@@ -339,15 +336,12 @@ if (container) {
   )  .then(response => response.json());
  
 console.log("Goal 15 descriptions", urlUNgoalData);
-
-// Select all elements with the class 'target-description__text'
 const descriptionElements = document.querySelectorAll('.target-description__text');
 
-// Iterate over each target and corresponding HTML element
 urlUNgoalData.forEach(goal => {
-  // Iterate over each target within the goal
+
   goal.targets.forEach((target, index) => {
-    // Ensure the element exists before attempting to set its text
+   
     if (descriptionElements[index]) {
       descriptionElements[index].textContent = '"'+target.description+"."+'"';
     }
@@ -361,25 +355,20 @@ getGoal15Swe();
 
 
     
-//------------------------------------------------------------------------------ //
-
-    //Scroll för knapp på startsidan // 
-
+//--------------------------Scroll-knapp för första, andra och tredje sidan------------------------------------------ //
     function scrollToSecondPage(event) {
-      event.preventDefault(); // Förhindra standardbeteendet för länken
+      event.preventDefault(); 
       window.scrollTo({
           top: window.innerHeight, // Rulla ner med höjden av fönstret (100vh)
           behavior: 'smooth' // Gör rullningen jämn
       });
   }
 
-
   function scrollToThirdPage(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     const thirdPageSection = document.querySelector('.third-page__background'); // Get the third section element by class
     thirdPageSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the third section smoothly
 }
-
 
 function scrollToFourthPage(event) {
   event.preventDefault(); 
@@ -493,10 +482,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
-
-
 // ---------------- API från SCB Natura 2000 områden -----///
 
 const urlSCBNatura2000 = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/Natura2000N"
@@ -547,13 +532,13 @@ const querySCBNatura2000 =
   .then(response => response.json())
   .then((dataNatura2000) => {
 
-    console.log("Natura 2000 SCB API",dataNatura2000)
+    // console.log("Natura 2000 SCB API",dataNatura2000)
 
     const labelsNatura = dataNatura2000.data.map((data) => data.key[2]);
-    console.log("Årtal",labelsNatura);
+    // console.log("Årtal",labelsNatura);
 
     const valuesNatura = dataNatura2000.data.map((data) => data.values[0]);
-    console.log("Totalareal i hektar",valuesNatura);
+    // console.log("Totalareal i hektar",valuesNatura);
 
     const labels = [...new Set (labelsNatura)];
     // console.log(labels)
@@ -563,7 +548,7 @@ const querySCBNatura2000 =
     
   
 
-// Natura 2000 chart 
+// Natura 2000 bar chart 
 
     const datasetsNatura = [
       {
@@ -675,7 +660,7 @@ const querySCBNatura2000 =
   .then(response => response.json())
   .then((dataNatura2000text) => {
 
-    console.log("Natura 2000 SCB API text",dataNatura2000text)
+    // console.log("Natura 2000 SCB API text",dataNatura2000text)
 
     });
 
