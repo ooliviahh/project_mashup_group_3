@@ -1,3 +1,9 @@
+/* 
+Projektgrupp 3
+h22oliha Olivia Hansson
+h22malgr Malin Grubb
+*/
+
 /* Vår färgpalett */
 :root {
   --darkgreen: rgb(24, 47, 33);
@@ -125,7 +131,7 @@ body {
   width: 60%;
 }
 
-/* Scrollknappar på sida 1,2 och 3 */
+/* --------------- Scrollknappar på sida 1,2 och 3 --------------- */
 .btn {
   display: flex;
   justify-content: center;
@@ -336,7 +342,7 @@ body {
   border-radius: 2rem;
 }
 
-/* Läsa mer/mindre knapp till modal nr 3 på second page */
+/* --------------- Läsa mer/mindre knapp till modal nr 3 på second page ---------------*/
 .hidden-text {
   display: none;
 }
@@ -410,7 +416,7 @@ body.modal-open {
   opacity: 80%;
 }
 
-/*---Modal i modal----*/
+/*--------------- Modal i modal---------------*/
 
 .modal .modal {
   z-index: 9999;
@@ -445,7 +451,7 @@ body.modal-open {
   }
 }
 
-/*----------- Third page section --------------------------------- */
+/*-------------------------- Third page section --------------------------------- */
 .third-page__background {
   background-image: url(img/geranimo-qzgN45hseN0-unsplash.jpg);
   background-size: cover;
@@ -552,7 +558,7 @@ body.modal-open {
   }
 }
 
-/* Fourth page section  */
+/* --------------- Fourth page section --------------- */
 .fourth-page {
   background-image: url(img/artic_fox_horizontal_rotate_zoom.jpg);
   background-size: cover;
@@ -583,7 +589,7 @@ body.modal-open {
   margin: 0.5rem;
 }
 
-/* Pie charts på sida 4  */
+/* --------------- Pie charts på sida 4 --------------- */
 .pie-charts__swe-goal-15 {
   padding-top: 1%;
   width: 70%;
@@ -612,6 +618,11 @@ body.modal-open {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.pieChart_labelDiv {
+  font-weight: 900;
+  font-size: 1.2rem;
 }
 
 .chart-wrapper {
@@ -653,7 +664,7 @@ a {
   color: white;
 }
 
-/* Description targets från UN API */
+/*--------------- Description targets från UN API till fourth page ---------------*/
 
 .target-description__container {
   display: grid;
@@ -796,11 +807,7 @@ a {
   }
 }
 
-.pieChart_labelDiv {
-  font-weight: 900;
-  font-size: 1.2rem;
-}
-
+/* --------------- Footer --------------- */
 .footer {
   display: flex;
   color: var(--beigeish);

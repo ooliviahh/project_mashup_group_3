@@ -1,3 +1,7 @@
+// Projektgrupp 3
+// h22oliha Olivia Hansson
+// h22malgr Malin Grubb
+
 // Data om fridlysta djur och växtarter från SCB via API ------------>
 
 const urlDjuroVaxtart = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/DjuroVaxtart";
@@ -38,10 +42,10 @@ fetch(request)
 .then((dataDjuroVaxtart) => {
 
 
-  console.log(dataDjuroVaxtart);
+  // console.log(dataDjuroVaxtart);
 
   const values = dataDjuroVaxtart.data.map((value) => value.values[0]);
-  console.log("värden", values);
+  // console.log("värden", values);
 
   const customLabelsMap = {
     "Daggdjur": "Däggdjur",
@@ -62,7 +66,7 @@ fetch(request)
   const labels = expectedStructure
       ? dataDjuroVaxtart.data.map(value => {
           const originalLabel = value.key[1];
-          return customLabelsMap[originalLabel] || originalLabel; // Använd anpassad label om den finns, annars original
+          return customLabelsMap[originalLabel] || originalLabel; 
         })
       : dataDjuroVaxtart.data.map(value => value.key[1]);
 
@@ -83,8 +87,6 @@ fetch(request)
       datasets
     };
     
-
-    // console.log("data:", data);
 
     const config = {type: "bar", data,
       options: {
@@ -110,13 +112,13 @@ fetch(request)
 //-------------------------------------------------------------------------//
 
 // Lägga in information om fridlysta djur, text + lägga 4 första ord som rubrik ------------>
-console.log(dataDjuroVaxtart.columns[1]);
+// console.log(dataDjuroVaxtart.columns[1]);
 const animalTextElement = document.querySelector('.endangered-species-modal_text');
 const animalHeaderElement = document.querySelector(".endangered-species-modal_header");
 
-// Check if the elements exist in the DOM
+
 if (animalTextElement && animalHeaderElement) {
-    // Hämta kommentaren
+
     let comment = dataDjuroVaxtart.columns[1].comment;
 
     // Dela upp texten i ord och ta bort de första fyra orden
@@ -124,8 +126,8 @@ if (animalTextElement && animalHeaderElement) {
     const headerText = words.slice(0, 4).join(' ');
     comment = words.slice(4).join(' ');
 
-    // Dela upp den resterande texten i meningar
-    const sentences = comment.match(/[^\.!\?]+[\.!\?]+/g) || [comment]; // Split by sentence
+    // Dela upp resten av texten i meningar
+    const sentences = comment.match(/[^\.!\?]+[\.!\?]+/g) || [comment]; 
 
     // Skapa en rubrik med de första fyra orden
     const headerElement = document.createElement('h4');
@@ -138,12 +140,12 @@ if (animalTextElement && animalHeaderElement) {
         const paragraphs = [];
 
         let i = 0;
-        // Första stycket med angivet antal meningar
+        // Första stycket 
         const firstParagraph = sentences.slice(i, i + firstParagraphSentences).join(' ').trim();
         paragraphs.push(firstParagraph);
         i += firstParagraphSentences;
 
-        // Resten av styckena med angivet antal meningar
+        // Resten av styckena 
         while (i < sentences.length) {
             const paragraph = sentences.slice(i, i + subsequentParagraphSentences).join(' ').trim();
             paragraphs.push(paragraph);
@@ -156,7 +158,7 @@ if (animalTextElement && animalHeaderElement) {
     // Dela upp texten i stycken: första stycket med 3 meningar, resten med 2 meningar
     const paragraphs = splitIntoParagraphs(comment, 4, 2);
 
-    // Skapa textnoder för varje stycke
+    // Skapa p-element för varje stycke
     paragraphs.forEach((paragraph, index) => {
         const paragraphElement = document.createElement('p');
         paragraphElement.textContent = paragraph;
@@ -167,13 +169,13 @@ if (animalTextElement && animalHeaderElement) {
             // Första stycket visas direkt
             animalTextElement.appendChild(paragraphElement);
         } else {
-            // Övriga stycken läggs till i en span som initialt är dold
+            // Övriga stycken läggs till i en span som är dold
             paragraphElement.classList.add('hidden-text');
             animalTextElement.appendChild(paragraphElement);
         }
     });
 
-    // Skapa "Read more" och "Show less" knappar
+    // Läs mer knapp
     const readMoreButton = document.createElement('button');
     readMoreButton.textContent = 'Läs mer';
     readMoreButton.classList.add('read-more-button');
@@ -183,7 +185,7 @@ if (animalTextElement && animalHeaderElement) {
     showLessButton.style.display = 'none';
     showLessButton.classList.add('show-less-button');
 
-    // Lägg till event listeners till knapparna
+    // Lägg till eventlyssnare till knapparna
     readMoreButton.addEventListener('click', () => {
         document.querySelectorAll('.hidden-text').forEach(element => {
             element.classList.add('show-text');
@@ -204,16 +206,14 @@ if (animalTextElement && animalHeaderElement) {
     animalHeaderElement.insertBefore(headerElement, animalHeaderElement.firstChild);
     animalTextElement.appendChild(readMoreButton);
     animalTextElement.appendChild(showLessButton);
-} else {
-    console.error("One or more elements were not found in the DOM");
-}
+} 
 
 });
 
 
 
 //-----------------------------------------------------------------------------------------------
-// Hämta data från två API:er från UN: Get indicators all countries och Goal list 
+// Hämta data från två API:er från UN:
 async function getGoal15Swe() {
   const urlSWEUN1 = await fetch ("https://unstats.un.org/SDGAPI/v1/sdg/DataAvailability/GetIndicatorsAllCountries",
     {
@@ -335,7 +335,7 @@ if (container) {
     }
   )  .then(response => response.json());
  
-console.log("Goal 15 descriptions", urlUNgoalData);
+// console.log("Goal 15 descriptions", urlUNgoalData);
 const descriptionElements = document.querySelectorAll('.target-description__text');
 
 urlUNgoalData.forEach(goal => {
@@ -360,14 +360,14 @@ getGoal15Swe();
       event.preventDefault(); 
       window.scrollTo({
           top: window.innerHeight, // Rulla ner med höjden av fönstret (100vh)
-          behavior: 'smooth' // Gör rullningen jämn
+          behavior: 'smooth' 
       });
   }
 
   function scrollToThirdPage(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    const thirdPageSection = document.querySelector('.third-page__background'); // Get the third section element by class
-    thirdPageSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the third section smoothly
+    event.preventDefault(); 
+    const thirdPageSection = document.querySelector('.third-page__background'); 
+    thirdPageSection.scrollIntoView({ behavior: 'smooth' }); 
 }
 
 function scrollToFourthPage(event) {
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn1 = document.getElementById('bubble-btn_paw');
   const btn2 = document.getElementById('bubble-btn_tree');
   const btn3 = document.getElementById('bubble-btn_flower');
-  //third page 
+  //third page modaler
   const btn4 = document.getElementById('bubble-btn_hot_1');
   const btn5 = document.getElementById('bubble-btn_hot_2');
   const btn6 = document.getElementById('bubble-btn_hot_3');
@@ -402,8 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'modal1_2': document.getElementById('modal1_2'),
       'modal1_3': document.getElementById('modal1_3'),
       'modal1_4': document.getElementById('modal1_4'),
-      'modal1_5': document.getElementById('modal1_5'),
-      'modal2_1': document.getElementById('modal2_1'),
+      'modal1_5': document.getElementById('modal1_5')
   };
 
   // Stäng-knappen
@@ -412,10 +411,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Funktion för att öppna en modal
   function openModal(modal) {
-      console.log(`Opening modal: ${modal.id}`);
+      // console.log(`Opening modal: ${modal.id}`);
       modal.style.display = "block";
       document.body.classList.add('modal-open');
-      console.log('modal-open class added to body');
+      // console.log('modal-open class added to body');
   }
 
   // Funktion för att stänga modal 
@@ -426,9 +425,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const anyModalOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === "block");
     if (!anyModalOpen) {
         document.body.classList.remove('modal-open');
-        console.log('modal-open class removed from body');
+        // console.log('modal-open class removed from body');
     } else {
-        console.log('Other modals are still open, modal-open class not removed');
+        // console.log('Other modals are still open, modal-open class not removed');
     }
 }
 
