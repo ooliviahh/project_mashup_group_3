@@ -519,7 +519,7 @@ body.modal-open {
 @media screen and (max-width: 1200px) {
   .third-page__content .h4-text,
   .third-page__content .h5-text {
-    font-size: 98%;
+    font-size: 1.8rem;
   }
 
   .third-page__content {
@@ -790,13 +790,6 @@ a {
     display: flex;
     flex-direction: column;
     width: 80%;
-  }
-
-  .target-description__title {
-    font-size: 90%;
-  }
-  .target-description__text {
-    font-size: 90%;
   }
 }
 
